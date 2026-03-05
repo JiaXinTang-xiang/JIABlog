@@ -25,32 +25,29 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://JiaXinTang-xiang.github.io',
+  site: 'https://astro-pure.js.org',
   // Deploy to a sub path
   // https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
-  base: '/JIABlog/',
-  trailingSlash: 'always',
+  // base: '/astro-pure/',
+  trailingSlash: 'never',
   // root: './my-project-directory',
   server: { host: true },
 
   // [Adapter]
   // https://docs.astro.build/en/guides/deploy/
-
-  //adapter: vercel(),
-  //output: 'server',
-
-  output: 'static',
+  adapter: vercel(),
+  output: 'server',
   // Local (standalone)
   // adapter: node({ mode: 'standalone' }),
   // output: 'server',
 
   // [Assets]
-  // image: {
-    // responsiveStyles: true,
-    // service: {
-   //    entrypoint: 'astro/assets/services/sharp'
-   //  }
-   //},
+  image: {
+    responsiveStyles: true,
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
+  },
 
   // [Markdown]
   markdown: {
