@@ -45,12 +45,12 @@ export default defineConfig({
   // output: 'server',
 
   // [Assets]
-  image: {
-    responsiveStyles: true,
-    service: {
-      entrypoint: 'astro/assets/services/sharp'
-    }
-  },
+  // image: {
+    // responsiveStyles: true,
+    // service: {
+   //    entrypoint: 'astro/assets/services/sharp'
+   //  }
+   //},
 
   // [Markdown]
   markdown: {
