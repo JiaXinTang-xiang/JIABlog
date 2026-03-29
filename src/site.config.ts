@@ -3,11 +3,11 @@ import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } fro
 export const theme: ThemeUserConfig = {
   // [Basic]
   /** Title for your website. Will be used in metadata and as browser tab title. */
-  title: 'Astro Theme Pure',
+  title: 'JiaXinBlog',
   /** Will be used in index page & copyright declaration */
-  author: 'Pure Lab',
+  author: 'JiaXinTang',
   /** Description metadata for your website. Can be used in page metadata. */
-  description: 'Stay hungry, stay foolish',
+  description: 'share delight',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
@@ -78,9 +78,12 @@ export const theme: ThemeUserConfig = {
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
     credits: true,
     /** Optional details about the social media accounts for this site. */
-    social: { github: 'https://github.com/cworld1/astro-theme-pure' }
+    social: {
+      github: 'https://github.com/jiaxintang-xiang',  // 您的GitHub
+      email: 'mailto:jiaxintang_xiang@163.com',         // 您的邮箱 }
+    }
   },
-
+  
   // [Content]
   content: {
     /** External links configuration */
