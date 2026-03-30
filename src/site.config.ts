@@ -3,21 +3,21 @@ import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } fro
 export const theme: ThemeUserConfig = {
   // [Basic]
   /** Title for your website. Will be used in metadata and as browser tab title. */
-  title: 'JiaXinBlog',
+  title: 'JiaXin‘s Blog',
   /** Will be used in index page & copyright declaration */
-  author: 'JiaXinTang',
+  author: 'Jaxon',
   /** Description metadata for your website. Can be used in page metadata. */
-  description: 'share delight',
+  description: '分享一些技术思考和记录成长的点滴',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
   socialCard: '/images/social-card.png',
   /** Specify the default language for this site. */
   locale: {
-    lang: 'en-US',
-    attrs: 'en_US',
+    lang: 'zh-CN',
+    attrs: 'zh_CN',
     // Date locale
-    dateLocale: 'en-US',
+    dateLocale: 'zh-CN',
     dateOptions: {
       day: 'numeric',
       month: 'short',
@@ -26,15 +26,15 @@ export const theme: ThemeUserConfig = {
   },
   /** Set a logo image to show in the homepage. */
   logo: {
-    src: '/src/assets/avatar.png',
+    src: '/src/assets/head.jpg',
     alt: 'Avatar'
   },
-
-  titleDelimiter: '•',
+  //建议：保持现状
+  titleDelimiter: '•',  //网站页面标题中各部分之间的分隔符  
   prerender: true, // pagefind search is not supported with prerendering disabled
-  npmCDN: 'https://cdn.jsdelivr.net/npm',
+  npmCDN: 'https://cdn.jsdelivr.net/npm',   //依赖第三方库时用的 CDN 源
 
-  // Still in test
+  // Still in test  这是用来在 HTML 的 <head> 标签中添加自定义元数据或标签的
   head: [
     /* Telegram channel */
     // {
@@ -58,17 +58,17 @@ export const theme: ThemeUserConfig = {
 
   /** Configure the footer of your site. */
   footer: {
-    // Year format
+    // Year format  年份格式
     year: `© ${new Date().getFullYear()}`,
-    // year: `© 2019 - ${new Date().getFullYear()}`,
+    // year: `© 2024 - ${new Date().getFullYear()}`,
     links: [
-      // Registration link
+      // Registration link  真实的 ICP 备案信息
       {
         title: 'Moe ICP 114514',
         link: 'https://icp.gov.moe/?keyword=114514',
         style: 'text-sm' // Uno/TW CSS class
       },
-      // Privacy Policy link
+      // Privacy Policy link  隐私政策和使用条款链接
       {
         title: 'Site Policy',
         link: '/terms',
@@ -76,19 +76,22 @@ export const theme: ThemeUserConfig = {
       }
     ],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
-    credits: true,
+    credits: true,    //这是对主题作者的尊重
     /** Optional details about the social media accounts for this site. */
     social: {
-      github: 'https://github.com/jiaxintang-xiang',  // 您的GitHub
-      email: 'mailto:jiaxintang_xiang@163.com',         // 您的邮箱 }
+      github: 'https://github.com/jiaxintang-xiang',
+      email: 'mailto:2174064279@qq.com',
+      // 可以添加更多社交链接
+      // twitter: 'https://twitter.com/yourusername',
+      // weibo: 'https://weibo.com/yourusername'
     }
   },
   
   // [Content]
   content: {
-    /** External links configuration */
+    /** External links configuration  外部链接配置*/ 
     externalLinks: {
-      content: ' ↗',
+      content: ' ↗',   //提示用户这是外部链接（会跳转到其他网站）
       /** Properties for the external links element */
       properties: {
         style: 'user-select:none'
@@ -96,8 +99,8 @@ export const theme: ThemeUserConfig = {
     },
     /** Blog page size for pagination (optional) */
     blogPageSize: 8,
-    // Currently support weibo, x, bluesky
-    share: ['weibo', 'x', 'bluesky']
+    // Currently support weibo, x, bluesky 社交分享按钮
+    share: ['weibo', 'x', 'bluesky']  
   }
 }
 
@@ -107,18 +110,18 @@ export const integ: IntegrationUserConfig = {
   links: {
     // Friend logbook
     logbook: [
-      { date: '2025-03-16', content: 'Is there a leakage?' },
-      { date: '2025-03-16', content: 'A leakage of what?' },
-      { date: '2025-03-16', content: 'I have a full seat of water, like, full of water!' },
-      { date: '2025-03-16', content: 'Must be the water.' },
-      { date: '2025-03-16', content: "Let's add that to the words of wisdom." }
+      { date: '2025-03-30', content: '开始完善个人博客，记录技术成长之路' },
+      { date: '2025-03-29', content: '学习 Astro 框架，体验现代前端开发的魅力' },
+      { date: '2025-03-28', content: '配置 GitHub Pages 自动部署，让分享变得更简单' },
+      { date: '2025-03-27', content: '思考博客的定位：不仅是技术分享，更是生活记录' },
+      { date: '2025-03-26', content: '每一个项目都是成长的见证，每一篇文章都是思考的结晶' }
     ],
     // Yourself link info
     applyTip: [
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'https://astro-pure.js.org/' },
-      { name: 'Avatar', val: 'https://astro-pure.js.org/favicon/favicon.ico' }
+      { name: 'Link', val: 'https://jiaxintang-xiang.github.io/JIABlog/' },
+      { name: 'Avatar', val: '/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
