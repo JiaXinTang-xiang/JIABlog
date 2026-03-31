@@ -6,8 +6,6 @@ description: 'Draft page for any purpose'
 tags:
   - Draft
 language: 'English'
-# Remove or set false to turn draft page into normal ones
-draft: true
 ---
 
 ```log title="hello.log"
