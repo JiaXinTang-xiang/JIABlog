@@ -166,7 +166,7 @@ export const integ: IntegrationUserConfig = {
   // Comment system
   waline: {
     enable: true,
-    // Server service link
+    // Server service link222222222222
     server: 'https://astro-theme-pure-waline.arthals.ink/',
     // Show meta info for comments
     showMeta: false,
