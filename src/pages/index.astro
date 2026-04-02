@@ -78,14 +78,11 @@ if (!images[imagePath])
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
       <Section title='About'>
-        <p class='text-muted-foreground'>前端开发者 / 技术爱好者</p>
+        <p class='text-muted-foreground'>学生/</p>
         <p class='text-muted-foreground'>
-        热爱技术，喜欢分享。专注于前端开发，探索新技术，记录成长历程。这里是我的技术博客，分享前端开发心得、项目经验和学习总结。
+        这里分享自己的学习和成长经历。Feel free to contact me~
         </p>
-        <p class='text-muted-foreground mt-2'>
-          座右铭: 学而时习之，不亦说乎。记录技术成长的点点滴滴。
-        </p>
-        <Button title='了解更多' class='w-fit self-end mt-4' href='/JIABlog/about' variant='ahead' />
+        <Button title='了解更多' class='w-fit self-end' href='/JIABlog/about' variant='ahead' />
       </Section>
 
       {
@@ -124,16 +121,11 @@ if (!images[imagePath])
           subheading='电子信息工程专业 - 本科'
           date='Sept 2024 - Present'
           href='https://dept4.guat.edu.cn/'
-        >
-          <!-- <ul class='ms-4 list-disc text-muted-foreground'>
-            <li>主修课程：数据结构、算法设计、Web开发、数据库系统</li>
-            <li>获得奖学金：校级一等奖学金（2022-2023学年）</li>
-            <li>参与多个前端项目开发，积累实战经验</li>
-          </ul> -->
+
         </Card>
       </Section>
 
-      <!-- <Section title='项目展示'>
+      <Section title='项目展示'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <ProjectCard
             href='https://github.com/jiaxintang-xiang/JIABlog'
@@ -160,8 +152,8 @@ if (!images[imagePath])
             imagePath='/src/assets/projects/4.avif'
           />
         </div>
-      </Section> -->
-      <!-- <Section title='认证证书'>
+      </Section>
+       <Section title='认证证书'>
         <Card
           as='a'
           heading='前端开发认证'
@@ -169,7 +161,7 @@ if (!images[imagePath])
           date='2024年12月'
           href='https://example.com/certificate'
         />
-      </Section> -->
+      </Section> 
 
       <Section title='Statistics'>
         <div class='grid grid-cols-2 gap-4 sm:grid-cols-4'>
@@ -205,11 +197,11 @@ if (!images[imagePath])
         </div>
       </Section>
 
-      <!-- <Section title='技能栈'>
+      <Section title='技能栈'>
         <SkillLayout title='编程语言' skills={languages} />
         <SkillLayout title='前端技术' skills={frontend} />
         <SkillLayout title='后端工具' skills={backend} />
-      </Section> -->
+      </Section> 
     </div>
      <Quote class='mt-12' />   <!--//Quote 组件的配置 -->
   </main>
