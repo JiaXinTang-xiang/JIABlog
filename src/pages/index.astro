@@ -86,21 +86,15 @@ if (!images[imagePath])
       </Section>
 
       {
-         <Section title='Experience'>
-        <Card
-          heading='前端开发实习生'
-          subheading='某科技公司 - 前端开发'
-          date='2024年6月 - 2024年12月'
-        >
-          <ul class='ms-4 list-disc text-muted-foreground'>
-            <li>参与公司核心产品的前端开发，使用 React + TypeScript 技术栈</li>
-            <li>负责用户界面设计和交互优化，提升用户体验</li>
-            <li>与后端团队协作，完成API接口对接和数据展示</li>
-          </ul>
-        </Card>
-      </Section> 
       }
       <Section title='Education'>
+        <Card
+          as='a'
+          heading='广西无人机遥测实验室'
+          subheading='成员'
+          date='Sept 2024 - Present'
+        >
+        </Card>
         <Card
           as='a'
           heading='桂林航天工业学院'
@@ -108,41 +102,36 @@ if (!images[imagePath])
           date='Sept 2024 - Present'
           href='https://dept4.guat.edu.cn/'
         >
-           <ul class='ms-4 list-disc text-muted-foreground'>
+           <!-- <ul class='ms-4 list-disc text-muted-foreground'>
             <li>主修课程：数据结构、算法设计、Web开发、数据库系统</li>
             <li>获得奖学金：校级一等奖学金</li>
             <li>参与多个前端项目开发，积累实战经验</li>
-          </ul> 
+          </ul>  -->
         </Card>
       </Section>
-
-      <Section title='项目展示'>
+      <Section title='Projects'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <ProjectCard
             href='https://github.com/jiaxintang-xiang/JIABlog'
-            heading='个人博客系统'
-            subheading='基于 Astro 构建的技术博客，支持 Markdown、MDX 和响应式设计'
+            heading='Personal Blog '
+            subheading='A technical blog built with Astro, supporting Markdown, MDX and responsive design'
             imagePath='/src/assets/projects/1.avif'
-          />remb
-          <ProjectCard
+          />
+          <!-- <ProjectCard
             href='https://github.com/jiaxintang-xiang/todo-app'
             heading='任务管理应用'
             subheading='使用 React + TypeScript 开发的待办事项管理应用'
             imagePath='/src/assets/projects/2.avif'
-          />
+          /> -->
       </Section> 
 
        </Section>
-      <Section title='技能栈'>
-        <SkillLayout title='编程语言' skills={languages} />
-        <SkillLayout title='前端技术' skills={frontend} />
-        <SkillLayout title='后端工具' skills={backend} />
+     <Section title='Skills'>
+        <SkillLayout title='Programming Languages' skills={languages} />
+        <SkillLayout title='Frontend Technologies' skills={frontend} />
+        <SkillLayout title='Backend Tools' skills={backend} />
       </Section> 
-    </div>
-     <Quote class='mt-12' />   <!--//Quote 组件的配置 -->
-
-      
-
+      </div>
       <Section title='Statistics'>
         <div class='grid grid-cols-2 gap-4 sm:grid-cols-4'>
           <div class='rounded-lg border p-4 text-center'>
@@ -163,7 +152,6 @@ if (!images[imagePath])
           </div>
         </div>
         <div class="mt-8">
-          <h3 class="mb-4 text-lg font-semibold">GitHub Contributions</h3>
           <div class="overflow-x-auto">
             <img
               src="https://ghchart.rshah.org/jiaxintang-xiang"
@@ -176,7 +164,7 @@ if (!images[imagePath])
           </p>
         </div>
 
+     <Quote class='mt-12' />   <!--//Quote 组件的配置 -->
 
-     
   </main>
 </PageLayout>
