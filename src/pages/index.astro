@@ -86,14 +86,11 @@ if (!images[imagePath])
       </Section>
 
       {
-        /* <Section title='Experience'>
+         <Section title='Experience'>
         <Card
           heading='前端开发实习生'
           subheading='某科技公司 - 前端开发'
           date='2024年6月 - 2024年12月'
-          imagePath='/src/assets/about-astro.png'
-          altText='实习经历'
-          imageClass='h-12 w-auto md:-start-16'
         >
           <ul class='ms-4 list-disc text-muted-foreground'>
             <li>参与公司核心产品的前端开发，使用 React + TypeScript 技术栈</li>
@@ -101,21 +98,7 @@ if (!images[imagePath])
             <li>与后端团队协作，完成API接口对接和数据展示</li>
           </ul>
         </Card>
-        <Card
-          heading='个人项目开发者'
-          subheading='自由开发 - 个人项目'
-          date='2023年9月 - 至今'
-          imagePath='/src/assets/head.jpg'
-          altText='个人项目'
-          imageClass='h-12 w-auto md:-start-16'
-        >
-          <ul class='ms-4 list-disc text-muted-foreground'>
-            <li>开发个人博客系统，掌握 Astro 框架和现代化前端技术</li>
-            <li>构建响应式网站，支持多设备访问</li>
-            <li>集成评论系统和统计分析功能</li>
-          </ul>
-        </Card>
-      </Section> */
+      </Section> 
       }
       <Section title='Education'>
         <Card
@@ -125,11 +108,11 @@ if (!images[imagePath])
           date='Sept 2024 - Present'
           href='https://dept4.guat.edu.cn/'
         >
-          <!-- <ul class='ms-4 list-disc text-muted-foreground'>
+           <ul class='ms-4 list-disc text-muted-foreground'>
             <li>主修课程：数据结构、算法设计、Web开发、数据库系统</li>
-            <li>获得奖学金：校级一等奖学金（2022-2023学年）</li>
+            <li>获得奖学金：校级一等奖学金</li>
             <li>参与多个前端项目开发，积累实战经验</li>
-          </ul> -->
+          </ul> 
         </Card>
       </Section>
 
@@ -147,29 +130,18 @@ if (!images[imagePath])
             subheading='使用 React + TypeScript 开发的待办事项管理应用'
             imagePath='/src/assets/projects/2.avif'
           />
-          <ProjectCard
-            href='https://github.com/jiaxintang-xiang/weather-dashboard'
-            heading='天气仪表板'
-            subheading='集成多个天气 API 的数据可视化项目'
-            imagePath='/src/assets/projects/3.avif'
-          />
-          <ProjectCard
-            href='/projects'
-            heading='更多项目'
-            subheading='查看我的完整项目集'
-            imagePath='/src/assets/projects/4.avif'
-          />
-        </div>
-      </Section>
-       <Section title='认证证书'>
-        <Card
-          as='a'
-          heading='前端开发认证'
-          subheading='通过专业的前端开发技能认证，掌握现代Web开发技术栈'
-          date='2024年12月'
-          href='https://example.com/certificate'
-        />
       </Section> 
+
+       </Section>
+      <Section title='技能栈'>
+        <SkillLayout title='编程语言' skills={languages} />
+        <SkillLayout title='前端技术' skills={frontend} />
+        <SkillLayout title='后端工具' skills={backend} />
+      </Section> 
+    </div>
+     <Quote class='mt-12' />   <!--//Quote 组件的配置 -->
+
+      
 
       <Section title='Statistics'>
         <div class='grid grid-cols-2 gap-4 sm:grid-cols-4'>
@@ -190,27 +162,21 @@ if (!images[imagePath])
             <div class='text-sm text-muted-foreground'>Total Posts</div>
           </div>
         </div>
-
-        <div class='mt-8'>
-          <h3 class='mb-4 text-lg font-semibold'>GitHub Contributions</h3>
-          <div class='overflow-x-auto'>
+        <div class="mt-8">
+          <h3 class="mb-4 text-lg font-semibold">GitHub Contributions</h3>
+          <div class="overflow-x-auto">
             <img
-              src='https://ghchart.rshah.org/jiaxintang-xiang'
-              class='h-auto w-full rounded-lg border'
-            />
+              src="https://ghchart.rshah.org/jiaxintang-xiang"
+              alt="GitHub Contributions Chart"
+              class="h-auto w-full rounded-lg border"
+            >
           </div>
-          <p class='mt-2 text-center text-sm text-muted-foreground'>
+          <p class="mt-2 text-center text-sm text-muted-foreground">
             3010 contributions in 2025 ~ 2026
           </p>
         </div>
-      </Section>
 
-      <Section title='技能栈'>
-        <SkillLayout title='编程语言' skills={languages} />
-        <SkillLayout title='前端技术' skills={frontend} />
-        <SkillLayout title='后端工具' skills={backend} />
-      </Section> 
-    </div>
-     <Quote class='mt-12' />   <!--//Quote 组件的配置 -->
+
+     
   </main>
 </PageLayout>
