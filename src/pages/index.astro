@@ -109,29 +109,52 @@ if (!images[imagePath])
           </ul>  -->
         </Card>
       </Section>
+
+      <Section title='Posts'>
+        <div class='flex flex-col gap-y-3'>
+          <div class='flex flex-col gap-y-1.5 sm:gap-y-2'>
+            <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
+              <a class='group/link w-full flex flex-col transition-all hover:text-primary sm:flex-row' href='/blog/first-post'>
+                <span class='text-muted-foreground font-mono min-w-[95px] py-1 text-xs'>
+                  <time datetime='2025-01-15T00:00:00.000Z'>2025年1月15日</time>
+                </span>
+                <div class='z-10 flex-grow'>
+                  <div class='flex justify-between'>
+                    <div>我的第一篇博客文章</div>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'>
+                      <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'></line>
+                      <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+          <a class='group inline-flex items-center gap-x-1 rounded-lg bg-muted border px-3 py-2 text-sm text-muted-foreground transition-all hover:bg-primary-foreground no-underline w-fit self-end' href='/blog'>
+            <p class='my-0'>查看更多文章</p>
+            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='stroke-muted-foreground group-hover:stroke-primary'>
+              <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 group-hover:scale-x-100'></line>
+              <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1'></polyline>
+            </svg>
+          </a>
+        </div>
+      </Section>
+
       <Section title='Projects'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <ProjectCard
             href='https://github.com/jiaxintang-xiang/JIABlog'
-            heading='Personal Blog '
+            heading='Personal Blog'
             subheading='A technical blog built with Astro, supporting Markdown, MDX and responsive design'
             imagePath='/src/assets/projects/1.avif'
           />
-          <!-- <ProjectCard
-            href='https://github.com/jiaxintang-xiang/todo-app'
-            heading='任务管理应用'
-            subheading='使用 React + TypeScript 开发的待办事项管理应用'
-            imagePath='/src/assets/projects/2.avif'
-          /> -->
-      </Section> 
+        </div>
+      </Section>
 
-       </Section>
-     <Section title='Skills'>
+      <Section title='Skills'>
         <SkillLayout title='Programming Languages' skills={languages} />
         <SkillLayout title='Frontend Technologies' skills={frontend} />
         <SkillLayout title='Backend Tools' skills={backend} />
-      </Section> 
-      </div>
+      </Section>
       <Section title='Statistics'>
         <div class='grid grid-cols-2 gap-4 sm:grid-cols-4'>
           <div class='rounded-lg border p-4 text-center'>
