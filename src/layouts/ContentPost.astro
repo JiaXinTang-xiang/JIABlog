@@ -1,0 +1,66 @@
+---
+import type { MarkdownHeading } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+// Plugin styles
+import 'katex/dist/katex.min.css'
+
+import { MediumZoom } from 'astro-pure/advanced'
+import { ArticleBottom, Copyright, Hero, TOC } from 'astro-pure/components/pages'
+import config from 'virtual:config'
+import PageLayout from '@/layouts/ContentLayout.astro'
+import { Comment, PageInfo } from '@/components/waline'
+
+interface Props {
+  post: CollectionEntry<'blog' | 'tech' | 'daily'>
+  posts: CollectionEntry<'blog' | 'tech' | 'daily'>[]
+  headings: MarkdownHeading[]
+  remarkPluginFrontmatter: Record<string, unknown>
+}
+
+const {
+  post: { id, data, collection },
+  posts,
+  headings,
+  remarkPluginFrontmatter
+} = Astro.props
+
+const {
+  description,
+  title,
+  draft
+} = data
+
+const meta = {
+  title: `${title} • ${config.author}`,
+  description,
+  image: config.socialCard
+}
+
+const isDraft = Boolean(draft)
+const enableComment = data.comment !== false
+
+const back = `/${collection}`
+---
+
+<PageLayout {meta} back={back}>
+  <Hero {data} {remarkPluginFrontmatter}>
+    <Fragment slot='description'>
+      {!isDraft && enableComment && <PageInfo comment class='mt-1' />}
+    </Fragment>
+  </Hero>
+
+  <slot />
+
+  <Fragment slot='bottom'>
+    <Copyright {data} />
+    <ArticleBottom collections={posts} {id} class='mt-3 sm:mt-6' />
+    {!isDraft && enableComment && <Comment class='mt-3 sm:mt-6' />}
+  </Fragment>
+
+  <Fragment slot='sidebar'>
+    <TOC {headings} />
+  </Fragment>
+</PageLayout>
+
+{config.integ.mediumZoom.enable && <MediumZoom />}

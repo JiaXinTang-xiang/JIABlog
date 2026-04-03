@@ -11,8 +11,9 @@ export const theme: ThemeUserConfig = {
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
-  socialCard: '/images/social-card.jpg',
-  /** Specify the default language for this site. */
+  socialCard: '/JIABlog/images/social-card.jpg',
+  /** Specify the default language f
+   * or this site. */
   locale: {
     lang: 'zh-CN',
     attrs: 'zh_CN',
@@ -47,14 +48,18 @@ export const theme: ThemeUserConfig = {
 
   /** Configure the header of your site. */
   header: {
+    
     menu: [
       { title: 'Blog', link: '/JIABlog/blog' },
+      { title: 'Tech', link: '/JIABlog/tech' },
+      { title: 'Daily', link: '/JIABlog/daily' },
       { title: 'Docs', link: '/JIABlog/docs' },
       { title: 'Projects', link: '/JIABlog/projects' },
       { title: 'Links', link: '/JIABlog/links' },
       { title: 'About', link: '/JIABlog/about' }
     ]
   },
+
 
   /** Configure the footer of your site. */
   footer: {
