@@ -1,13 +1,20 @@
 import { z } from 'astro/zod'
 
-export const HeaderMenuSchema = () =>
-  z
-    .array(
+const HeaderMenuItemSchema = () =>
+  z.object({
+    title: z.string(),
+    link: z.string(),
+    submenu: z.array(
       z.object({
         title: z.string(),
         link: z.string()
       })
-    )
+    ).optional()
+  })
+
+export const HeaderMenuSchema = () =>
+  z
+    .array(HeaderMenuItemSchema())
     .default([
       { title: 'Blog', link: '/blog' },
       { title: 'Projects', link: '/projects' },

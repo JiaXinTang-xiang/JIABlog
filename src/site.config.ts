@@ -50,10 +50,14 @@ export const theme: ThemeUserConfig = {
   header: {
     
     menu: [
-      { title: 'Blog', link: '/JIABlog/blog' },
-      { title: 'Tech', link: '/JIABlog/tech' },
-      { title: 'Daily', link: '/JIABlog/daily' },
-      { title: 'Docs', link: '/JIABlog/docs' },
+      {
+        title: 'Blog',
+        link: '/JIABlog/blog',
+        submenu: [
+          { title: 'Tech', link: '/JIABlog/tech' },
+          { title: 'Daily', link: '/JIABlog/daily' }
+        ]
+      },
       { title: 'Projects', link: '/JIABlog/projects' },
       { title: 'Links', link: '/JIABlog/links' },
       { title: 'About', link: '/JIABlog/about' }

@@ -1,0 +1,225 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { PostPreview } from 'astro-pure/components/pages'
+import { getBlogCollection, getUniqueTagsWithCount, sortMDByDate } from 'astro-pure/server'
+import { Button, Icon } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import config from '@/site-config'
+
+export const prerender = true
+
+interface Props {
+  blogPosts: CollectionEntry<'blog'>[]
+  techPosts: CollectionEntry<'tech'>[]
+  dailyPosts: CollectionEntry<'daily'>[]
+  blogTags: string[]
+  techTags: string[]
+  dailyTags: string[]
+}
+
+// 获取所有集合的数据
+const { getCollection } = await import('astro:content')
+const blogPosts = sortMDByDate(await getBlogCollection())
+const techPosts = sortMDByDate(await getCollection('tech'))
+const dailyPosts = sortMDByDate(await getCollection('daily'))
+
+const blogTags = getUniqueTagsWithCount(blogPosts).map(([tag]) => tag)
+const techTags = getUniqueTagsWithCount(techPosts).map(([tag]) => tag)
+const dailyTags = getUniqueTagsWithCount(dailyPosts).map(([tag]) => tag)
+
+const meta = {
+  description: '我的博客 - 技术分享与生活记录',
+  title: '博客'
+}
+
+// 传递给组件的props
+const props = {
+  blogPosts,
+  techPosts,
+  dailyPosts,
+  blogTags,
+  techTags,
+  dailyTags
+}
+---
+
+<PageLayout {meta}>
+  <Button title='Back' href='/' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>博客</h1>
+      <p class='text-muted-foreground'>记录技术成长与生活点滴</p>
+    </div>
+
+    <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
+      <section aria-label='Blog categories' class='animate' id='content'>
+        {/* 分类导航 */}
+        <div class='mb-8 grid gap-6 sm:grid-cols-2'>
+          {/* 技术文章分类 */}
+          <div class='rounded-2xl border bg-card p-6 transition-colors hover:bg-muted'>
+            <div class='flex items-center gap-3 mb-4'>
+              <Icon name='computer' class='size-6 text-primary' />
+              <h2 class='text-xl font-semibold'>技术文章</h2>
+            </div>
+            <p class='text-muted-foreground mb-4'>分享编程技术、开发经验和学习心得</p>
+            <div class='flex items-center justify-between'>
+              <span class='text-sm text-muted-foreground'>{techPosts.length} 篇文章</span>
+              <a href='/tech' class='text-primary hover:underline' aria-label='查看所有技术文章'>
+                查看全部 →
+              </a>
+            </div>
+            {techPosts.length > 0 && (
+              <div class='mt-4 space-y-2'>
+                <h3 class='text-sm font-medium text-muted-foreground'>最新文章：</h3>
+                {techPosts.slice(0, 2).map((post) => (
+                  <a
+                    href={`/tech/${post.id}`}
+                    class='block text-sm hover:text-primary transition-colors'
+                    aria-label={`阅读技术文章：${post.data.title}`}
+                  >
+                    • {post.data.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* 日常记录分类 */}
+          <div class='rounded-2xl border bg-card p-6 transition-colors hover:bg-muted'>
+            <div class='flex items-center gap-3 mb-4'>
+              <Icon name='calendar' class='size-6 text-primary' />
+              <h2 class='text-xl font-semibold'>日常记录</h2>
+            </div>
+            <p class='text-muted-foreground mb-4'>记录生活感悟、思考片段和日常点滴</p>
+            <div class='flex items-center justify-between'>
+              <span class='text-sm text-muted-foreground'>{dailyPosts.length} 篇文章</span>
+              <a href='/daily' class='text-primary hover:underline' aria-label='查看所有日常记录'>
+                查看全部 →
+              </a>
+            </div>
+            {dailyPosts.length > 0 && (
+              <div class='mt-4 space-y-2'>
+                <h3 class='text-sm font-medium text-muted-foreground'>最新文章：</h3>
+                {dailyPosts.slice(0, 2).map((post) => (
+                  <a
+                    href={`/daily/${post.id}`}
+                    class='block text-sm hover:text-primary transition-colors'
+                    aria-label={`阅读日常记录：${post.data.title}`}
+                  >
+                    • {post.data.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* 综合博客文章 */}
+        <div class='border-t pt-8'>
+          <div class='flex items-center gap-3 mb-6'>
+            <Icon name='document' class='size-6 text-primary' />
+            <h2 class='text-xl font-semibold'>综合文章</h2>
+            <span class='text-sm text-muted-foreground'>({blogPosts.length} 篇)</span>
+          </div>
+
+          {blogPosts.length === 0 ? (
+            <p class='text-muted-foreground'>暂无综合文章。</p>
+          ) : (
+            <>
+              <ul class='flex flex-col gap-y-4 text-start'>
+                {blogPosts.slice(0, 5).map((post) => (
+                  <PostPreview {post} />
+                ))}
+              </ul>
+              {blogPosts.length > 5 && (
+                <div class='mt-6 text-center'>
+                  <a href='/blog/page/2' class='text-primary hover:underline' aria-label='查看更多综合文章'>
+                    查看更多综合文章 →
+                  </a>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* 侧边栏 */}
+      <aside class='animate' id='sidebar'>
+        <div class='space-y-8'>
+          {/* 标签云 */}
+          <div>
+            <h2 class='mb-4 flex items-center text-lg font-medium'>
+              <Icon name='tag-2' class='me-2' />
+              热门标签
+            </h2>
+            <div class='space-y-4'>
+              {techTags.length > 0 && (
+                <div>
+                  <h3 class='text-sm font-medium mb-2'>技术标签</h3>
+                  <ul class='flex flex-wrap gap-2'>
+                    {techTags.slice(0, 10).map((tag) => (
+                      <li>
+                        <Button title={tag} href={`/tags/${tag}`} variant='pill' />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {dailyTags.length > 0 && (
+                <div>
+                  <h3 class='text-sm font-medium mb-2'>生活标签</h3>
+                  <ul class='flex flex-wrap gap-2'>
+                    {dailyTags.slice(0, 10).map((tag) => (
+                      <li>
+                        <Button title={tag} href={`/tags/${tag}`} variant='pill' />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {blogTags.length > 0 && (
+                <div>
+                  <h3 class='text-sm font-medium mb-2'>综合标签</h3>
+                  <ul class='flex flex-wrap gap-2'>
+                    {blogTags.slice(0, 10).map((tag) => (
+                      <li>
+                        <Button title={tag} href={`/tags/${tag}`} variant='pill' />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* 快速链接 */}
+          <div>
+            <h2 class='mb-4 flex items-center text-lg font-medium'>
+              <Icon name='link' class='me-2' />
+              快速链接
+            </h2>
+            <ul class='space-y-2 text-sm'>
+              <li>
+                <a href='/archives' class='text-muted-foreground hover:text-primary transition-colors'>
+                  按年份查看文章
+                </a>
+              </li>
+              <li>
+                <a href='/tags' class='text-muted-foreground hover:text-primary transition-colors'>
+                  查看所有标签
+                </a>
+              </li>
+              <li>
+                <a href='/search' class='text-muted-foreground hover:text-primary transition-colors'>
+                  搜索文章
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</PageLayout>
