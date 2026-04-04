@@ -52,15 +52,15 @@ export const theme: ThemeUserConfig = {
     menu: [
       {
         title: 'Blog',
-        link: '/JIABlog/blog',
+        link: '/blog',
         submenu: [
-          { title: 'Tech', link: '/JIABlog/tech' },
-          { title: 'Daily', link: '/JIABlog/daily' }
+          { title: 'Tech', link: '/tech' },
+          { title: 'Daily', link: '/daily' }
         ]
       },
-      { title: 'Projects', link: '/JIABlog/projects' },
-      { title: 'Links', link: '/JIABlog/links' },
-      { title: 'About', link: '/JIABlog/about' }
+      { title: 'Projects', link: '/projects' },
+      { title: 'Links', link: '/links' },
+      { title: 'About', link: '/about' }
     ]
   },
 
@@ -80,7 +80,7 @@ export const theme: ThemeUserConfig = {
       // Privacy Policy link  隐私政策和使用条款链接
       {
         title: 'Site Policy',
-        link: '/JIABlog/terms',
+        link: '/terms',
         pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
@@ -130,7 +130,7 @@ export const integ: IntegrationUserConfig = {
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
       { name: 'Link', val: 'https://jiaxintang-xiang.github.io/' },
-      { name: 'Avatar', val: '/JIABlog/favicon/favicon.ico' }
+      { name: 'Avatar', val: '/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
@@ -192,19 +192,19 @@ export const terms: CardListData = {
   list: [
     {
       title: 'Privacy Policy',
-      link: '/JIABlog/terms/privacy-policy'
+      link: '/terms/privacy-policy'
     },
     {
       title: 'Terms and Conditions',
-      link: '/JIABlog/terms/terms-and-conditions'
+      link: '/terms/terms-and-conditions'
     },
     {
       title: 'Copyright',
-      link: '/JIABlog/terms/copyright'
+      link: '/terms/copyright'
     },
     {
       title: 'Disclaimer',
-      link: '/JIABlog/terms/disclaimer'
+      link: '/terms/disclaimer'
     }
   ]
 }
