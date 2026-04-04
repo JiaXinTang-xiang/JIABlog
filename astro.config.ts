@@ -24,7 +24,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://jiaxintang-xiang.github.io',
+  site: 'https://jiaxintang-xiang.github.io/JIABlog',
   // Deploy to a sub path for GitHub Pages
   base: '/JIABlog/', // 本地开发时注释掉，仅用于 GitHub Pages 部署
   trailingSlash: 'never',

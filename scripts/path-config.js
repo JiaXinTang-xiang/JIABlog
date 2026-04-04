@@ -28,6 +28,7 @@ console.log(`正在配置 ${isProd ? '生产' : '开发'} 环境路径...`)
 const filesToProcess = [
   'packages/pure/components/basic/Header.astro',
   'astro.config.ts',
+  'src/site.config.ts',
   'src/pages/tech/[...page].astro',
   'src/pages/terms/index.astro',
   'src/pages/404.astro',
@@ -94,6 +95,17 @@ function processFile(filePath) {
       content = content.replace(new RegExp(escapeRegExp(mapping.find), 'g'), mapping.replace)
       modified = true
       console.log(`更新 astro.config.ts: ${mapping.find} → ${mapping.replace}`)
+    }
+  } else if (filePath === 'src/site.config.ts') {
+    // 特殊处理 site.config.ts 中的静态资源路径
+    const mapping = pathMappings[MODE]
+    if (content.includes(mapping.find)) {
+      // 只替换配置值中的路径，避免破坏代码结构
+      content = content.replace(/favicon: '\/favicon\//g, `favicon: '${mapping.replace}favicon/`)
+      content = content.replace(/socialCard: '\/images\//g, `socialCard: '${mapping.replace}images/`)
+      content = content.replace(/val: '\/favicon\//g, `val: '${mapping.replace}favicon/`)
+      modified = true
+      console.log(`更新 src/site.config.ts: 替换静态资源路径`)
     }
   } else {
     // 处理其他文件中的路径（使用更精确的匹配）
