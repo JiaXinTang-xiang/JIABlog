@@ -21,7 +21,7 @@
     "cache:avatars": "tsx preset/scripts/cacheAvatars.ts",
     "config:dev": "node scripts/path-config.js dev",
     "config:prod": "node scripts/path-config.js prod",
-    "dev:setup": "npm run config:dev && astro dev",
+    "dev:setup": "npm run config:dev && npm run dev",
     "build:setup": "npm run config:prod && npm run build"
   },
   "dependencies": {
