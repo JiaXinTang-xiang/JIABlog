@@ -6,8 +6,8 @@
   "type": "module",
   "version": "4.1.2",
   "scripts": {
-    "dev": "astro dev --base /JIABlog/",
-    "dev:check": "astro check --watch & astro dev --base /JIABlog/",
+    "dev": "astro dev",
+    "dev:check": "astro check --watch & astro dev",
     "build": "astro-pure check && astro check && astro build",
     "preview": "astro preview",
     "sync": "astro sync",
