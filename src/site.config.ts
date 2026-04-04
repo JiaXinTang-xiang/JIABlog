@@ -52,15 +52,15 @@ export const theme: ThemeUserConfig = {
     menu: [
       {
         title: 'Blog',
-        link: '/blog',
+        link: '/JIABlog/blog',
         submenu: [
-          { title: 'Tech', link: '/tech' },
-          { title: 'Daily', link: '/daily' }
+          { title: 'Tech', link: '/JIABlog/tech' },
+          { title: 'Daily', link: '/JIABlog/daily' }
         ]
       },
-      { title: 'Projects', link: '/projects' },
-      { title: 'Links', link: '/links' },
-      { title: 'About', link: '/about' }
+      { title: 'Projects', link: '/JIABlog/projects' },
+      { title: 'Links', link: '/JIABlog/links' },
+      { title: 'About', link: '/JIABlog/about' }
     ]
   },
 
@@ -130,7 +130,7 @@ export const integ: IntegrationUserConfig = {
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
       { name: 'Link', val: 'https://jiaxintang-xiang.github.io/' },
-      { name: 'Avatar', val: '/favicon/favicon.ico' }
+      { name: 'Avatar', val: '/JIABlog/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
