@@ -18,7 +18,11 @@
     "lint": "eslint --fix 'src/**/*.{js,ts,jsx,tsx,astro}'",
     "yijiansilian": "bun lint && bun sync && bun check && bun format",
     "clean": "rm -rf .astro .vercel dist",
-    "cache:avatars": "tsx preset/scripts/cacheAvatars.ts"
+    "cache:avatars": "tsx preset/scripts/cacheAvatars.ts",
+    "config:dev": "node scripts/path-config.js dev",
+    "config:prod": "node scripts/path-config.js prod",
+    "dev:setup": "npm run config:dev && npm run dev",
+    "build:setup": "npm run config:prod && npm run build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

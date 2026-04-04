@@ -52,15 +52,15 @@ export const theme: ThemeUserConfig = {
     menu: [
       {
         title: 'Blog',
-        link: '/JIABlog/blog',
+        link: '/blog',
         submenu: [
-          { title: 'Tech', link: '/JIABlog/tech' },
-          { title: 'Daily', link: '/JIABlog/daily' }
+          { title: 'Tech', link: '/tech' },
+          { title: 'Daily', link: '/daily' }
         ]
       },
-      { title: 'Projects', link: '/JIABlog/projects' },
-      { title: 'Links', link: '/JIABlog/links' },
-      { title: 'About', link: '/JIABlog/about' }
+      { title: 'Projects', link: '/projects' },
+      { title: 'Links', link: '/links' },
+      { title: 'About', link: '/about' }
     ]
   },
 

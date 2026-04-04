@@ -12,7 +12,7 @@ export const prerender = true
 
 export const getStaticPaths = (async ({ paginate }) => {
   const { getCollection } = await import('astro:content')
-  const collections = sortMDByDate(await getCollection('daily'))
+  const collections = sortMDByDate(await getCollection('tech'))
   const uniqueTags = getUniqueTagsWithCount(collections).map(([tag]) => tag)
   const collectionsCount = collections.length
   return paginate(collections, {
@@ -22,7 +22,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths
 
 interface Props {
-  page: Page<CollectionEntry<'daily'>>
+  page: Page<CollectionEntry<'tech'>>
   uniqueTags: string[]
   collectionsCount: number
 }
@@ -30,8 +30,8 @@ interface Props {
 const { page, uniqueTags, collectionsCount } = Astro.props
 
 const meta = {
-  description: '生活记录与日常思考',
-  title: '日常记录'
+  description: '技术分享与学习记录',
+  title: '技术文章'
 }
 
 const paginationProps = {
@@ -51,24 +51,24 @@ const paginationProps = {
 ---
 
 <PageLayout {meta}>
-  <Button title='Back' href='/' variant='back' />
+  <Button title='Back' href='/JIABlog/' variant='back' />
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
-      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>日常记录</h1>
-      <p class='text-muted-foreground'>记录生活的点点滴滴</p>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>技术文章</h1>
+      <p class='text-muted-foreground'>记录技术学习与成长</p>
     </div>
     {
       page.data.length === 0 ? (
-        <p>暂无日常记录。</p>
+        <p>暂无技术文章。</p>
       ) : (
         <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
-          <section aria-label='Daily posts list' class='animate' id='content'>
+          <section aria-label='Tech posts list' class='animate' id='content'>
             {/* header */}
             <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
               <span class='text-muted-foreground'>
                 第 {page.currentPage} 页 - 显示 {page.data.length} 篇文章，共 {collectionsCount} 篇
               </span>
-              <a aria-label='按年份查看所有日常记录' href='/archives' data-astro-prefetch>
+              <a aria-label='按年份查看所有技术文章' href='/archives' data-astro-prefetch>
                 按年份查看 →
               </a>
             </div>
@@ -99,7 +99,7 @@ const paginationProps = {
                 }
               </ul>
               <span class='mt-4 block sm:text-end'>
-                <a aria-label='View all daily categories' href='/tags' data-astro-prefetch>
+                <a aria-label='View all tech categories' href='/tags' data-astro-prefetch>
                   View all →
                 </a>
               </span>

@@ -40,7 +40,7 @@ const meta = {
 const isDraft = Boolean(draft)
 const enableComment = data.comment !== false
 
-const back = `/${collection}`
+const back = `/JIABlog/${collection}`
 ---
 
 <PageLayout {meta} back={back}>
