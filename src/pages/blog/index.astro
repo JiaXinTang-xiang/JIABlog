@@ -73,7 +73,7 @@ const props = {
                 <h3 class='text-sm font-medium text-muted-foreground'>最新文章：</h3>
                 {techPosts.slice(0, 2).map((post) => (
                   <a
-                    href={`/tech/${post.id}`}
+                    href={`/JIABlog/tech/${post.id}`}
                     class='block text-sm hover:text-primary transition-colors'
                     aria-label={`阅读技术文章：${post.data.title}`}
                   >
@@ -102,7 +102,7 @@ const props = {
                 <h3 class='text-sm font-medium text-muted-foreground'>最新文章：</h3>
                 {dailyPosts.slice(0, 2).map((post) => (
                   <a
-                    href={`/daily/${post.id}`}
+                    href={`/JIABlog/daily/${post.id}`}
                     class='block text-sm hover:text-primary transition-colors'
                     aria-label={`阅读日常记录：${post.data.title}`}
                   >
