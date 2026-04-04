@@ -11,7 +11,9 @@ const { articleDate, description, ogImage, title } = Astro.props
 
 const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.url).href
+// Build absolute URL for social preview images.
+// Astro.url is page-level; use Astro.site to avoid double-appending paths (e.g. /JIABlog/).
+const socialImageURL = new URL(ogImage ? ogImage : config.socialCard, Astro.site).href
 ---
 
 <meta charset='utf-8' />
