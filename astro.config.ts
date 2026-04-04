@@ -27,7 +27,7 @@ export default defineConfig({
   site: 'https://jiaxintang-xiang.github.io',
   // Deploy to a sub path for GitHub Pages
   base: '/JIABlog/', // 本地开发时注释掉，仅用于 GitHub Pages 部署
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   // root: './my-project-directory',
   server: { host: true },
 
