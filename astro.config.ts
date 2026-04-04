@@ -24,7 +24,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://jiaxintang-xiang.github.io/JIABlog',
+  site: 'https://jiaxintang-xiang.github.io/JIABlog/', // 必须写！这是 GitHub 要求的
   base: '/JIABlog', // 必须写！这是 GitHub 要求的
   trailingSlash: 'always',
   // root: './my-project-directory',
