@@ -52,15 +52,15 @@ export const theme: ThemeUserConfig = {
     menu: [
       {
         title: 'Blog',
-        link: '/blog',
+        link: '/JIABlog/blog',
         submenu: [
-          { title: 'Tech', link: '/tech' },
-          { title: 'Daily', link: '/daily' }
+          { title: 'Tech', link: '/JIABlog/tech' },
+          { title: 'Daily', link: '/JIABlog/daily' }
         ]
       },
-      { title: 'Projects', link: '/projects' },
-      { title: 'Links', link: '/links' },
-      { title: 'About', link: '/about' }
+      { title: 'Projects', link: '/JIABlog/projects' },
+      { title: 'Links', link: '/JIABlog/links' },
+      { title: 'About', link: '/JIABlog/about' }
     ]
   },
 
@@ -80,7 +80,7 @@ export const theme: ThemeUserConfig = {
       // Privacy Policy link  隐私政策和使用条款链接
       {
         title: 'Site Policy',
-        link: '/terms',
+        link: '/JIABlog/terms',
         pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
@@ -192,19 +192,19 @@ export const terms: CardListData = {
   list: [
     {
       title: 'Privacy Policy',
-      link: '/terms/privacy-policy'
+      link: '/JIABlog/terms/privacy-policy'
     },
     {
       title: 'Terms and Conditions',
-      link: '/terms/terms-and-conditions'
+      link: '/JIABlog/terms/terms-and-conditions'
     },
     {
       title: 'Copyright',
-      link: '/terms/copyright'
+      link: '/JIABlog/terms/copyright'
     },
     {
       title: 'Disclaimer',
-      link: '/terms/disclaimer'
+      link: '/JIABlog/terms/disclaimer'
     }
   ]
 }
