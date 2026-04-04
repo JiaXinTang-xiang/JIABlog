@@ -105,7 +105,7 @@ function processFile(filePath) {
       content = content.replace(/socialCard: '\/images\//g, `socialCard: '${mapping.replace}images/`)
       content = content.replace(/val: '\/favicon\//g, `val: '${mapping.replace}favicon/`)
       modified = true
-      console.log(`更新 src/site.config.ts: 替换静态资源路径`)
+      console.log(`更新 src/site.config.ts: 替换静态资源路径和导航菜单`)
     }
   } else {
     // 处理其他文件中的路径（使用更精确的匹配）
