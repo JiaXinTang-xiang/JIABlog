@@ -129,7 +129,7 @@ export const integ: IntegrationUserConfig = {
     applyTip: [
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'https://jiaxintang-xiang.github.io/' },
+      { name: 'Link', val: 'https://jiaxintang-xiang.github.io/JIABlog/' },
       { name: 'Avatar', val: '/JIABlog/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
