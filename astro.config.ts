@@ -25,8 +25,7 @@ import config from './src/site.config.ts'
 export default defineConfig({
   // [Basic]
   site: 'https://jiaxintang-xiang.github.io/JIABlog',
-  // Deploy to a sub path for GitHub Pages
-  base: '/JIABlog/', // GitHub Pages子目录部署
+  base: '/JIABlog', // 必须写！这是 GitHub 要求的
   trailingSlash: 'always',
   // root: './my-project-directory',
   server: { host: true },
