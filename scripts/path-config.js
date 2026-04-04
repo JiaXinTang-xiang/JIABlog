@@ -96,12 +96,24 @@ function processFile(filePath) {
       console.log(`更新 astro.config.ts: ${mapping.find} → ${mapping.replace}`)
     }
   } else {
-    // 处理其他文件中的路径
+    // 处理其他文件中的路径（使用更精确的匹配）
     const mapping = pathMappings[MODE]
     if (content.includes(mapping.find)) {
-      content = content.replace(new RegExp(escapeRegExp(mapping.find), 'g'), mapping.replace)
-      modified = true
-      console.log(`更新 ${filePath}: 替换路径 ${mapping.find} → ${mapping.replace}`)
+      // 使用更安全的替换方法，避免破坏代码结构
+      let newContent = content
+
+      // 只替换明确的链接模式
+      newContent = newContent.replace(/href='\/JIABlog\/'/g, `href='${mapping.replace}`)
+      newContent = newContent.replace(/href="\/JIABlog\/"/g, `href="${mapping.replace}`)
+      newContent = newContent.replace(/link:\s*['"]\/JIABlog\//g, `link: '${mapping.replace}`)
+      newContent = newContent.replace(/back='\/JIABlog\/'/g, `back='${mapping.replace}`)
+      newContent = newContent.replace(/back="\/JIABlog\/"/g, `back="${mapping.replace}`)
+
+      if (newContent !== content) {
+        content = newContent
+        modified = true
+        console.log(`更新 ${filePath}: 替换路径 ${mapping.find} → ${mapping.replace}`)
+      }
     }
   }
 
