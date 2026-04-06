@@ -16,7 +16,31 @@ console.log('正在配置自定义域名 jiaxin404.top 环境...')
 // 需要处理的文件列表
 const filesToProcess = [
   'astro.config.ts',
-  'src/site.config.ts'
+  'src/site.config.ts',
+  'src/components/BaseHead.astro',
+  'src/pages/rss.xml.ts',
+  'src/pages/blog/index.astro',
+  'packages/pure/components/pages/PostPreview.astro',
+  'src/pages/about/index.astro',
+  'src/pages/projects/index.astro',
+  'src/pages/tags/[tag]/[...page].astro',
+  'src/pages/search/index.astro',
+  'src/pages/archives/index.astro',
+  'packages/pure/components/basic/Footer.astro',
+  'src/pages/docs/index.astro',
+  'packages/pure/components/pages/Hero.astro',
+  'src/pages/blog/[...page].astro',
+  'src/pages/tags/index.astro',
+  'src/pages/tech/[...page].astro',
+  'src/pages/daily/[...page].astro',
+  'packages/pure/components/basic/Header.astro',
+  'src/pages/terms/index.astro',
+  'src/pages/index.astro',
+  'src/pages/404.astro',
+  'src/layouts/BlogPost.astro',
+  'src/layouts/ContentLayout.astro',
+  'src/layouts/ContentPost.astro',
+  'src/layouts/IndividualPage.astro'
 ]
 
 // 备份文件后缀
@@ -85,6 +109,19 @@ function processFile(filePath) {
     if (content !== oldContent) {
       modified = true
       console.log('更新 src/site.config.ts: 替换所有路径为根路径')
+    }
+  } else {
+    // 处理其他文件中的 /JIABlog/ 路径
+    const oldContent = content
+    content = content.replace(/\/JIABlog\//g, '/')
+    content = content.replace(/href="\/JIABlog"/g, 'href="/"')
+    content = content.replace(/href='\/JIABlog'/g, "href='/'" )
+    content = content.replace(/link:\s*['"]\/JIABlog\//g, "link: '")
+    content = content.replace(/back=['"]\/JIABlog\//g, "back='/")
+
+    if (content !== oldContent) {
+      modified = true
+      console.log(`更新 ${filePath}: 替换 /JIABlog/ 路径为根路径`)
     }
   }
 
