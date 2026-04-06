@@ -11,7 +11,7 @@ export const theme: ThemeUserConfig = {
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/JIABlog/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
-  socialCard: 'public/images/social-card.jpg',
+  socialCard: '/JIABlog/images/social-card.jpg',
   /** Specify the default language f
    * or this site. */
   locale: {
