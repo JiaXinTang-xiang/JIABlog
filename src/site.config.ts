@@ -41,6 +41,12 @@ export const theme: ThemeUserConfig = {
     //   tag: 'meta',
     //   attrs: { name: 'telegram:channel', content: '@cworld0_cn' },
     //   content: ''
+    // },
+    // 百度统计
+    // {
+    //   tag: 'script',
+    //   attrs: { src: 'https://hm.baidu.com/hm.js?your_baidu_code' },
+    //   content: ''
     // }
   ],
   customCss: [],
@@ -91,7 +97,8 @@ export const theme: ThemeUserConfig = {
       email: 'mailto:2174064279@qq.com',
       // 可以添加更多社交链接
       // twitter: 'https://twitter.com/yourusername',
-      // weibo: 'https://weibo.com/yourusername'
+      // weibo: 'https://weibo.com/yourusername',
+      // bilibili: 'https://space.bilibili.com/yourid'
     }
   },
   
@@ -142,8 +149,8 @@ export const integ: IntegrationUserConfig = {
   // [Quote]
   quote: {
     // 固定显示你喜欢的名言
-    server: 'data:text/plain,When everything seems to be going against you, remember that the airplane takes off against the wind, not with it.',
-    target: `(data) => 'When everything seems to be going against you, remember that the airplane takes off against the wind, not with it.'`
+    server: 'data:text/plain,追风赶月莫停留，平芜尽处是青山',
+    target: `(data) => '追风赶月莫停留，平芜尽处是青山。'`
   },
   // [Typography]
   // https://unocss.dev/presets/typography

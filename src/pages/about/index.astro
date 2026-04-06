@@ -1,7 +1,6 @@
 ---
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
-import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
 
 const headings = [
@@ -14,29 +13,27 @@ const headings = [
 ---
 
 <PageLayout title='About' {headings} comment>
-  <p>前端开发者 / 技术爱好者</p>
+  <p>学生 / 开发者</p>
   <p>
-    热爱技术，喜欢分享。专注于前端开发，探索新技术，记录成长历程。
-    这里是我的技术博客，分享前端开发心得、项目经验和学习总结。
+    我是「嘉心糖Jaxon」，桂林航天工业学院电子信息工程专业 24 级在读生，热爱技术，专注前端开发。
   </p>
   <p>
-    座右铭: 学而时习之，不亦说乎。<Spoiler>记录技术成长的点点滴滴</Spoiler>
+  <Spoiler>记录技术成长的点点滴滴</Spoiler>
   </p>
   <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' />
 
   {/* general-talk */}
   <h2 id='hobbies'>Hobbies</h2>
   <ul>
-    <li>💻 前端开发 - 探索新技术，构建优秀产品</li>
     <li>📚 技术学习 - 持续学习，不断进步</li>
-    <li>✍️ 技术写作 - 分享经验，帮助他人</li>
+    <li>✍️ Blog分享 - 分享经验，帮助他人</li>
     <li>🎵 音乐欣赏 - 放松身心，激发灵感</li>
   </ul>
 
   {/* tools */}
   <h2 id='tools'>Tools</h2>
   <p>Current support tools as follow:</p>
-  <ToolSection
+  <!-- <ToolSection
     class='mb-5'
     title='Design'
     tools={[
@@ -65,8 +62,8 @@ const headings = [
         icon: import('@/assets/tools/premiere.svg?raw')
       }
     ]}
-  />
-  <ToolSection
+  /> -->
+  <!-- <ToolSection
     class='mb-5'
     title='Productivity'
     tools={[
@@ -95,7 +92,7 @@ const headings = [
         icon: import('@/assets/tools/typora.svg?raw')
       }
     ]}
-  />
+  /> -->
   <ToolSection
     class='mb-5'
     title='Development'
@@ -107,20 +104,26 @@ const headings = [
         icon: import('@/assets/tools/vscode.svg?raw')
       },
       {
-        name: 'Neovim',
-        description: 'IDE',
-        href: 'https://neovim.io/',
-        icon: import('@/assets/tools/neovim.svg?raw')
+        name: 'Ubuntu 22.04 LTS',
+        description: 'Linux Distribution',
+        href: 'https://ubuntu.com/',
+        icon: import('@/assets/tools/ubuntu.svg?raw')
       },
-      {
-        name: 'Sublime Text',
-        description: 'IDE',
-        href: 'https://www.sublimetext.com/',
-        icon: import('@/assets/tools/sublime.svg?raw')
-      }
+      // {
+      //   name: 'Neovim',
+      //   description: 'IDE',
+      //   href: 'https://neovim.io/',
+      //   icon: import('@/assets/tools/neovim.svg?raw')
+      // },
+      // {
+      //   name: 'Sublime Text',
+      //   description: 'IDE',
+      //   href: 'https://www.sublimetext.com/',
+      //   icon: import('@/assets/tools/sublime.svg?raw')
+      // }
     ]}
   />
-  <ToolSection
+  <!-- <ToolSection
     class='mb-5'
     title='Environment'
     tools={[
@@ -131,7 +134,7 @@ const headings = [
         icon: import('@/assets/tools/archlinux.svg?raw')
       },
       {
-        name: 'Ubuntu 24.04 LTS',
+        name: 'Ubuntu 22.04 LTS',
         description: 'Linux Distribution',
         href: 'https://ubuntu.com/',
         icon: import('@/assets/tools/ubuntu.svg?raw')
@@ -149,58 +152,31 @@ const headings = [
         icon: import('@/assets/tools/windows11.svg?raw')
       }
     ]}
-  />
+  /> -->
 
-  {/* social-networks */}
-  <h2 id='social-networks'>Social Networks</h2>
-  <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne.
-  </p>
-  <Substats
-    stats={[
-      {
-        platform: 'GitHub',
-        icon: 'github',
-        link: 'https://github.com/jiaxintang-xiang',
-        text: 'followers',
-        api: 'github/jiaxintang-xiang'
-      }
-    ]}
-  />
-
-  {/* gossips */}
+  <!-- {/* gossips */}
   <h2 id='gossips'>Gossips</h2>
   <Collapse title='Lorem ipsum'>
     Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
     dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
     possit voluptatum.
-  </Collapse>
+  </Collapse> -->
 
   {/* about-blog */}
   <h2 id='about-blog'>About Blog</h2>
-  <p>Website history:</p>
+  <p>版权:</p>
   <Timeline
     events={[
       {
         date: '2024-04-29',
         content:
-          'Website refactored using <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
+          '如你所见，本站中的所有原创内容及设计整体，除非特别说明，均使用 CC BY-NC-SA 4.0 协议进行授权。您可以在协议允许的范围内自由地分享、复制本作品的内容及基于本作品内容进行创作，但必须注明原作者和链接，并且不得用于任何商业目的。本站中的绝大多数博客封面均选自 Pixiv 的公开作品，并已注明原作链接。包括封面在内，本站中使用了一些来自互联网的图片等素材，均归属它们各自的权利持有人所有。如果本站中存在侵犯您权益的内容，请您联系我，我将尽快予以删除。'
       },
-      {
-        date: '2024-07-26',
-        content:
-          'Website abstracted as a theme and published on <a href="https://github.com/cworld1/astro-theme-pure"target="_blank">Github</a>'
-      },
-      {
-        date: '2024-07-27',
-        content: 'Began writing website docs'
-      }
+
     ]}
   />
   <p>
-    The smooth operation and personalized customization of website also rely on the resources and
-    technical support provided by the following excellent projects/service providers:
+    主题:
   </p>
   <ul>
     <li>Domain: <a href='#' target='_blank'>Vercel</a></li>
@@ -211,20 +187,8 @@ const headings = [
       >
     </li>
     <li>
-      Site hosting: <a href='https://vercel.com/' target='_blank'>Vercel</a>
+      Site hosting: <a href='https://vercel.com' target='_blank'>Vercel</a>
     </li>
-    <li>
-      CI/CD: <a href='https://vercel.com/workflow' target='_blank'>Vercel Workflow</a>
-    </li>
-    <li>Comment system: <a href='https://waline.js.org' target='_blank'>Waline</a></li>
-    <li>
-      Visits: <a href='https://supabase.com/' target='_blank'>Supabase</a> +
-      <a href='https://waline.js.org/' target='_blank'>Waline</a>
-    </li>
-    <li>
-      Other statistics: <a href='https://github.com/spencerwooo/substats' target='_blank'
-        >Substats</a
-      >
-    </li>
+
   </ul>
 </PageLayout>
