@@ -12,8 +12,7 @@ export const theme: ThemeUserConfig = {
   favicon: '/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
   socialCard: '/images/social-card.jpg',
-  /** Specify the default language f
-   * or this site. */
+  /** Specify the default language for this site. */
   locale: {
     lang: 'zh-CN',
     attrs: 'zh_CN',
@@ -118,19 +117,20 @@ export const integ: IntegrationUserConfig = {
   // https://astro-pure.js.org/docs/integrations/links
   links: {
     // Friend logbook
-    logbook: [
-      { date: '2025-03-30', content: '开始完善个人博客，记录技术成长之路' },
-      { date: '2025-03-29', content: '学习 Astro 框架，体验现代前端开发的魅力' },
-      { date: '2025-03-28', content: '配置 GitHub Pages 自动部署，让分享变得更简单' },
-      { date: '2025-03-27', content: '思考博客的定位：不仅是技术分享，更是生活记录' },
-      { date: '2025-03-26', content: '每一个项目都是成长的见证，每一篇文章都是思考的结晶' }
-    ],
+      logbook: [],  // 不注释，给空数组
+    // logbook: [
+    //   { date: '2025-03-30', content: '开始完善个人博客，记录技术成长之路' },
+    //   { date: '2025-03-29', content: '学习 Astro 框架，体验现代前端开发的魅力' },
+    //   { date: '2025-03-28', content: '配置 GitHub Pages 自动部署，让分享变得更简单' },
+    //   { date: '2025-03-27', content: '思考博客的定位：不仅是技术分享，更是生活记录' },
+    //   { date: '2025-03-26', content: '每一个项目都是成长的见证，每一篇文章都是思考的结晶' }
+    // ],
     // Yourself link info
     applyTip: [
-      { name: 'Name', val: theme.title },
-      { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'http://jiaxin404.top/' },
-      { name: 'Avatar', val: '/favicon/favicon.ico' }
+      { name: '网站名称', val: 'JiaXin Blog' },
+      { name: '网站描述', val: '心有山海，静而无边' },
+      { name: '网站链接', val: 'https://jiaxin404.top/' },
+      { name: '头像链接', val: '/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false

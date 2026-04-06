@@ -2,20 +2,8 @@
   "friends": [
     {
       "id_name": "cf-links",
-      "desc": "Common links included in circle friends",
+      "desc": "技术博客与学习资源",
       "link_list": [
-        {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png"
-        },
-        {
-          "name": "CWorld Site",
-          "intro": "求知若愚，虚怀若谷",
-          "link": "https://cworld0.com/",
-          "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200"
-        },
         {
           "name": "MDN Web Docs",
           "intro": "前端开发者的最佳参考资料",
@@ -24,26 +12,56 @@
         },
         {
           "name": "Astro官方文档",
-          "intro": "Astro框架官方文档",
+          "intro": "Astro框架官方文档，现代静态网站构建工具",
           "link": "https://docs.astro.build/",
           "avatar": "https://avatars.githubusercontent.com/u/44914786?s=200&v=4"
+        },
+        {
+          "name": "TypeScript官网",
+          "intro": "JavaScript的超集，为代码添加类型安全",
+          "link": "https://www.typescriptlang.org/",
+          "avatar": "https://avatars.githubusercontent.com/u/61231463?s=200&v=4"
+        },
+        {
+          "name": "Vue.js中文文档",
+          "intro": "渐进式JavaScript框架",
+          "link": "https://cn.vuejs.org/",
+          "avatar": "https://avatars.githubusercontent.com/u/6128107?s=200&v=4"
+        },
+        {
+          "name": "React中文文档",
+          "intro": "用于构建用户界面的JavaScript库",
+          "link": "https://zh-hans.react.dev/",
+          "avatar": "https://avatars.githubusercontent.com/u/13142320?s=200&v=4"
         }
       ]
     },
     {
       "id_name": "inactive-links",
-      "desc": "Inactive or rule-breaking friends",
+      "desc": "暂时无法访问或不符合要求的朋友",
       "link_list": []
     },
     {
       "id_name": "special-links",
-      "desc": "Other special links",
+      "desc": "特别推荐的资源",
       "link_list": [
         {
           "name": "Astro",
-          "intro": "The web framework for content-driven websites",
+          "intro": "内容驱动型网站的现代Web框架",
           "link": "https://astro.build/",
           "avatar": "https://avatars.githubusercontent.com/u/44914786?s=200&v=4"
+        },
+        {
+          "name": "GitHub",
+          "intro": "全球最大的代码托管平台",
+          "link": "https://github.com/",
+          "avatar": "https://avatars.githubusercontent.com/u/14327002?s=200&v=4"
+        },
+        {
+          "name": "掘金",
+          "intro": "优质的技术创作社区",
+          "link": "https://juejin.cn/",
+          "avatar": "https://p3-passport.byteimg.com/img/user-avatar/8e4c6c3d4f4e8c1b9e8e8c1b9e8e8c1b~120x120.awebp"
         }
       ]
     }
