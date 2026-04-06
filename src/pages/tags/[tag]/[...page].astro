@@ -11,7 +11,13 @@ import config from '@/site-config'
 export const prerender = true
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const allPosts = await getBlogCollection()
+  // 获取所有类型的内容（blog, tech, daily）
+  const { getCollection } = await import('astro:content')
+  const blogPosts = await getCollection('blog')
+  const techPosts = await getCollection('tech')
+  const dailyPosts = await getCollection('daily')
+
+  const allPosts = [...blogPosts, ...techPosts, ...dailyPosts]
   const allPostsByDate = sortMDByDate(allPosts)
   const uniqueTags = getUniqueTags(allPostsByDate)
 

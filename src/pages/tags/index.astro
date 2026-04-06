@@ -4,7 +4,13 @@ import { Button } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
 
-const allPosts = await getBlogCollection()
+// 获取所有类型的内容（blog, tech, daily）
+const { getCollection } = await import('astro:content')
+const blogPosts = await getCollection('blog')
+const techPosts = await getCollection('tech')
+const dailyPosts = await getCollection('daily')
+
+const allPosts = [...blogPosts, ...techPosts, ...dailyPosts]
 const allTags = getUniqueTagsWithCount(allPosts)
 
 const meta = {
