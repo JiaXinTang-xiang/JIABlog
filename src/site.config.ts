@@ -186,8 +186,33 @@ export const integ: IntegrationUserConfig = {
       pageview: true,
       comment: true,
       locale: {
-        reaction0: 'Like',
-        placeholder: 'Welcome to comment. (Email to receive replies. Login is unnecessary)'
+        reaction0: '点赞',
+        placeholder: '欢迎评论！(留下邮箱可以收到回复通知，无需登录)',
+        timeAgo: true,
+        locale: {
+          nick: '昵称',
+          mail: '邮箱',
+          link: '网站',
+          optional: '可选',
+          placeholder: '欢迎评论！支持 Markdown 语法',
+          sofa: '还没有评论，快来抢沙发吧！',
+          submit: '提交',
+          reply: '回复',
+          cancel: '取消',
+          confirm: '确认',
+          cancelReply: '取消回复',
+          comments: '评论',
+          refresh: '刷新',
+          more: '加载更多...',
+          preview: '预览',
+          emoji: '表情',
+          expand: '展开',
+          seconds: '秒前',
+          minutes: '分钟前',
+          hours: '小时前',
+          days: '天前',
+          now: '刚刚'
+        }
       },
       imageUploader: false
     }
