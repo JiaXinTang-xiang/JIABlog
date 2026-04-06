@@ -9,9 +9,9 @@ export const theme: ThemeUserConfig = {
   /** Description metadata for your website. Can be used in page metadata. */
   description: '分享一些技术思考和记录成长的点滴',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
-  favicon: '/JIABlog/favicon/favicon.ico',
+  favicon: '/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
-  socialCard: '/JIABlog/images/social-card.jpg',
+  socialCard: '/images/social-card.jpg',
   /** Specify the default language f
    * or this site. */
   locale: {
@@ -80,7 +80,7 @@ export const theme: ThemeUserConfig = {
       // Privacy Policy link  隐私政策和使用条款链接
       {
         title: 'Site Policy',
-        link: '/terms',
+        link: '/JIABlog/terms',
         pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
@@ -129,8 +129,8 @@ export const integ: IntegrationUserConfig = {
     applyTip: [
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'http://jiaxin404.top/' },
-      { name: 'Avatar', val: '/JIABlog/favicon/favicon.ico' }
+      { name: 'Link', val: 'https://jiaxintang-xiang.github.io/JIABlog/' },
+      { name: 'Avatar', val: '/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
@@ -192,19 +192,19 @@ export const terms: CardListData = {
   list: [
     {
       title: 'Privacy Policy',
-      link: '/terms/privacy-policy'
+      link: '/JIABlog/terms/privacy-policy'
     },
     {
       title: 'Terms and Conditions',
-      link: '/terms/terms-and-conditions'
+      link: '/JIABlog/terms/terms-and-conditions'
     },
     {
       title: 'Copyright',
-      link: '/terms/copyright'
+      link: '/JIABlog/terms/copyright'
     },
     {
       title: 'Disclaimer',
-      link: '/terms/disclaimer'
+      link: '/JIABlog/terms/disclaimer'
     }
   ]
 }
