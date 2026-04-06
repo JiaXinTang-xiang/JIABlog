@@ -22,7 +22,9 @@
     "config:dev": "node scripts/path-config.js dev",
     "config:prod": "node scripts/path-config.js prod",
     "dev:setup": "npm run config:dev && npm run dev",
-    "build:setup": "npm run config:prod && npm run build"
+    "build:setup": "npm run config:prod && npm run build",
+    "config:custom": "node scripts/custom-domain-config.js",
+    "deploy:custom": "npm run config:custom && npm run build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

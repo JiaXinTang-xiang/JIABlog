@@ -9,7 +9,7 @@ export const theme: ThemeUserConfig = {
   /** Description metadata for your website. Can be used in page metadata. */
   description: '分享一些技术思考和记录成长的点滴',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
-  favicon: '/JIABlog/favicon/favicon.ico',
+  favicon: '/favicon/favicon.ico',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
   socialCard: 'public/images/social-card.jpg',
   /** Specify the default language f
@@ -52,15 +52,15 @@ export const theme: ThemeUserConfig = {
     menu: [
       {
         title: 'Blog',
-        link: '/JIABlog/blog',
+        link: '/blog',
         submenu: [
-          { title: 'Tech', link: '/JIABlog/tech' },
-          { title: 'Daily', link: '/JIABlog/daily' }
+          { title: 'Tech', link: '/tech' },
+          { title: 'Daily', link: '/daily' }
         ]
       },
-      { title: 'Projects', link: '/JIABlog/projects' },
-      { title: 'Links', link: '/JIABlog/links' },
-      { title: 'About', link: '/JIABlog/about' }
+      { title: 'Projects', link: '/projects' },
+      { title: 'Links', link: '/links' },
+      { title: 'About', link: '/about' }
     ]
   },
 
@@ -129,8 +129,8 @@ export const integ: IntegrationUserConfig = {
     applyTip: [
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'https://jiaxintang-xiang.github.io/JIABlog/' },
-      { name: 'Avatar', val: '/JIABlog/favicon/favicon.ico' }
+      { name: 'Link', val: 'http://jiaxin404.top/' },
+      { name: 'Avatar', val: '/favicon/favicon.ico' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
