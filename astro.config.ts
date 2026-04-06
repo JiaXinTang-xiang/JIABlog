@@ -24,8 +24,8 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'http://jiaxin404.top/', // 更新为你的自定义域名
-  base: '/', // 根路径部署
+  site: 'https://jiaxintang-xiang.github.io', // GitHub Pages 域名
+  base: '/JIABlog', // GitHub 仓库名作为 base path
   trailingSlash: 'always',
   // root: './my-project-directory',
   server: { host: true },
