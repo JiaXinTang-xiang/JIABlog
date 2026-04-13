@@ -10,8 +10,9 @@ tags:
   - 个人成长
 language: 'Chinese'
 draft: false
-heroImage: { src: './my-blog.jpg', color: '#4A90E2' }
+heroImage: { src: './my blog.jpg', color: '#4A90E2' }
 ---
+
 
 ## 前言
 
@@ -119,7 +120,7 @@ Obsidian 的安装与下载十分简单，你可以在 [Obsidian 的官网 ↗
 
 现在使用 AI Code 来协助开发，工作效率大大提升。博客网站的核心目标是实现正常的发布和阅读功能，而增加其他花样功能则是个人情趣的体现 😄
 
-希望我的经验对你有所帮助！如果你也在搭建自己的博客，欢迎交流经验。
+希望我的经验对你有所帮助！
 
 ****
 
