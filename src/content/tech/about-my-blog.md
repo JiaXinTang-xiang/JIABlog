@@ -10,10 +10,10 @@ tags:
   - 个人成长
 language: 'Chinese'
 draft: false
-heroImage: { src: './my blog.jpg', color: '#4A90E2' }
+heroImage: { src: './my-blog.jpg', color: '#4A90E2' }
 ---
 
-![我的博客界面](./my blog.jpg)
+![我的博客界面](./my-blog.jpg)
 
 ## 前言
 
