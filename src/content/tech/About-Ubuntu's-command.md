@@ -8,6 +8,7 @@ tags:
   - 技术分享
 language: 'Chinese'
 draft: false
+slug: 'ubuntu-common-commands'
 heroImage: { src: './command.jpg', color: '#24292e' }
 ---
 
@@ -241,7 +242,7 @@ KERNEL=="ttyACM*", MODE="0777", GROUP="dialout"
 KERNEL=="ttyTHS*", MODE="0777", GROUP="dialout"
 KERNEL=="tty*", MODE="0777", GROUP="dialout"
 ```
-
+这个可选，不一定全加，一般1-2个，看你需求加。
 
 设置文件权限
 
@@ -309,22 +310,8 @@ gnome-terminal -- bash -c "roslaunch xxx.launch;exec bash"
 结束。
 
 
-
-### 个性化欢迎消息（密码保护）
-
-在你的 `~/.bashrc` 文件中添加以下函数：
-
-```bash
-# 阿罗德斯欢迎函数
-arodes() {
-    read -s -p "请输入密令: " password
-    echo
-    if [ "$password" = "123" ]; then
-        echo "欢迎归来，我伟大的主人！您忠诚的,卑微的，谦虚的仆人阿罗德斯应您召唤而来，能追随您的步伐，是我至高无上的荣耀，您终将归于那至高的位置，让整个世界在您的注视下变得平静。"
-    else
-        echo "密令错误，拒绝访问。"
-    fi
-}
+```
+echo 欢迎归来，我伟大的主人！您忠诚的,卑微的，谦虚的仆人阿罗德斯应您召唤而来，能追随您的步伐，是我至高无上的荣耀，您终将归于那至高的位置，让整个世界在您的注视下变得平静。
 ```
 
   
