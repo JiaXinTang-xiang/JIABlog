@@ -152,6 +152,13 @@ export http_proxy=http://127.0.0.1:7890
 export https_proxy=http://127.0.0.1:7890
 ```
 
+
+## 取消代理命令
+```
+unset http_proxy
+unset https_proxy
+```
+
 ## 软件包管理
 
 ```
