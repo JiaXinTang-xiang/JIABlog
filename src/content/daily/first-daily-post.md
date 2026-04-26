@@ -1,10 +1,16 @@
 ---
 title: '我的第一篇日常记录'
 description: '这是我在Daily板块的第一篇日常生活记录'
-publishDate: '2025-04-02'
+publishDate: '2026-04-02'
 tags: ['生活', '思考']
 draft: false
+heroImage: { src: './day1.jpg.jpg', color: '#24292e' }
 ---
+
+
+
+---
+
 
 # 我的第一篇日常记录
 
