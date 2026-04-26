@@ -4,6 +4,7 @@ description: '这是我在Tech板块的第一篇技术分享文章'
 publishDate: '2025-04-01'
 tags: ['技术', '学习']
 draft: false
+slug: 'first-tech-post'
 heroImage: { src: './first.jpg', color: '#24292e' }
 ---
 
