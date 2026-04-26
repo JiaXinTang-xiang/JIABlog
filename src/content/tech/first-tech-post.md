@@ -1,11 +1,11 @@
 ---
 title: '我的第一篇技术文章'
 description: '这是我在Tech板块的第一篇技术分享文章'
-publishDate: '2025-04-01'
+publishDate: '2026-04-01'
 tags: ['技术', '学习']
 draft: false
 slug: 'first-tech-post'
-heroImage: { src: './first.jpg', color: '#24292e' }
+heroImage: { src: './first.jpg', color: '#1b2229' }
 ---
 
 # 我的第一篇技术文章
