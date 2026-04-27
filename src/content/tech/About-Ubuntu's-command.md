@@ -9,7 +9,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'ubuntu-common-commands'
-heroImage: { src: '/images/tech/command.jpg', color: '#24292e' }
+heroImage: { src: './command.jpg', color: '#24292e' }
 ---
 
 
