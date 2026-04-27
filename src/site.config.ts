@@ -60,7 +60,8 @@ export const theme: ThemeUserConfig = {
         link: '/blog',
         submenu: [
           { title: 'Tech', link: '/tech' },
-          { title: 'Daily', link: '/daily' }
+          { title: 'Daily', link: '/daily' },
+          { title: 'Monthly', link: '/monthly' }
         ]
       },
       { title: 'Projects', link: '/projects' },

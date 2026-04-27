@@ -1,0 +1,29 @@
+---
+import { type CollectionEntry, render } from 'astro:content'
+
+import { sortMDByDate } from 'astro-pure/server'
+import PostLayout from '@/layouts/ContentPost.astro'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const { getCollection } = await import('astro:content')
+  const posts = sortMDByDate(await getCollection('monthly'))
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post, posts }
+  }))
+}
+
+type Props = {
+  post: CollectionEntry<'monthly'>
+  posts: CollectionEntry<'monthly'>[]
+}
+
+const { post, posts } = Astro.props
+const { Content, headings, remarkPluginFrontmatter } = await render(post)
+---
+
+<PostLayout {post} {posts} {headings} {remarkPluginFrontmatter}>
+  <Content />
+</PostLayout>
