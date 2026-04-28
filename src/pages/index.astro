@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets'
-import { getCollection } from 'astro:content'
 
 import { Quote } from 'astro-pure/advanced'
 import { Button, Card, Icon, Label } from 'astro-pure/user'
@@ -14,23 +13,6 @@ const languages = ['HTML', 'CSS', 'JavaScript', 'TypeScript']
 const frontend = ['React', 'Vue.js', 'Astro', 'Tailwind CSS']
 const backend = ['Node.js', 'Express', 'MongoDB', 'Vercel']
 
-// Get recent posts from all collections
-const [blogPosts, techPosts, dailyPosts, monthlyPosts] = await Promise.all([
-  getCollection('blog', (post) => !post.data.draft),
-  getCollection('tech', (post) => !post.data.draft),
-  getCollection('daily', (post) => !post.data.draft),
-  getCollection('monthly', (post) => !post.data.draft)
-])
-
-// Combine and sort all posts by date, take the 4 most recent
-const allPosts = [
-  ...blogPosts.map(post => ({ ...post, collection: 'blog' })),
-  ...techPosts.map(post => ({ ...post, collection: 'tech' })),
-  ...dailyPosts.map(post => ({ ...post, collection: 'daily' })),
-  ...monthlyPosts.map(post => ({ ...post, collection: 'monthly' }))
-]
-.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-.slice(0, 4)
 
 const imagePath = config.logo.src
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -78,7 +60,7 @@ if (!images[imagePath])
         </div>
       </div>
 
-      <!-- {/* Get template */}  
+      <!-- {/* Get template */}
       <a
         href='https://github.com/cworld1/astro-theme-pure'
         target='_blank'
@@ -130,33 +112,70 @@ if (!images[imagePath])
       <Section title='Posts'>
         <div class='flex flex-col gap-y-3'>
           <div class='flex flex-col gap-y-1.5 sm:gap-y-2'>
-            {allPosts.map((post) => (
-              <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
-                <a
-                  class='group/link w-full flex flex-col transition-all hover:text-primary sm:flex-row'
-                  href={`/${post.collection}/${post.slug}`}
-                >
-                  <span class='text-muted-foreground font-mono min-w-[95px] py-1 text-xs'>
-                    <time datetime={post.data.publishDate.toISOString()}>
-                      {post.data.publishDate.toLocaleDateString('zh-CN', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      }).replace(/年|月/g, '$& ').replace('日', '')}
-                    </time>
-                  </span>
-                  <div class='z-10 flex-grow'>
-                    <div class='flex justify-between'>
-                      <div>{post.data.title}</div>
-                      <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'>
-                        <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'></line>
-                        <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'></polyline>
-                      </svg>
-                    </div>
+            <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
+              <a class='group/link w-full flex flex-col transition-all hover:text-primary sm:flex-row' href='/tech/use-git'>
+                <span class='text-muted-foreground font-mono min-w-[95px] py-1 text-xs'>
+                  <time datetime='2026-04-07T00:00:00.000Z'>2026年4月7日</time>
+                </span>
+                <div class='z-10 flex-grow'>
+                  <div class='flex justify-between'>
+                    <div>Git的常见使用</div>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'>
+                      <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'></line>
+                      <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'></polyline>
+                    </svg>
                   </div>
-                </a>
-              </div>
-            ))}
+                </div>
+              </a>
+            </div>
+            <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
+              <a class='group/link w-full flex flex-col transition-all hover:text-primary sm:flex-row' href='/blog/first-post'>
+                <span class='text-muted-foreground font-mono min-w-[95px] py-1 text-xs'>
+                  <time datetime='2025-01-15T00:00:00.000Z'>2025年1月15日</time>
+                </span>
+                <div class='z-10 flex-grow'>
+                  <div class='flex justify-between'>
+                    <div>我的第一篇博客文章</div>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'>
+                      <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'></line>
+                      <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
+              <a class='group/link w-full flex flex-col transition-all hover:text-primary sm:flex-row' href='/monthly/26_4_27'>
+                <span class='text-muted-foreground font-mono min-w-[95px] py-1 text-xs'>
+                  <time datetime='2024-04-27T00:00:00.000Z'>2024年4月27日</time>
+                </span>
+                <div class='z-10 flex-grow'>
+                  <div class='flex justify-between'>
+                    <div>月记·26-04</div>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'>
+                      <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'></line>
+                      <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
+              <a class='group/link w-full flex flex-col transition-all hover:text-primary sm:flex-row' href='/tech/about-my-blog'>
+                <span class='text-muted-foreground font-mono min-w-[95px] py-1 text-xs'>
+                  <time datetime='2024-04-07T00:00:00.000Z'>2024年4月7日</time>
+                </span>
+                <div class='z-10 flex-grow'>
+                  <div class='flex justify-between'>
+                    <div>关于我的博客</div>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'>
+                      <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'></line>
+                      <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'></polyline>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
           <a class='group inline-flex items-center gap-x-1 rounded-lg bg-muted border px-3 py-2 text-sm text-muted-foreground transition-all hover:bg-primary-foreground no-underline w-fit self-end' href='/blog'>
             <p class='my-0'>Read more articles</p>
@@ -200,7 +219,7 @@ if (!images[imagePath])
             <div class='text-sm text-muted-foreground'>Total Words</div>
           </div>
           <div class='rounded-lg border p-4 text-center'>
-            <div class='text-2xl font-bold text-primary'>{allPosts.length}</div>
+            <div class='text-2xl font-bold text-primary'>6</div>
             <div class='text-sm text-muted-foreground'>Total Posts</div>
           </div>
         </div>

@@ -100,7 +100,6 @@ git pull origin main  # 明确拉取远程叫 origin 的 main 分支，不管你
 
 
 
-
 ## 一些有用的命令
 
 ```bash
@@ -115,8 +114,6 @@ git add .  # 把当前文件加入暂存区
 
 
 
-
-
 ## 撤销提交
 
 ```bash
@@ -126,8 +123,6 @@ git checkout -- <file>  # 撤销工作区修改
 git reset HEAD <file>   # 撤销暂存区文件
 git checkout <commit_id> -- <file_path>  # 恢复误删的文件
 ```
-
-
 
 
 
