@@ -100,14 +100,13 @@ git pull origin main  # 明确拉取远程叫 origin 的 main 分支，不管你
 
 
 
-## 一些有用的命令
+## 一些可能用的命令
 
 ```bash
 git status # 查看仓库状态
 git log    # 查看提交历史
 git diff   # 默认对比：工作区 VS 暂存区
 
-git add .  # 把当前文件加入暂存区
 ```
 
 `.`代表当前目录下全部添加，也可以特指文件
@@ -190,3 +189,37 @@ target/
 
 
 ```
+
+## 放弃弃当前 Github 仓库分支并更新 main 分支#
+
+对于部分的仓库的重构需求，例如需要将本仓库的完全的重建，同时出于保险起见，还需要将之前的分支进行备份，也就是将其置入一个废弃分支。
+
+首先先备份当前的分支：
+```
+git checkout main
+git checkout -b deprecated-main
+git push origin deprecated-main
+```
+重建当前的 main 分支：
+```
+git branch -D main
+git checkout --orphan main
+git rm -rf .
+```
+# 将新的文件添加到当前目录
+```
+git add .
+git commit -m "Rebuild main branch"
+```
+最后在 push 的时候使用 -f，也就是 force，进行强制推送：
+```
+git push -f origin main
+```
+假如说本仓库存在一个 gh-pages 分支，有可能会需要删除这个分支，使用以下指令：
+```
+git push origin --delete gh-pages
+```
+
+## 总结
+
+以上整理了笔者日常开发中使用的 Git 实用技巧，也是仓库维护过程中最常用的基础操作。除此之外，还需要养成良好的使用习惯，例如在修改仓库代码前先执行 git pull 拉取远端更新，以此保证本地与远端仓库内容保持同步一致，还有尽量提交信息写规范，个人敏感信息写进 .gitignore。
