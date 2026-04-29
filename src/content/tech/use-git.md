@@ -206,7 +206,7 @@ git branch -D main
 git checkout --orphan main
 git rm -rf .
 ```
-# 将新的文件添加到当前目录
+将新的文件添加到当前目录
 ```
 git add .
 git commit -m "Rebuild main branch"
