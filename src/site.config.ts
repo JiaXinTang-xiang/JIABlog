@@ -64,10 +64,10 @@ export const theme: ThemeUserConfig = {
           { title: 'Monthly', link: '/monthly' }
         ]
       },
-      { title: 'Update', link: '/update' },
       { title: 'Projects', link: '/projects' },
       { title: 'Links', link: '/links' },
-      { title: 'About', link: '/about' }
+      { title: 'About', link: '/about' },
+      { title: 'Update', link: '/update' }
     ]
   },
 
