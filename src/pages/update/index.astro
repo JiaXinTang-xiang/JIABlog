@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
+import type { Page } from 'astro'
 
 import { Paginator, PostPreview } from 'astro-pure/components/pages'
 import { getUniqueTagsWithCount, sortMDByDate } from 'astro-pure/server'
@@ -71,7 +72,7 @@ const paginationProps = {
             </div>
             {/* posts */}
             <ul class='flex flex-col gap-y-4 text-start'>
-              {page.data.map((post) => (
+              {page.data.map((post: CollectionEntry<'update'>) => (
                 <PostPreview {post} detailed />
               ))}
             </ul>
