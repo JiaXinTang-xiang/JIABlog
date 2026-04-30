@@ -1,8 +1,8 @@
 ---
 title: '关于我的博客'
 description: '记录我搭建个人博客的过程、技术选型和心得体会'
-publishDate: '2024-04-07'
-updatedDate: '2024-04-07'
+publishDate: '2026-04-07'
+updatedDate: '2026-04-07'
 tags:
   - 博客
   - 技术分享
