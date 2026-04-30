@@ -19,7 +19,7 @@ const blog = defineCollection({
       title: z.string().max(60),
       description: z.string().max(160),
       publishDate: z.coerce.date(),
-      
+
       // Optional
       updatedDate: z.coerce.date().optional(),
       heroImage: z
@@ -37,7 +37,8 @@ const blog = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      slug: z.string().optional()
     })
 })
 
@@ -53,7 +54,8 @@ const docs = defineCollection({
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       draft: z.boolean().default(false),
       // Special fields
-      order: z.number().default(999)
+      order: z.number().default(999),
+      slug: z.string().optional()
     })
 })
 
@@ -84,7 +86,8 @@ const tech = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      slug: z.string().optional()
     })
 })
 
@@ -115,7 +118,8 @@ const daily = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      slug: z.string().optional()
     })
 })
 
@@ -146,7 +150,8 @@ const monthly = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      slug: z.string().optional()
     })
 })
 
@@ -177,7 +182,8 @@ const update = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      slug: z.string().optional()
     })
 })
 

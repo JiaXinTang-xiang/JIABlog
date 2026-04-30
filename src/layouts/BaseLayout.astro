@@ -169,7 +169,7 @@ const {
           opacity: 0.6;
         }
         100% {
-          transform: scale(4);
+          transform: scale(2.5);
           opacity: 0;
         }
       }
@@ -181,10 +181,10 @@ const {
         document.addEventListener('click', (e) => {
           const ripple = document.createElement('div');
           ripple.className = 'click-ripple';
-          ripple.style.width = '100px';
-          ripple.style.height = '100px';
-          ripple.style.left = e.clientX - 50 + 'px';
-          ripple.style.top = e.clientY - 50 + 'px';
+          ripple.style.width = '60px';
+          ripple.style.height = '60px';
+          ripple.style.left = e.clientX - 30 + 'px';
+          ripple.style.top = e.clientY - 30 + 'px';
           document.body.appendChild(ripple);
           setTimeout(() => {
             if (ripple.parentNode) {

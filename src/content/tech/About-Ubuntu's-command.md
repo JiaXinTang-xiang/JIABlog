@@ -8,7 +8,7 @@ tags:
   - 技术分享
 language: 'Chinese'
 draft: false
-slug: 'ubuntu-common-commands'
+slug: 'About-Ubuntu-command'
 heroImage: { src: './command.jpg', color: '#24292e' }
 ---
 
