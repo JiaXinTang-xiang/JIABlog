@@ -1,56 +1,40 @@
 ---
-import type { GetStaticPaths } from 'astro'
-import type { CollectionEntry } from 'astro:content'
-
-import { PostPreview } from 'astro-pure/components/pages'
-import { sortMDByDate } from 'astro-pure/server'
 import { Button } from 'astro-pure/user'
-import PageLayout from '@/layouts/BaseLayout.astro'
-import config from '@/site-config'
+import PageLayout from '@/layouts/CommonPage.astro'
 
-export const prerender = true
-
-export const getStaticPaths = (async () => {
-  const { getCollection } = await import('astro:content')
-  const collections = sortMDByDate(await getCollection('update'))
-  return [{
-    params: {},
-    props: { collections }
-  }]
-}) satisfies GetStaticPaths
-
-interface Props {
-  collections: CollectionEntry<'update'>[]
-}
-
-const { collections } = Astro.props
-
-const meta = {
-  description: '博客更新日志 - 记录功能更新和改进',
-  title: '更新日志'
-}
+const headings = [
+  { depth: 2, slug: 'update-log', text: '更新日志' }
+]
 ---
 
-<PageLayout {meta}>
+<PageLayout title='更新日志' {headings}>
   <Button title='Back' href='/' variant='back' />
-  <main class='mt-6 lg:mt-10'>
-    <div id='content-header' class='animate'>
-      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>更新日志</h1>
-      <p class='text-muted-foreground'>记录博客功能更新和改进历程</p>
-    </div>
 
-    <div class='animate' id='content'>
-      {
-        !collections || collections.length === 0 ? (
-          <p class='text-center text-muted-foreground py-8'>暂无更新日志。</p>
-        ) : (
-          <div class='flex flex-col gap-y-4'>
-            {collections.map((post) => (
-              <PostPreview {post} />
-            ))}
-          </div>
-        )
-      }
-    </div>
-  </main>
+  <h1>更新日志</h1>
+  <p>记录博客功能更新和改进历程</p>
+
+  <h2 id='update-log'>更新记录</h2>
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="border-b">
+          <th class="text-left py-2 px-3 font-medium text-muted-foreground">日期</th>
+          <th class="text-left py-2 px-3 font-medium text-muted-foreground">更新内容</th>
+          <th class="text-left py-2 px-3 font-medium text-muted-foreground">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b hover:bg-muted/50">
+          <td class="py-2 px-3 text-sm">2026-05-01</td>
+          <td class="py-2 px-3 text-sm">修复鼠标点击动画效果</td>
+          <td class="py-2 px-3 text-sm">优化鼠标点击水波纹效果，减小动画范围提升用户体验</td>
+        </tr>
+        <tr class="border-b hover:bg-muted/50">
+          <td class="py-2 px-3 text-sm">2026-04-15</td>
+          <td class="py-2 px-3 text-sm">优化鼠标点击水波纹效果</td>
+          <td class="py-2 px-3 text-sm">减小动画范围，提升用户体验</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </PageLayout>
