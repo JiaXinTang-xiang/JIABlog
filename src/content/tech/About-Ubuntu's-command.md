@@ -174,7 +174,7 @@ sudo hwclock --localtime --systohc
 ```
 
 
-## 文件树查看工具
+## 下载文件树
 
 ```
 sudo apt-get install tree
@@ -207,6 +207,13 @@ add_executable(main3 ${SRC_LIST})
 
 ```
 
+编译
+```
+mkdir build
+cd build
+cmake ..
+make -j8
+```
 
 
 ## 中文语言包安装
