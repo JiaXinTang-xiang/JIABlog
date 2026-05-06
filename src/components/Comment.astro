@@ -1,0 +1,67 @@
+---
+import '@waline/client/style'
+const { class: className } = Astro.props
+---
+
+<comment-component>
+  <div id='waline' class={`not-prose ${className}`}>
+    Comment seems to stuck. Try to refresh?✨
+  </div>
+</comment-component>
+
+<script>
+  import { init as walineInit } from '@waline/client'
+
+  class Comment extends HTMLElement {
+    constructor() {
+      super()
+    }
+
+    connectedCallback() {
+      const walineInstance = walineInit({
+        el: '#waline',
+        serverURL: 'https://astro-theme-pure-waline.arthals.ink/',
+        reaction: [],
+        dark: 'html.dark',
+        pageview: true,
+        comment: true,
+        emoji: ['weibo', 'alus', 'bilibili', 'qq'],
+        locale: {
+          placeholder: '欢迎留言~(支持Markdown语法)'
+        }
+      })
+      walineInstance?.update()
+    }
+  }
+
+  customElements.define('comment-component', Comment)
+</script>
+
+<style>
+  :global(.dark) #waline {
+    --waline-bg-color: var(--card-bg);
+    --waline-bg-color-light: var(--btn-plain-bg-hover);
+  }
+
+  :global(.wl-count) {
+    color: var(--waline-dark-grey);
+  }
+
+  :global(.wl-editor) {
+    padding: 0.35em 0.5em;
+    width: calc(100% - 2em);
+  }
+
+  :global(.wl-edit) {
+    color: var(--waline-dark-grey);
+  }
+
+  :global(#wl-edit)::placeholder {
+    color: var(--waline-dark-grey);
+  }
+
+  :global(.wl-panel) {
+    margin: .5em 0;
+    border: none;
+  }
+</style>

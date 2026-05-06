@@ -2,6 +2,7 @@
 import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
+import Comment from '@/components/Comment.astro'
 
 const headings = [
   { depth: 2, slug: 'hobbies', text: 'Hobbies' },
@@ -214,4 +215,10 @@ const headings = [
     </li>
 
   </ul>
+
+  <h2>评论区</h2>
+  <p>欢迎留言交流！</p>
+  <div class="mt-8">
+    <Comment class="" />
+  </div>
 </PageLayout>
