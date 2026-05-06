@@ -4,7 +4,7 @@ import { PostPreview } from 'astro-pure/components/pages'
 import { getBlogCollection, getUniqueTagsWithCount, sortMDByDate } from 'astro-pure/server'
 import { Button, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import config from '@/site-config'
+// import config from '@/site-config' // 暂时注释掉未使用的导入
 
 export const prerender = true
 
@@ -23,7 +23,7 @@ const blogPosts = sortMDByDate(await getBlogCollection())
 const techPosts = sortMDByDate(await getCollection('tech'))
 const dailyPosts = sortMDByDate(await getCollection('daily'))
 
-const blogTags = getUniqueTagsWithCount(blogPosts).map(([tag]) => tag)
+// const blogTags = getUniqueTagsWithCount(blogPosts).map(([tag]) => tag) // 暂时注释掉未使用的变量
 const techTags = getUniqueTagsWithCount(techPosts).map(([tag]) => tag)
 const dailyTags = getUniqueTagsWithCount(dailyPosts).map(([tag]) => tag)
 
@@ -33,14 +33,14 @@ const meta = {
 }
 
 // 传递给组件的props
-const props = {
-  blogPosts,
-  techPosts,
-  dailyPosts,
-  blogTags,
-  techTags,
-  dailyTags
-}
+// const props = {
+//   blogPosts,
+//   techPosts,
+//   dailyPosts,
+//   blogTags,
+//   techTags,
+//   dailyTags
+// }
 ---
 
 <PageLayout {meta}>

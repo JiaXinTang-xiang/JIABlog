@@ -1,5 +1,5 @@
 ---
-import '@waline/client/style'
+// import '@waline/client/style' // 暂时注释掉有问题的样式导入
 const { class: className } = Astro.props
 ---
 
@@ -25,7 +25,7 @@ const { class: className } = Astro.props
         dark: 'html.dark',
         pageview: true,
         comment: true,
-        emoji: ['weibo', 'alus', 'bilibili', 'qq'],
+        emoji: ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo/', 'https://cdn.jsdelivr.net/gh/walinejs/emojis/alus/', 'https://cdn.jsdelivr.net/gh/walinejs/emojis/bilibili/', 'https://cdn.jsdelivr.net/gh/walinejs/emojis/qq/'],
         locale: {
           placeholder: '欢迎留言~(支持Markdown语法)'
         }
