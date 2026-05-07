@@ -28,6 +28,7 @@ const {
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
+    <div id='spotlight' class='pointer-events-none fixed inset-0 z-1'></div>
     {
       highlightColor && (
         <div
@@ -88,149 +89,167 @@ const {
       }
     </style>
 
-    {/* 点击粒子动画效果 */}
+    {/* 点击星光闪烁动画 */}
     <style>
-      :global(.click-particle) {
+      /* 光标光圈 */
+      #spotlight {
+        background: radial-gradient(
+          circle 350px at var(--spot-x, 50%) var(--spot-y, 50%),
+          transparent 0%,
+          transparent 120px,
+          rgba(0, 0, 0, 0.05) 350px
+        );
+        transition: opacity 0.3s;
+      }
+      :global(.dark) #spotlight {
+        background: radial-gradient(
+          circle 350px at var(--spot-x, 50%) var(--spot-y, 50%),
+          rgba(255, 235, 180, 0.04) 0%,
+          transparent 150px,
+          rgba(0, 0, 0, 0.08) 350px
+        );
+      }
+
+      :global(.sparkle-star) {
         position: fixed;
         pointer-events: none;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
         z-index: 9999;
-        animation: particle-explosion 1.1s ease-out forwards;
-        box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        width: 12px;
+        height: 12px;
+        clip-path: polygon(50% 0%, 58% 38%, 95% 38%, 65% 55%, 75% 95%, 50% 68%, 25% 95%, 35% 55%, 5% 38%, 42% 38%);
+        animation: sparkle-burst 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        box-shadow: 0 0 6px 2px rgba(255, 215, 0, 0.5);
       }
 
-      :global(.dark .click-particle) {
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-      }
-
-      @keyframes particle-explosion {
-        0% {
-          opacity: 1;
-          transform: scale(0.4) translate(0, 0);
-        }
-        15% {
-          opacity: 1;
-          transform: scale(1.3) translate(var(--dx), var(--dy));
-        }
-        60% {
-          opacity: 0.8;
-          transform: scale(1) translate(calc(var(--dx) * 2.5), calc(var(--dy) * 2.5));
-        }
-        100% {
-          opacity: 0;
-          transform: scale(0.3) translate(calc(var(--dx) * 3.5), calc(var(--dy) * 3.5));
-        }
-      }
-
-      /* 粒子颜色 */
-      :global(.click-particle.color-1) { background: #ffc1cc; }
-      :global(.click-particle.color-2) { background: #bde4ff; }
-      :global(.click-particle.color-3) { background: #fff2a8; }
-      :global(.click-particle.color-4) { background: #e6ccff; }
-      :global(.click-particle.color-5) { background: #c1ffc1; }
-      :global(.click-particle.color-6) { background: #ffd4a3; }
-      :global(.click-particle.color-7) { background: #c4e8ff; }
-      :global(.click-particle.color-8) { background: #f8d7da; }
-      :global(.click-particle.color-9) { background: #d1f2d1; }
-      :global(.click-particle.color-10) { background: #fff0d4; }
-
-      /* 暗色主题粒子颜色 */
-      :global(.dark .click-particle.color-1) { background: #ff6b8a; }
-      :global(.dark .click-particle.color-2) { background: #4fc3f7; }
-      :global(.dark .click-particle.color-3) { background: #ffd54f; }
-      :global(.dark .click-particle.color-4) { background: #ba68c8; }
-      :global(.dark .click-particle.color-5) { background: #81c784; }
-      :global(.dark .click-particle.color-6) { background: #ffb74d; }
-      :global(.dark .click-particle.color-7) { background: #64b5f6; }
-      :global(.dark .click-particle.color-8) { background: #f48fb1; }
-      :global(.dark .click-particle.color-9) { background: #a5d6a7; }
-      :global(.dark .click-particle.color-10) { background: #ffe082; }
-
-      /* 点击水波纹效果 */
-      :global(.click-ripple) {
+      :global(.sparkle-dot) {
         position: fixed;
-        border-radius: 50%;
         pointer-events: none;
         z-index: 9998;
-        transform: scale(0);
-        animation: ripple-effect 0.6s ease-out forwards;
-        background: rgba(80, 150, 255, 0.3);
+        border-radius: 50%;
+        animation: dot-fly 0.7s ease-out forwards;
+        box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.6);
       }
 
-      :global(.dark .click-ripple) {
-        background: rgba(120, 180, 255, 0.2);
-      }
+      /* 星光颜色 */
+      :global(.sparkle-star.color-1) { background: #ffd700; box-shadow: 0 0 6px 2px rgba(255,215,0,0.5); }
+      :global(.sparkle-star.color-2) { background: #ffb347; box-shadow: 0 0 6px 2px rgba(255,179,71,0.5); }
+      :global(.sparkle-star.color-3) { background: #ffe484; box-shadow: 0 0 6px 2px rgba(255,228,132,0.5); }
+      :global(.sparkle-star.color-4) { background: #fff;    box-shadow: 0 0 8px 3px rgba(255,255,255,0.7); }
+      :global(.sparkle-star.color-5) { background: #ffcc80; box-shadow: 0 0 6px 2px rgba(255,204,128,0.5); }
 
-      @keyframes ripple-effect {
+      :global(.sparkle-dot.color-1) { background: #ffd700; }
+      :global(.sparkle-dot.color-2) { background: #ffe484; }
+      :global(.sparkle-dot.color-3) { background: #ffb347; }
+      :global(.sparkle-dot.color-4) { background: #fff; }
+      :global(.sparkle-dot.color-5) { background: #ffcc80; }
+
+      /* 暗色主题 */
+      :global(.dark .sparkle-star.color-1) { background: #ffd700; box-shadow: 0 0 8px 3px rgba(255,215,0,0.5); }
+      :global(.dark .sparkle-star.color-2) { background: #ff9f43; box-shadow: 0 0 8px 3px rgba(255,159,67,0.5); }
+      :global(.dark .sparkle-star.color-3) { background: #feca57; box-shadow: 0 0 8px 3px rgba(254,202,87,0.5); }
+      :global(.dark .sparkle-star.color-5) { background: #f0932b; box-shadow: 0 0 8px 3px rgba(240,147,43,0.5); }
+
+      :global(.dark .sparkle-dot.color-1) { background: #ffd700; }
+      :global(.dark .sparkle-dot.color-2) { background: #feca57; }
+      :global(.dark .sparkle-dot.color-3) { background: #ff9f43; }
+      :global(.dark .sparkle-dot.color-5) { background: #f0932b; }
+
+      @keyframes sparkle-burst {
         0% {
-          transform: scale(0);
-          opacity: 0.6;
+          opacity: 0;
+          transform: translate(0, 0) rotate(var(--rot, 0deg)) scale(0);
+        }
+        20% {
+          opacity: 1;
+          transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) rotate(calc(var(--rot, 0deg) * 0.5)) scale(1.3);
+        }
+        50% {
+          opacity: 0.7;
+          transform: translate(calc(var(--dx) * 0.60), calc(var(--dy) * 0.60)) rotate(var(--rot, 0deg)) scale(0.8);
         }
         100% {
-          transform: scale(2.5);
           opacity: 0;
+          transform: translate(var(--dx), var(--dy)) rotate(calc(var(--rot, 0deg) * 1.5)) scale(0);
+        }
+      }
+
+      @keyframes dot-fly {
+        0% {
+          opacity: 0;
+          transform: translate(0, 0) scale(0.5);
+        }
+        30% {
+          opacity: 0.9;
+          transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(var(--dx), var(--dy)) scale(0.2);
         }
       }
     </style>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        // 水波纹效果
-        document.addEventListener('click', (e) => {
-          const ripple = document.createElement('div');
-          ripple.className = 'click-ripple';
-          ripple.style.width = '60px';
-          ripple.style.height = '60px';
-          ripple.style.left = e.clientX - 30 + 'px';
-          ripple.style.top = e.clientY - 30 + 'px';
-          document.body.appendChild(ripple);
-          setTimeout(() => {
-            if (ripple.parentNode) {
-              ripple.parentNode.removeChild(ripple);
-            }
-          }, 600);
-        });
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReduced.matches) return;
 
-        function createParticle(x: number, y: number, angle: number, distance: number, colorIndex: number) {
-          const particle = document.createElement('div');
-          particle.className = `click-particle color-${colorIndex}`;
+        // 光标光圈跟随
+        const spotlight = document.getElementById('spotlight');
+        if (spotlight) {
+          let ticking = false;
+          document.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+              requestAnimationFrame(() => {
+                spotlight.style.setProperty('--spot-x', e.clientX + 'px');
+                spotlight.style.setProperty('--spot-y', e.clientY + 'px');
+                ticking = false;
+              });
+              ticking = true;
+            }
+          });
+        }
+
+        let lastClick = 0;
+
+        function createParticle(x: number, y: number, angle: number, distance: number, klass: string, rotDeg: number) {
+          const el = document.createElement('div');
+          el.className = klass;
           const dx = Math.cos(angle) * distance;
           const dy = Math.sin(angle) * distance;
-          particle.style.setProperty('--dx', dx + 'px');
-          particle.style.setProperty('--dy', dy + 'px');
-          particle.style.left = x + 'px';
-          particle.style.top = y + 'px';
-          const size = Math.random() * 6 + 8;
-          particle.style.width = size + 'px';
-          particle.style.height = size + 'px';
-          document.body.appendChild(particle);
+          el.style.setProperty('--dx', dx + 'px');
+          el.style.setProperty('--dy', dy + 'px');
+          el.style.setProperty('--rot', rotDeg + 'deg');
+          el.style.left = x + 'px';
+          el.style.top = y + 'px';
+          document.body.appendChild(el);
           setTimeout(() => {
-            if (particle.parentNode) {
-              particle.parentNode.removeChild(particle);
-            }
-          }, 1100);
+            if (el.parentNode) el.parentNode.removeChild(el);
+          }, 850);
         }
 
         document.addEventListener('click', (e) => {
-          const particleCount = 10;
-          const baseDistance = 18;
-          for (let i = 0; i < particleCount; i++) {
-            const angle = ((Math.PI * 2) / particleCount) * i;
-            const distance = baseDistance + Math.random() * 8;
-            const colorIndex = (i % 10) + 1;
-            setTimeout(() => {
-              createParticle(e.clientX, e.clientY, angle, distance, colorIndex);
-            }, i * 12);
-          }
+          const now = Date.now();
+          if (now - lastClick < 80) return;
+          lastClick = now;
+
+          const baseAngle = Math.random() * Math.PI * 2;
           for (let i = 0; i < 4; i++) {
-            const randomAngle = Math.random() * Math.PI * 2;
-            const randomDistance = baseDistance + Math.random() * 10;
-            const colorIndex = Math.floor(Math.random() * 10) + 1;
+            const angle = baseAngle + (Math.PI * 2 / 4) * i + (Math.random() - 0.5) * 0.5;
+            const distance = 18 + Math.random() * 22;
+            const colorIndex = (i % 5) + 1;
+            const rot = (Math.random() > 0.5 ? 1 : -1) * (200 + Math.random() * 160);
             setTimeout(() => {
-              createParticle(e.clientX, e.clientY, randomAngle, randomDistance, colorIndex);
-            }, (particleCount + i) * 12);
+              createParticle(e.clientX, e.clientY, angle, distance, `sparkle-star color-${colorIndex}`, rot);
+            }, i * 40);
+          }
+          for (let i = 0; i < 3; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 6 + Math.random() * 14;
+            const colorIndex = Math.floor(Math.random() * 5) + 1;
+            setTimeout(() => {
+              createParticle(e.clientX, e.clientY, angle, distance, `sparkle-dot color-${colorIndex}`, 0);
+            }, 60 + i * 30);
           }
         });
       });
