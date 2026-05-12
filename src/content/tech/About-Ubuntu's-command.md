@@ -159,6 +159,12 @@ unset http_proxy
 unset https_proxy
 ```
 
+## 图形窗口能显示在桌面
+```
+export DISPLAY=:0 
+```
+:0 = 本机第一个桌面显示器
+
 ## 软件包管理
 
 ```
