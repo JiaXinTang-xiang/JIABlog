@@ -165,6 +165,19 @@ export DISPLAY=:0
 ```
 :0 = 本机第一个桌面显示器
 
+
+## Jetson
+
+1.启用MAX功率模式
+```
+sudo nvpmodel -m 2 # Jetson Orin Nano
+```
+2.启用Jetson时钟：CPU、GPU内核都以最大频率运行
+```
+sudo jetson_clocks
+```
+
+
 ## 软件包管理
 
 ```
