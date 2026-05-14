@@ -166,6 +166,16 @@ export DISPLAY=:0
 :0 = 本机第一个桌面显示器
 
 
+## 安装cutecom
+```
+sudo apt update
+sudo apt install cutecom -y
+```
+使用cutecom
+```
+sudo cutecom
+```
+
 ## Jetson
 
 1.启用MAX功率模式
