@@ -117,6 +117,7 @@ ssh-keygen -t ed25519 -C "your.email@example.com"
 cat ~/.ssh/id_ed25519.pub
 ```
 
+
 ## Python 清华源配置
 
 直接执行：
@@ -143,6 +144,7 @@ sudo ubuntu-drivers autoinstall
 ```
 nvidia-smi
 ```
+
 
 
 ## 网络代理设置
