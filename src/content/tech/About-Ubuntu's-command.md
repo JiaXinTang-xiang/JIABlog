@@ -144,6 +144,10 @@ sudo ubuntu-drivers autoinstall
 ```
 nvidia-smi
 ```
+cha
+```
+ sudo dpkg --get-selections | grep linux
+```
 
 
 
