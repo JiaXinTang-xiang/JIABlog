@@ -2,7 +2,6 @@
 import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
-import AmbientCanvas from '@/components/AmbientCanvas.astro'
 import config from '@/site-config'
 
 // Import the global.css file here so that it is included on
@@ -29,6 +28,10 @@ const {
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
+    <!-- 阅读进度条 -->
+    <div id="reading-progress" class="fixed top-0 left-0 z-60 h-[3px] bg-[var(--highlightColor,#659EB9)] transition-[width] duration-150" style="width:0%"></div>
+    <!-- 回到顶部 -->
+    <button id="back-to-top" title="回到顶部" class="fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-border/40 bg-background/70 backdrop-blur-sm cursor-pointer text-base opacity-0 pointer-events-none transition-opacity duration-300 shadow-sm hover:shadow-md" aria-label="回到顶部">↑</button>
     <div id='spotlight' class='pointer-events-none fixed inset-0 z-1'></div>
     {
       highlightColor && (
@@ -394,13 +397,89 @@ const {
           transform: scale(0.3);
         }
       }
-    </style>
 
-    <AmbientCanvas />
+      /* ===== 全局暗色模式平滑过渡 ===== */
+      :global(html) {
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+      :global(html) *,
+      :global(html) *::before,
+      :global(html) *::after {
+        transition: background-color 0.4s ease, border-color 0.4s ease, color 0.2s ease;
+      }
+
+      /* ===== 链接下划线滑入动画 ===== */
+      :global(.prose a),
+      :global(article a) {
+        text-decoration: none;
+        position: relative;
+      }
+      :global(.prose a)::after,
+      :global(article a)::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 100%;
+        height: 1.5px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+      :global(.prose a:hover)::after,
+      :global(article a:hover)::after {
+        transform: scaleX(1);
+      }
+
+      /* ===== 卡片/图片悬停微放大 ===== */
+      :global(img:not(.no-hover-scale)) {
+        transition: transform 0.3s ease;
+      }
+      :global(img:not(.no-hover-scale):hover) {
+        transform: scale(1.03);
+      }
+      :global(.card),
+      :global([class*="rounded"][class*="border"]) {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      :global(.card:hover),
+      :global([class*="rounded"][class*="border"]:hover) {
+        transform: scale(1.02);
+      }
+    </style>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        // 阅读进度条 + 回到顶部按钮
+        const progressBar = document.getElementById('reading-progress');
+        const backToTop = document.getElementById('back-to-top');
+        const showBackTopThreshold = 400;
+        if (progressBar || backToTop) {
+          window.addEventListener('scroll', () => {
+            if (progressBar) {
+              const h = document.documentElement.scrollHeight - window.innerHeight;
+              progressBar.style.width = h > 0 ? Math.min((window.scrollY / h) * 100, 100) + '%' : '0%';
+            }
+            if (backToTop) {
+              if (window.scrollY > showBackTopThreshold) {
+                backToTop.style.opacity = '1';
+                backToTop.style.pointerEvents = 'auto';
+              } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.pointerEvents = 'none';
+              }
+            }
+          }, { passive: true });
+        }
+        if (backToTop) {
+          backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+
         if (prefersReduced.matches) return;
 
         // 光标光圈跟随
