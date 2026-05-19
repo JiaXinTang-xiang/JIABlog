@@ -153,17 +153,51 @@ cha
 
 ## 网络代理设置
 
+Linux / Mac 终端
+
 ```
 export http_proxy=http://127.0.0.1:7890
 export https_proxy=http://127.0.0.1:7890
 ```
 
+Windows PowerShell 
+
+```
+$env:http_proxy = "http://127.0.0.1:7890"
+$env:https_proxy = "http://127.0.0.1:7890"
+```
 
 ## 取消代理命令
+
+Linux / Mac 终端
+
 ```
 unset http_proxy
 unset https_proxy
 ```
+
+Windows PowerShell 
+
+```
+Remove-Item Env:http_proxy
+Remove-Item Env:https_proxy
+```
+
+## 查看当前代理
+
+Linux / Mac 终端
+
+```
+echo $http_proxy
+echo $https_proxy
+```
+
+Windows PowerShell 
+
+```
+$env:http_proxy
+```
+
 
 ## 图形窗口能显示在桌面
 ```
