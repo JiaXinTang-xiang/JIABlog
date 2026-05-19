@@ -9,8 +9,9 @@ tags:
 language: 'Chinese'
 draft: false
 slug: ''
-heroImage: { src: './About_me_git.jpg', color: '#24292e' }
+heroImage: { src: './About_me_git1.jpg', color: '#24292e' }
 ---
+
 
 ## 前言
 
@@ -78,7 +79,7 @@ About Me
 
 原理：用 GitHub Actions 自动生成贪吃蛇 SVG 动画，显示在你的个人首页 README 里。
 
-### 5.1 创建配置文件
+### 创建配置文件
 
 在你的主页仓库中创建路径 `.github/workflows/snake.yml`，填入以下内容：
 
@@ -116,7 +117,7 @@ jobs:
 提交保存后，进入仓库 **Actions** 标签 → 左侧点击 **Generate Snake** → 右侧 **Run workflow** → **Run workflow**。等约 1 分钟，运行变绿 ✅成功。
 
 
-### 5.2 放到 README.md 显示
+###  放到 README.md 显示
 
 ```markdown
 <picture>
@@ -128,7 +129,7 @@ jobs:
 
 把 `JiaXinTang-Xiang` 换成你自己的用户名。
 
-### 5.3 完成效果
+### 完成效果
 
 - ☀️ 白天模式：浅色贪吃蛇
 - 🌙 黑夜模式：深色贪吃蛇
