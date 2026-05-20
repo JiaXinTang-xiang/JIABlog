@@ -1,5 +1,5 @@
 ---
-// import { Button } from 'astro-pure/user' // 暂时注释掉未使用的导入
+import { Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 
 const headings = [
@@ -9,45 +9,30 @@ const headings = [
 
 <PageLayout title='更新日志' {headings}>
 
-
   <h2 id='update-log'>更新记录</h2>
-  <div class="overflow-x-auto">
-    <table class="w-full border-collapse">
-      <thead>
-        <tr class="border-b">
-          <th class="text-left py-2 px-3 font-medium text-muted-foreground">日期</th>
-          <th class="text-left py-2 px-3 font-medium text-muted-foreground">更新内容</th>
-          <th class="text-left py-2 px-3 font-medium text-muted-foreground">备注</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="border-b hover:bg-muted/50">
-          <td class="py-2 px-3 text-sm">2026-04-01</td>
-          <td class="py-2 px-3 text-sm">搭建个人博客</td>
-          <td class="py-2 px-3 text-sm">记录生活点滴</td>
-        </tr>
-        <tr class="border-b hover:bg-muted/50">
-          <td class="py-2 px-3 text-sm">2026-04-07</td>
-          <td class="py-2 px-3 text-sm">购买域名并部署</td>
-          <td class="py-2 px-3 text-sm">网站取个别名</td>
-        </tr>
-        <tr class="border-b hover:bg-muted/50">
-          <td class="py-2 px-3 text-sm">2026-05-01</td>
-          <td class="py-2 px-3 text-sm">创建鼠标点击动画效果</td>
-          <td class="py-2 px-3 text-sm">优化鼠标点击水波纹效果，减小动画范围提升用户体验</td>
-        </tr>
-        <tr class="border-b hover:bg-muted/50">
-          <td class="py-2 px-3 text-sm">2026-05-09</td>
-          <td class="py-2 px-3 text-sm">增强光标粒子特效</td>
-          <td class="py-2 px-3 text-sm">新增心形/花瓣/圆环/光晕多种粒子，加入标题光晕与鼠标轨迹效果</td>
-        </tr>
-        <tr class="border-b hover:bg-muted/50">
-          <td class="py-2 px-3 text-sm">2026-05-19</td>
-          <td class="py-2 px-3 text-sm">全站视觉细节优化</td>
-          <td class="py-2 px-3 text-sm">阅读进度条、暗色模式过渡、链接下划线动画、卡片图片悬停放大</td>
-        </tr>
-      </tbody>
 
-    </table>
-  </div>
+  <Timeline
+    events={[
+      {
+        date: '2026-05-19',
+        content: '全站视觉细节优化：阅读进度条、暗色模式平滑过渡、链接下划线滑入动画、卡片图片悬停微放大。'
+      },
+      {
+        date: '2026-05-09',
+        content: '增强光标粒子特效：新增心形、花瓣、圆环、光晕等多种粒子类型，加入标题悬停光晕与鼠标轨迹尾巴效果。'
+      },
+      {
+        date: '2026-05-01',
+        content: '创建鼠标点击动画效果：优化水波纹效果，减小动画范围提升用户体验。'
+      },
+      {
+        date: '2026-04-07',
+        content: '购买域名并部署上线，网站有了正式别名。'
+      },
+      {
+        date: '2026-04-01',
+        content: '搭建个人博客：使用 Astro + astro-theme-pure 主题，记录学习与生活点滴。'
+      }
+    ]}
+  />
 </PageLayout>

@@ -56,10 +56,19 @@ span.katex-display {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 0.75rem;
+  border: 1px solid hsl(var(--border) / 0.4);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   /* biome-ignore lint/complexity/noImportantStyles: this is to cover the declaimed style */
   background-color: hsl(var(--muted) / var(--un-bg-opacity, 1)) !important;
   display: flex;
   flex-direction: column;
+  &:hover {
+    border-color: hsl(var(--border) / 0.8);
+    box-shadow: 0 1px 3px hsl(var(--foreground) / 0.04);
+    & button.copy {
+      opacity: 1;
+    }
+  }
 
   /* Code container */
   & pre {
@@ -283,4 +292,25 @@ span.katex-display {
     background-color: var(--scrollbar-thumb);
     border-radius: 999px;
   }
+}
+
+/* ===== 全局表格斑马纹 ===== */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table th {
+  font-weight: 600;
+  text-align: left;
+}
+table td,
+table th {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+}
+table tbody tr:nth-child(even) {
+  background-color: hsl(var(--muted) / 0.4);
+}
+table tbody tr:hover {
+  background-color: hsl(var(--muted) / 0.7);
 }
