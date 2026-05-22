@@ -29,7 +29,6 @@ cat ~/.ssh/id_rsa.pub
 
 这里查看密钥，复制到github上面就行了。Ctrl + H显示隐藏文件
 
-
 ​
 ## 常用小连招
 
@@ -68,9 +67,6 @@ git pull          # 下载
 # 5. 看历史
 git log --oneline
 ```
-
-
-
 
 
 ## 创建仓库
