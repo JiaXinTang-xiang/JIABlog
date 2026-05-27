@@ -13,11 +13,9 @@ heroImage: { src: './command.jpg', color: '#24292e' }
 ---
 
 
-
 ## 前言
 
 本篇内容写作的初衷，是因为一些指令比较常见，所以写一篇博客记录一下，方便自己回看使用。
-
 
 
 ## 基础命令
@@ -148,7 +146,6 @@ cha
 ```
  sudo dpkg --get-selections | grep linux
 ```
-
 
 
 ## 网络代理设置

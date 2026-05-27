@@ -279,6 +279,48 @@ span.katex-display {
   }
 }
 
+/* ===== 全局暗色模式平滑过渡 ===== */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+html * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===== 纯CSS链接下划线滑入 ===== */
+a:not(.no-underline):not(nav a):not(.header-link) {
+  position: relative;
+  text-decoration: none;
+}
+a:not(.no-underline):not(nav a):not(.header-link)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+a:not(.no-underline):not(nav a):not(.header-link):hover::after {
+  width: 100%;
+}
+
+/* ===== 卡片/图片悬停微放大 ===== */
+.card, [class*='rounded'][class*='border']:not(.no-hover) {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover, [class*='rounded'][class*='border']:not(.no-hover):hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 4px 12px hsl(var(--foreground) / 0.06);
+}
+img:not(.no-hover):not(nav img):not(.header img) {
+  transition: transform 0.3s ease;
+}
+img:not(.no-hover):not(nav img):not(.header img):hover {
+  transform: scale(1.03);
+}
+
 /* Scroll bar */
 :root {
   --scrollbar-thumb: hsl(var(--muted-foreground) / var(--un-bg-opacity, 0.3));

@@ -28,6 +28,7 @@ const {
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
+    <div id='reading-progress' class='fixed top-0 left-0 h-[2px] bg-primary/70 z-50 transition-[width] duration-150' style='width:0'></div>
     <div id='spotlight' class='pointer-events-none fixed inset-0 z-1'></div>
     {
       highlightColor && (
@@ -397,6 +398,17 @@ const {
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        // 阅读进度条
+        const progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = progress + '%';
+          }, { passive: true });
+        }
+
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (prefersReduced.matches) return;
 
