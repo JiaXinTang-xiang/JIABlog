@@ -17,6 +17,13 @@ const headings = [
 ---
 
 <PageLayout title='Projects' {headings} view>
+  <p>
+    如果你觉得我做的项目还不错，可以赞助我，让我有动力继续做下去。
+  </p>
+  <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
+    <Icon class='size-5' name='receive-money' slot='before' />
+  </Button>
+
   {/* About astro-pure */}
   <!-- <div class='not-prose flex justify-center'>
     <a
@@ -37,12 +44,6 @@ const headings = [
     />
   </p> -->
 
-  <p>
-    如果你觉得我做的项目还不错，可以赞助我，让我有动力继续做下去。
-  </p>
-  <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
-    <Icon class='size-5' name='receive-money' slot='before' />
-  </Button>
 
   <h2 id='programs'>Programs</h2>
   <ProjectSection
@@ -133,14 +134,14 @@ const headings = [
   </Button> -->
 
   <h2 id='sponsorship'>Sponsorship</h2>
-  <p>Chinese methods: <a href="https://afdian.com/a/cworld" target="_blank">Afadian</a>, Wechat or Alipay </p>
+  <p>Chinese methods: Wechat or Alipay </p>
   <!-- <Sponsorship
     methods={[
       { name: 'WeChat', icon: 'wechat-pay', image: wechat },
       { name: 'Alipay', icon: 'alipay', image: alipay }
     ]}
   /> -->
-<!--   
+<!--
   <p>Global methods: <a href="https://ko-fi.com/cworld0" target="_blank">Ko-fi</a> </p>
   <p>Please leave a message or contact me proactively after sponsorship. My email is:
     <code style='cursor: pointer'
