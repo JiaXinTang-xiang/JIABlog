@@ -1,4 +1,5 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import vercel from '@astrojs/vercel'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
@@ -24,7 +25,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'http://jiaxin404.top',
+  site: 'https://www.jiaxin404.top',
   base: '/',
   trailingSlash: 'always',
   // root: './my-project-directory',
@@ -32,8 +33,7 @@ export default defineConfig({
 
   // [Adapter]
   // https://docs.astro.build/en/guides/deploy/
-  // Remove Vercel adapter for GitHub Pages
-  // adapter: vercel(),
+  adapter: vercel(),
   output: 'static',
   // Local (standalone)
   // adapter: node({ mode: 'standalone' }),

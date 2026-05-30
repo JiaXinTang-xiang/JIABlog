@@ -176,12 +176,12 @@ export const integ: IntegrationUserConfig = {
   // Comment system
   waline: {
     enable: true,
-    // Server service link222222222222
-    server: 'https://astro-theme-pure-waline.arthals.ink/',
+    // Server service link
+    server: 'https://waline-jiaxin.vercel.app',
     // Show meta info for comments
     showMeta: false,
     // Refer https://waline.js.org/en/guide/features/emoji.html
-    emoji: ['bmoji', 'weibo'],
+    emoji: ['bilibili', 'weibo'],
     // Refer https://waline.js.org/en/reference/client/props.html
     additionalConfigs: {
       // search: false,
