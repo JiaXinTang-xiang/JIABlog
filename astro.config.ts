@@ -25,7 +25,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://www.jiaxin404.top',
+  site: 'https://jiaxin404.top',
   base: '/',
   trailingSlash: 'always',
   // root: './my-project-directory',
