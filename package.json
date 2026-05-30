@@ -1,14 +1,11 @@
 {
   "name": "astro-theme-pure",
-  "workspaces": [
-    "packages/*"
-  ],
   "type": "module",
   "version": "4.1.2",
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
-    "build": "astro-pure check && astro check && astro build && node scripts/copy-cname.js",
+    "build": "astro build",
     "preview": "astro preview",
     "sync": "astro sync",
     "check": "astro check",
