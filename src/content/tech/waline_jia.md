@@ -1,5 +1,5 @@
 ---
-title: 'Astro 博客集成 Waline 评论系统'
+title: 'Astro 搭建 Waline 评论区'
 description: '从零搭建 Waline 评论系统，支持邮件提醒'
 publishDate: '2026-05-30'
 updatedDate: '2026-05-30'
@@ -260,7 +260,7 @@ AUTHOR_EMAIL=你的QQ邮箱@qq.com
 
 > **注意**：`SMTP_PASS` 不是 QQ 邮箱密码，需要在 QQ 邮箱 → 设置 → 账户 → 开启 SMTP 服务后生成的**授权码**。
 
-添加环境变量后，重新部署 Waline 项目即可。
+添加环境变量后，重新部署 Waline 项目即可。[我的管理界面 ](https://waline-jiaxin.vercel.app/ui/)
 
 ## 后记
 
