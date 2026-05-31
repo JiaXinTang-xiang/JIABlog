@@ -10,6 +10,7 @@ import { ArticleBottom, Copyright, Hero, TOC } from 'astro-pure/components/pages
 import config from 'virtual:config'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import { Comment, PageInfo } from '@/components/waline'
+import PasswordGate from '@/components/PasswordGate.astro'
 
 interface Props {
   post: CollectionEntry<'blog' | 'tech' | 'daily' | 'monthly'>
@@ -50,7 +51,9 @@ const back = `/${collection}`
     </Fragment>
   </Hero>
 
-  <slot />
+  <PasswordGate password={data.password}>
+    <slot />
+  </PasswordGate>
 
   <Fragment slot='bottom'>
     <Copyright {data} />

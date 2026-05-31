@@ -38,6 +38,7 @@ const blog = defineCollection({
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true),
+      password: z.string().optional(),
       slug: z.string().optional()
     })
 })
@@ -87,6 +88,7 @@ const tech = defineCollection({
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true),
+      password: z.string().optional(),
       slug: z.string().optional()
     })
 })
@@ -119,6 +121,7 @@ const daily = defineCollection({
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true),
+      password: z.string().optional(),
       slug: z.string().optional()
     })
 })
@@ -151,6 +154,7 @@ const monthly = defineCollection({
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true),
+      password: z.string().optional(),
       slug: z.string().optional()
     })
 })
@@ -183,6 +187,7 @@ const update = defineCollection({
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true),
+      password: z.string().optional(),
       slug: z.string().optional()
     })
 })
