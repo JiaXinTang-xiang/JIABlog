@@ -5,22 +5,16 @@
       "desc": "Common links included in circle friends",
       "link_list": [
         {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png"
+          "name": "Anan's Blog",
+          "intro": "你好，这里是anan",
+          "link": "https://anan1911.top/",
+          "avatar": "https://anan1911.top/_astro/Image111.BCPofmtf_2rRB3f.webp"
         },
         {
           "name": "CWorld Site",
           "intro": "求知若愚，虚怀若谷",
           "link": "https://cworld0.com/",
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200"
-        },
-        {
-          "name": "MDN Web Docs",
-          "intro": "前端开发者的最佳参考资料",
-          "link": "https://developer.mozilla.org/",
-          "avatar": "https://avatars.githubusercontent.com/u/7562937?s=200&v=4"
         },
         {
           "name": "Astro官方文档",
