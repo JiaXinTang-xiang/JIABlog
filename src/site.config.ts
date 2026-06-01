@@ -136,7 +136,7 @@ export const integ: IntegrationUserConfig = {
     // ],
     // Yourself link info
     applyTip: [
-      { name: '网站名称', val: 'JiaXin Blog' },
+      { name: '网站名称', val: 'JiaXin's Blog' },
       { name: '网站描述', val: '心有山海，静而无边' },
       { name: '网站链接', val: 'https://jiaxin404.top/' },
       { name: '头像链接', val: '/images/avatar.jpg' }
