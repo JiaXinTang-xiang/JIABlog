@@ -9,7 +9,7 @@ tags:
   - Jetson
   - Ubuntu
 language: 'Chinese'
-draft: false/home/jiaxintang/桌面/my/picture/wallhaven-3qw16y.jpg   # 是否为草稿
+draft: false                                                          # 是否为草稿
 slug: ''                                                          # 文章的 URL 路径。
 heroImage: { src: './yolo-uv-setup.jpg', color: '#24292e' }
 ---
