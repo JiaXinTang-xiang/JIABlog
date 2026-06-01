@@ -1,7 +1,7 @@
 ---
 title: '使用 uv 配置 YOLO '
 description: '在 Ubuntu 22.04 上使用 uv 安装 PyTorch + Ultralytics YOLO 环境，主要是对应 Jetson Nano 版本，方便后面模型移植部署'
-publishDate: '2026-06-01'
+publishDate: '2026-06-02'
 tags:
   - YOLO
   - PyTorch
