@@ -47,7 +47,6 @@ sudo reboot
 | 驱动 | NVIDIA 580.142 (已预装) |
 | Python | 3.10.12 (系统自带) |
 | 包管理 | uv 0.11.17 |
-
 Jetson Nano 端的版本：
 
 | 包 | 版本 |
