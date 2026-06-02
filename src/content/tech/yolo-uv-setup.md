@@ -10,14 +10,14 @@ tags:
   - Ubuntu
 language: 'Chinese'
 draft: false                                                          # 是否为草稿
-slug: ''                                                          # 文章的 URL 路径。
+slug: 'yolo-uv-setup'                                             # 文章的 URL 路径。
 heroImage: { src: './yolo-uv-setup.jpg', color: '#24292e' }
 ---
 
 ## 前言
 
 我的工作流是：**Windows 训练 → Ubuntu 验证 → Jetson Nano 部署**。为了保证模型在三端之间无缝移植，需要在 Ubuntu 上搭建一个和 Jetson 版本对齐的 YOLO 环境。
-我们常用的onnx，pytorch框架都将会依赖于工具集和英伟达神经网络运行库cudnn。下文将以win和Ubuntu环境分别讲述安装。
+
 之前看到的教程大多用 conda，但我最终选择了 **uv**，原因是已经装好了、速度快、不占额外磁盘。实际用下来完全够用，记录一下过程。
 
 
@@ -77,7 +77,7 @@ uv venv --python 3.10
 source .venv/bin/activate
 ```
 
-激活后终端会出现 `(yolo-project)` 前缀。yolo-project是工程名字，可以根据你自己命名改。
+激活后终端会出现 `yolo-project` 前缀（工程名字，可自行修改）。
 
 ### 2. 安装 PyTorch（对应 Jetson 的 2.5.0）
 
@@ -212,7 +212,7 @@ nvcc --version
 ### Ubuntu 20.04 兼容性问题
 
 如果在 Ubuntu 20.04 上使用 runfile 安装时可能报错，原因是 g++ 版本过高（默认是 9）。解决方法：
-也可以看看这个链接(https://blog.csdn.net/h3c4lenovo/article/details/119003405)
+也可以看看[这个链接](https://blog.csdn.net/h3c4lenovo/article/details/119003405)
 ```bash
 sudo apt install g++-7
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100
