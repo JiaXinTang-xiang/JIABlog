@@ -1,5 +1,5 @@
 ---
-title: '使用 uv 配置 YOLO '
+title: '使用 uv 配置 YOLO 环境'
 description: '在 Ubuntu 22.04 上使用 uv 安装 PyTorch + Ultralytics YOLO 环境，主要是对应 Jetson Nano 版本，方便后面模型移植部署'
 publishDate: '2026-06-02'
 tags:
@@ -17,7 +17,7 @@ heroImage: { src: './yolo-uv-setup.jpg', color: '#24292e' }
 ## 前言
 
 我的工作流是：**Windows 训练 → Ubuntu 验证 → Jetson Nano 部署**。为了保证模型在三端之间无缝移植，需要在 Ubuntu 上搭建一个和 Jetson 版本对齐的 YOLO 环境。
-
+我们常用的onnx，pytorch框架都将会依赖于工具集和英伟达神经网络运行库cudnn。下文将以win和Ubuntu环境分别讲述安装。
 之前看到的教程大多用 conda，但我最终选择了 **uv**，原因是已经装好了、速度快、不占额外磁盘。实际用下来完全够用，记录一下过程。
 
 
@@ -178,7 +178,7 @@ cv2.destroyAllWindows()
 - **模型导出格式**：Jetson 上推荐用 ONNX 或 TensorRT，不要直接跑 .pt，推理速度差很多
 - **uv 的坑**：用 `uv pip install` 而不是 `pip install`，否则包装到系统目录而不是虚拟环境
 
-## 进阶：安装 CUDA Toolkit（可选）
+## 进阶：安装 CUDA Toolkit（可选）--安装 CUDA 与 CUDNN
 
 PyTorch 自带 CUDA runtime 已经够用，但以下场景需要单独安装：
 
@@ -212,7 +212,7 @@ nvcc --version
 ### Ubuntu 20.04 兼容性问题
 
 如果在 Ubuntu 20.04 上使用 runfile 安装时可能报错，原因是 g++ 版本过高（默认是 9）。解决方法：
-
+也可以看看这个链接(https://blog.csdn.net/h3c4lenovo/article/details/119003405)
 ```bash
 sudo apt install g++-7
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100
@@ -227,6 +227,7 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100
 ## 总结
 
 使用体验：用 uv 配置 YOLO 环境确实比 conda 更轻量快速些。
+使用ubuntu系统默认已经有不少计算机基础以及独立搜索解决问题的能力,你需要记住在ubuntu进行操作：永远不要动你的内核，尽量不要动系统组件，否则后果自负。
 
 完结撒花。
 
