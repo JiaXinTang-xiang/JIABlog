@@ -64,14 +64,14 @@ heroImage: { src: './yaoce_baby.jpg', color: '#24292e' }
 
 下面是推荐构建知识体系以及大学规划非常好的文章和资料，大家自行查看：
 
-- 🔗 [推荐硕哥的机器人工程师学习计划](https://zhuanlan.zhihu.com/p/22266788)：对于机器人学习讲得非常好，整体偏向软件，很适合视觉/算法组的同学参考
-- 🔗 [计算机视觉知识框架图](https://www.processon.com/view/link/6236db1a5653bb071e70457b)：RM视觉学习的思维导图，可以参考
-- 🔗 [西安交大生存指南](https://survivexjtu.cc/)：这个生存指南看完，还是深受启发，非常不错
+- [推荐硕哥的机器人工程师学习计划](https://zhuanlan.zhihu.com/p/22266788)：对于机器人学习讲得非常好，整体偏向软件，很适合视觉/算法组的同学参考
+- [计算机视觉知识框架图](https://www.processon.com/view/link/6236db1a5653bb071e70457b)：RM视觉学习的思维导图，可以参考
+- [西安交大生存指南](https://survivexjtu.cc/)：这个生存指南看完，还是深受启发，非常不错
 
 
 ### 遇到问题怎么办
 
-- 🔗 [How-To-Ask-Questions-The-Smart-Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)：详细地介绍了提问的艺术，良好的问题描述有助于他人了解你的情况
+- [How-To-Ask-Questions-The-Smart-Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)：详细地介绍了提问的艺术，良好的问题描述有助于他人了解你的情况
 
 会提问是一个非常重要的能力，不只是向学长学姐提问，还有向老师，技术交流群，开源社区提问，如果你能提出一个好问题，别人看到也会非常乐意去回答。
 
@@ -423,10 +423,7 @@ github有些同学可能进不去，Windows系统的同学可以下载一个 Wat
 
 ## 有用的网站和资源
 
-- [html](https://www.bilibili.com/video/BV1aE411i7Vg/)：前端学习
-- [css3](https://www.bilibili.com/video/BV1eE411p7tZ/)：前端学习
-- [javascript](https://www.bilibili.com/video/BV1nJ41127Dc/)：前端学习
-
+- [html](https://www.bilibili.com/video/BV1aE411i7Vg/)，[css3](https://www.bilibili.com/video/BV1eE411p7tZ/)，[javascript](https://www.bilibili.com/video/BV1nJ41127Dc/)：前端学习
 - [ProcessOn](https://www.processon.com/)：方便画流程图和各种图，也推荐vscode的drawio插件
 - [MathPages](https://www.mathpages.com/home/index.htm)：进阶数学知识的学习
 - [力扣](https://leetcode.cn/)：刷题
