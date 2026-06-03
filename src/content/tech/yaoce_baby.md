@@ -11,9 +11,12 @@ password: '301'
 heroImage: { src: './yaoce_baby.jpg', color: '#24292e' }
 ---
 
-> <span style="color: #4CAF50;">**TL;DR**</span>：
+<blockquote style="border-left: 4px solid #4CAF50; background-color: #f0fff0; padding: 12px 16px; margin: 16px 0;">
 
-本博客起初刚开始是想随便写一点教程，弄个大概的学习方向，但在整理我过往收藏的资料和学习的视频发现，给后面新来的以及现在大一同学做一个全面的知识体系是非常有必要的，因为我发现视觉学习多而杂，特别是进入Ubuntu后的学习，需要了解和学习的东西很多，最近看他们安装好了虚拟机学习linux的一些命令，回想我安装好Ubuntu学习的时候，完全是摸着石头过河，东看一些西看一些，也是比较迷茫，不知道要学什么,非常有感触。于是就有了这个我熬夜吐血整理简单学习入门教程，欢迎指正。
+**TL;DR**：
+> <span style="color: #4CAF50;">**TL;DR**</span>：本博客起初刚开始是想随便写一点教程，弄个大概的学习方向，但在整理我过往收藏的资料和学习的视频发现，给后面新来的以及现在大一同学做一个全面的知识体系是非常有必要的，因为我发现视觉学习多而杂，特别是进入Ubuntu后的学习，需要了解和学习的东西很多，最近看他们安装好了虚拟机学习linux的一些命令，回想我安装好Ubuntu学习的时候，完全是摸着石头过河，东看一些西看一些，也是比较迷茫，不知道要学什么,非常有感触。于是就有了这个我熬夜吐血整理简单学习入门教程，欢迎指正。
+
+</blockquote>
 
 ## 前言
 
@@ -30,14 +33,6 @@ heroImage: { src: './yaoce_baby.jpg', color: '#24292e' }
 编程语言 Python && C/C++
 
 基础计算机知识：进行一些基础知识的扫盲，其中的前几个篇章都很有阅读的必要。
-
-基础数学知识：有条件的话可以观看 MIT 的相关课程，即 [高等数学-18.02 ↗︎](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/)、[线性代数-18.06 ↗︎](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/)。[MIT 概率论-进阶 ↗︎](https://www.bilibili.com/video/BV1Rt411i7yy?spm_id_from=333.788.videopod.episodes&vd_source=ddae2b7332590050afe28928f52f0bda&p=5)
-
-在这里笔者推荐 [宋浩 ↗︎](https://space.bilibili.com/66607740) 的相关课程，对于线性代数这门可以理解为几乎最重要的数学课程，推荐读者观看 [3Blue1Brown ↗︎](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) 的相关讲解 ↗︎。这个系列课程通过大量直观有趣的可视化，给你提供直觉的理解。
-数学基础，对于控制理论学习，非常重要的。
-
-
-Markdown：记录你的笔记[Markdown 语法 ↗︎](https://www.markdownguide.org/basic-syntax/),通过 Markdown 官网 ↗︎，读者可以了解 Markdown 的全部语法，虽然说是全部，但实际上也非常简单，基本上两三次之后就可以熟练使用。推荐 Typora或者 Obsidian。
 
 Ubuntu：Ubuntu是一个基于Linux的、开源的操作系统。
 
@@ -56,6 +51,13 @@ IDE：推荐 VSCode，插件丰富，高度自定义
 串行通信 & CAN 总线：下位机通信的基础，连接电机、电调等设备
 
 OpenCV：计算机视觉核心库，图像处理的基础
+
+基础数学知识：有条件的话可以观看 MIT 的相关课程，即 [高等数学-18.02 ↗︎](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/)、[线性代数-18.06 ↗︎](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/)。[MIT 概率论-进阶 ↗︎](https://www.bilibili.com/video/BV1Rt411i7yy?spm_id_from=333.788.videopod.episodes&vd_source=ddae2b7332590050afe28928f52f0bda&p=5)
+
+在这里笔者推荐 [宋浩 ↗︎](https://space.bilibili.com/66607740) 的相关课程，对于线性代数这门可以理解为几乎最重要的数学课程，推荐读者观看 [3Blue1Brown ↗︎](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) 的相关讲解 ↗︎。这个系列课程通过大量直观有趣的可视化，给你提供直觉的理解。
+数学基础，对于控制理论学习，非常重要的。
+
+Markdown：记录你的笔记[Markdown 语法 ↗︎](https://www.markdownguide.org/basic-syntax/),通过 Markdown 官网 ↗︎，读者可以了解 Markdown 的全部语法，虽然说是全部，但实际上也非常简单，基本上两三次之后就可以熟练使用。推荐 Typora或者 Obsidian。
 
 
 ### 进阶篇
