@@ -1,7 +1,7 @@
 ---
 title: '适合于遥测宝宝体质的视觉学习教程'
-description: '熬夜吐血整理的视觉教程'
-publishDate: '2026-06-03'
+description: '适用于遥测宝宝体质的视觉学习，内容由浅入深，轻松上手，易吸收。'
+publishDate: '2026-06-05'
 tags:
   - 技术分享
   - Astro
