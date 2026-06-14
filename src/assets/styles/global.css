@@ -384,3 +384,18 @@ table tbody tr:nth-child(even) {
 table tbody tr:hover {
   background-color: hsl(var(--muted) / 0.7);
 }
+
+/* ===== 图片标签 ===== */
+figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+figure img {
+  border-radius: 0.5rem;
+}
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
