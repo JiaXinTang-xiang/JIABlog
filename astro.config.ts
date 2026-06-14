@@ -7,6 +7,7 @@ import remarkMath from 'remark-math'
 
 // Local integrations
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
+import rehypeFigure from './src/plugins/rehype-figure.ts'
 // Shiki
 import {
   addCollapse,
@@ -65,7 +66,8 @@ export default defineConfig({
           properties: { className: ['anchor'] },
           content: { type: 'text', value: '#' }
         }
-      ]
+      ],
+      rehypeFigure()
     ],
     // https://docs.astro.build/en/guides/syntax-highlighting/
     shikiConfig: {
