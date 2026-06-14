@@ -1,3 +1,31 @@
+/* [Fonts] LXGW WenKai — 中文文章正文 */
+@import '@fontsource/lxgw-wenkai/300.css';
+@import '@fontsource/lxgw-wenkai/500.css';
+
+/* [Typography] 中文排版优化 */
+.prose {
+  font-family: 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', serif;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.prose h2 {
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+.prose p {
+  line-height: 1.9;
+  margin-top: 1.15em;
+  margin-bottom: 1.15em;
+  letter-spacing: 0.02em;
+}
+.prose code, .prose pre, .prose kbd, .prose samp {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+}
+
 /* [Animation] */
 @keyframes fade-in-up {
   0% {
