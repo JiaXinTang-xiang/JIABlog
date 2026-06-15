@@ -67,7 +67,7 @@ heroImage: { src: './yaoce_baby.jpg', color: '#24292e' }
 - [推荐硕哥的机器人工程师学习计划](https://zhuanlan.zhihu.com/p/22266788)：对于机器人学习讲得非常好，整体偏向软件，很适合视觉/算法组的同学参考
 - [计算机视觉知识框架图](https://www.processon.com/view/link/6236db1a5653bb071e70457b)：RM视觉学习的思维导图，可以参考
 - [西安交大生存指南](https://survivexjtu.cc/)：这个生存指南看完，还是深受启发，非常不错
-- (机器人工程师学习计划)[https://zhuanlan.zhihu.com/p/2039380190334284614]:Lain-Ego哥写的，对机器人学习整体讲解清晰
+- [机器人工程师学习计划](https://zhuanlan.zhihu.com/p/2039380190334284614):Lain-Ego哥写的，对机器人学习整体讲解醍醐灌顶，非常好
 
 ### 遇到问题怎么办
 
