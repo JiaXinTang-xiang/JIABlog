@@ -136,10 +136,10 @@ export const integ: IntegrationUserConfig = {
     // ],
     // Yourself link info
     applyTip: [
-      { name: '网站名称', val: `JiaXin's Blog` },
-      { name: '网站描述', val: '心有山海，静而无边' },
-      { name: '网站链接', val: 'https://jiaxin404.top/' },
-      { name: '头像链接', val: '/images/avatar.jpg' }
+      { name: 'Name', val: `JiaXin's Blog` },
+      { name: 'Desc', val: '心有山海，静而无边' },
+      { name: 'Link', val: 'https://jiaxin404.top/' },
+      { name: 'Avatar', val: 'https://jiaxin404.top/images/avatar.jpg' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
