@@ -1,18 +1,11 @@
 ---
-// LanguageToggle.astro - 语言切换组件
+// LanguageToggle.astro - 语言切换组件（通过 JS 注入到 Header）
 ---
-
-<button
-  id="lang-toggle"
-  class="flex items-center gap-x-1 rounded-md border px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-  aria-label="Toggle language"
->
-  <span id="lang-label">EN</span>
-</button>
 
 <script>
   const translations: Record<string, Record<string, string>> = {
     zh: {
+      // 导航栏
       'nav.blog': '博客',
       'nav.blog.tech': '技术',
       'nav.blog.daily': '日常',
@@ -21,37 +14,56 @@
       'nav.links': '友链',
       'nav.about': '关于',
       'nav.update': '更新',
+      // 首页
       'home.about': '关于',
       'home.education': '教育',
       'home.posts': '文章',
       'home.projects': '项目',
       'home.skills': '技能',
       'home.statistics': '统计',
+      'home.student': '学生',
+      'home.bio': '这里分享自己的学习和成长经历。Feel free to contact me~',
+      // 按钮
       'btn.learn_more': '了解更多',
       'btn.read_more': '查看更多文章',
       'btn.checkout': '查看赞助',
+      // 统计
       'stats.days_online': '在线天数',
       'stats.last_updated': '最后更新',
       'stats.total_words': '总字数',
       'stats.total_posts': '文章总数',
+      // 技能
       'skill.languages': '编程语言',
       'skill.frontend': '前端技术',
       'skill.backend': '后端工具',
+      // 友链
       'links.common': '友情链接',
       'links.apply': '申请友链',
-      'links.apply_desc': '可通过下方留言或提交 PR 申请友链。',
-      'projects.title': '项目',
+      // 项目
       'projects.programs': '项目',
       'projects.sponsorship': '赞助',
+      // 关于页
+      'about.student_dev': '学生 / 开发者',
+      'about.intro': '我是「嘉心糖」，就读于桂林航天工业学院电子信息工程专业，是24级的，热爱生活。',
+      'about.spoiler': '记录技术成长的点点滴滴',
+      'about.sponsor': '赞助我',
       'about.hobbies': '爱好',
       'about.tools': '工具',
       'about.social_networks': '社交网络',
       'about.gossips': '八卦',
       'about.blog': '关于博客',
+      'about.hobby1': '📚 技术学习 - 持续学习，不断进步',
+      'about.hobby2': '✍️ Blog分享 - 分享经验，帮助他人',
+      'about.hobby3': '🎵 音乐欣赏 - 放松身心，激发灵感',
+      'about.github_desc': '💬 GitHub - 代码分享与开源项目',
+      'about.email_desc': '📧 Email - 商务合作与问题交流',
+      'about.blog_desc': '📝 Blog - 技术文章与学习笔记',
+      // 通用
       'common.search': '搜索',
       'common.back': '返回',
     },
     en: {
+      // Nav
       'nav.blog': 'Blog',
       'nav.blog.tech': 'Tech',
       'nav.blog.daily': 'Daily',
@@ -60,66 +72,54 @@
       'nav.links': 'Links',
       'nav.about': 'About',
       'nav.update': 'Update',
+      // Home
       'home.about': 'About',
       'home.education': 'Education',
       'home.posts': 'Posts',
       'home.projects': 'Projects',
       'home.skills': 'Skills',
       'home.statistics': 'Statistics',
+      'home.student': 'Student',
+      'home.bio': 'Sharing my learning and growth experiences. Feel free to contact me~',
+      // Buttons
       'btn.learn_more': 'Learn more',
       'btn.read_more': 'Read more articles',
       'btn.checkout': 'Checkout sponsorship',
+      // Stats
       'stats.days_online': 'Days Online',
       'stats.last_updated': 'Last Updated',
       'stats.total_words': 'Total Words',
       'stats.total_posts': 'Total Posts',
+      // Skills
       'skill.languages': 'Programming Languages',
       'skill.frontend': 'Frontend Technologies',
       'skill.backend': 'Backend Tools',
+      // Links
       'links.common': 'Common Links',
       'links.apply': 'Apply Links',
-      'links.apply_desc': 'Apply via comment or submitting a PR.',
-      'projects.title': 'Projects',
+      // Projects
       'projects.programs': 'Programs',
       'projects.sponsorship': 'Sponsorship',
+      // About
+      'about.student_dev': 'Student / Developer',
+      'about.intro': 'I\'m Jaxon, studying Electronic Information Engineering at Guilin University of Aerospace Technology. I love life.',
+      'about.spoiler': 'Recording every bit of technical growth',
+      'about.sponsor': 'Sponsor Me',
       'about.hobbies': 'Hobbies',
       'about.tools': 'Tools',
       'about.social_networks': 'Social Networks',
       'about.gossips': 'Gossips',
       'about.blog': 'About Blog',
+      'about.hobby1': '📚 Tech Learning - Keep learning, keep improving',
+      'about.hobby2': '✍️ Blog Sharing - Share experiences, help others',
+      'about.hobby3': '🎵 Music - Relax and get inspired',
+      'about.github_desc': '💬 GitHub - Code sharing & open source projects',
+      'about.email_desc': '📧 Email - Business cooperation & communication',
+      'about.blog_desc': '📝 Blog - Technical articles & learning notes',
+      // Common
       'common.search': 'Search',
       'common.back': 'Back',
     }
-  }
-
-  // 文本映射：中文 -> 翻译键
-  const textToKey: Record<string, string> = {
-    '关于': 'home.about',
-    '教育': 'home.education',
-    '文章': 'home.posts',
-    '项目': 'home.projects',
-    '技能': 'home.skills',
-    '统计': 'home.statistics',
-    '了解更多': 'btn.learn_more',
-    '查看更多文章': 'btn.read_more',
-    '查看赞助': 'btn.checkout',
-    '在线天数': 'stats.days_online',
-    '最后更新': 'stats.last_updated',
-    '总字数': 'stats.total_words',
-    '文章总数': 'stats.total_posts',
-    '编程语言': 'skill.languages',
-    '前端技术': 'skill.frontend',
-    '后端工具': 'skill.backend',
-    '友情链接': 'links.common',
-    '申请友链': 'links.apply',
-    '赞助': 'projects.sponsorship',
-    '爱好': 'about.hobbies',
-    '工具': 'about.tools',
-    '社交网络': 'about.social_networks',
-    '八卦': 'about.gossips',
-    '关于博客': 'about.blog',
-    '搜索': 'common.search',
-    '返回': 'common.back',
   }
 
   type Lang = 'zh' | 'en'
@@ -143,47 +143,11 @@
       }
     })
 
-    // 2. 翻译导航栏菜单项
-    document.querySelectorAll('nav a, nav button').forEach((el) => {
-      const text = el.textContent?.trim()
-      if (text) {
-        // 找到匹配的翻译键
-        for (const [zhText, key] of Object.entries(textToKey)) {
-          if (text === zhText && t[key]) {
-            el.textContent = t[key]
-            break
-          }
-        }
-        // 特殊处理：英文 -> 中文
-        if (lang === 'zh') {
-          for (const [key, enText] of Object.entries(translations.en)) {
-            if (text === enText && translations.zh[key]) {
-              el.textContent = translations.zh[key]
-              break
-            }
-          }
-        }
-      }
-    })
-
-    // 3. 翻译按钮文字
-    document.querySelectorAll('button p, a p').forEach((el) => {
-      const text = el.textContent?.trim()
-      if (text) {
-        for (const [zhText, key] of Object.entries(textToKey)) {
-          if (text === zhText && t[key]) {
-            el.textContent = t[key]
-            break
-          }
-        }
-        if (lang === 'zh') {
-          for (const [key, enText] of Object.entries(translations.en)) {
-            if (text === enText && translations.zh[key]) {
-              el.textContent = translations.zh[key]
-              break
-            }
-          }
-        }
+    // 2. 翻译导航栏菜单项（通过 data-i18n-nav 属性）
+    document.querySelectorAll('[data-i18n-nav]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-nav')
+      if (key && t[key]) {
+        el.textContent = t[key]
       }
     })
 
@@ -196,19 +160,53 @@
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'
   }
 
-  // 初始化
-  const currentLang = getLang()
-  applyTranslations(currentLang)
+  function injectLanguageToggle() {
+    // 找到主题切换按钮的容器
+    const header = document.querySelector('header-component')
+    if (!header) return
 
-  // 绑定点击事件
-  document.getElementById('lang-toggle')?.addEventListener('click', () => {
-    const newLang: Lang = getLang() === 'zh' ? 'en' : 'zh'
-    setLang(newLang)
-    applyTranslations(newLang)
-  })
+    const buttonsContainer = header.querySelector('.z-30.flex.gap-x-4')
+    if (!buttonsContainer) return
+
+    // 检查是否已经注入过
+    if (document.getElementById('lang-toggle')) return
+
+    // 创建语言切换按钮
+    const langBtn = document.createElement('button')
+    langBtn.id = 'lang-toggle'
+    langBtn.className = 'group/dark box-content size-5 rounded-md border p-1.5 transition-colors hover:bg-border sm:group-[.not-top]:rounded-xl'
+    langBtn.innerHTML = `<span id="lang-label" class="text-xs font-medium">${getLang() === 'zh' ? 'EN' : '中'}</span>`
+    langBtn.title = getLang() === 'zh' ? 'Switch to English' : '切换到中文'
+
+    // 插入到主题切换按钮前面
+    buttonsContainer.insertBefore(langBtn, buttonsContainer.firstChild)
+
+    // 绑定点击事件
+    langBtn.addEventListener('click', () => {
+      const newLang: Lang = getLang() === 'zh' ? 'en' : 'zh'
+      setLang(newLang)
+      applyTranslations(newLang)
+      langBtn.title = newLang === 'zh' ? 'Switch to English' : '切换到中文'
+    })
+  }
+
+  // 初始化
+  function init() {
+    injectLanguageToggle()
+    const currentLang = getLang()
+    applyTranslations(currentLang)
+  }
+
+  // 页面加载时初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init)
+  } else {
+    init()
+  }
 
   // 监听 Astro 页面切换事件（SPA 导航时重新应用翻译）
   document.addEventListener('astro:page-load', () => {
+    injectLanguageToggle()
     const lang = getLang()
     applyTranslations(lang)
   })
