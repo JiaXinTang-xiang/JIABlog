@@ -2,6 +2,7 @@
 import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
 import config from '@/site-config'
 
 // Import the global.css file here so that it is included on
@@ -44,6 +45,9 @@ const {
       class='w-full max-w-[70rem] min-h-[100dvh] flex flex-col justify-between'
     >
       <Header />
+      <div class='fixed top-3 right-20 z-50 sm:right-24 lg:right-28'>
+        <LanguageToggle />
+      </div>
       <div class='flex-1 w-full'>
         <slot />
       </div>

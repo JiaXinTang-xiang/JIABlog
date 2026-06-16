@@ -77,7 +77,7 @@ if (!images[imagePath])
     </section> -->
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
-      <Section title='About'>
+      <Section title='About' i18nKey='home.about'>
         <p class='text-muted-foreground'>学生/</p>
         <p class='text-muted-foreground'>
         这里分享自己的学习和成长经历。Feel free to contact me~
@@ -85,7 +85,7 @@ if (!images[imagePath])
         <Button title='Learn more' class='w-fit self-end' href='/about' variant='ahead' />
       </Section>
 
-      <Section title='Education'>
+      <Section title='Education' i18nKey='home.education'>
         <Card
           as='a'
           heading='广西无人机遥测实验室'
@@ -109,7 +109,7 @@ if (!images[imagePath])
         </Card>
       </Section>
 
-      <Section title='Posts'>
+      <Section title='Posts' i18nKey='home.posts'>
         <div class='flex flex-col gap-y-3'>
           <div class='flex flex-col gap-y-1.5 sm:gap-y-2'>
             <div class='post-preview group/card flex flex-col relative rounded-xl border bg-background transition-colors ease-in-out px-4 py-3 hover:bg-muted'>
@@ -203,7 +203,7 @@ if (!images[imagePath])
         </div>
       </Section>
 
-      <Section title='Projects'>
+      <Section title='Projects' i18nKey='home.projects'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <!-- <ProjectCard
             href='https://github.com/jiaxintang-xiang/JIABlog'
@@ -220,13 +220,13 @@ if (!images[imagePath])
         </div>
       </Section>
 
-      <Section title='Skills'>
+      <Section title='Skills' i18nKey='home.skills'>
         <SkillLayout title='Programming Languages' skills={languages} />
         <SkillLayout title='Frontend Technologies' skills={frontend} />
         <SkillLayout title='Backend Tools' skills={backend} />
       </Section>
 
-      <Section title='Statistics'>
+      <Section title='Statistics' i18nKey='home.statistics'>
         <div class='grid grid-cols-2 gap-4 sm:grid-cols-4'>
           <div class='rounded-lg border p-4 text-center'>
             <div class='text-2xl font-bold text-primary'>365</div>

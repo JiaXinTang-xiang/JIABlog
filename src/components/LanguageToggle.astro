@@ -1,0 +1,215 @@
+---
+// LanguageToggle.astro - 语言切换组件
+---
+
+<button
+  id="lang-toggle"
+  class="flex items-center gap-x-1 rounded-md border px-2 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+  aria-label="Toggle language"
+>
+  <span id="lang-label">EN</span>
+</button>
+
+<script>
+  const translations: Record<string, Record<string, string>> = {
+    zh: {
+      'nav.blog': '博客',
+      'nav.blog.tech': '技术',
+      'nav.blog.daily': '日常',
+      'nav.blog.monthly': '月记',
+      'nav.projects': '项目',
+      'nav.links': '友链',
+      'nav.about': '关于',
+      'nav.update': '更新',
+      'home.about': '关于',
+      'home.education': '教育',
+      'home.posts': '文章',
+      'home.projects': '项目',
+      'home.skills': '技能',
+      'home.statistics': '统计',
+      'btn.learn_more': '了解更多',
+      'btn.read_more': '查看更多文章',
+      'btn.checkout': '查看赞助',
+      'stats.days_online': '在线天数',
+      'stats.last_updated': '最后更新',
+      'stats.total_words': '总字数',
+      'stats.total_posts': '文章总数',
+      'skill.languages': '编程语言',
+      'skill.frontend': '前端技术',
+      'skill.backend': '后端工具',
+      'links.common': '友情链接',
+      'links.apply': '申请友链',
+      'links.apply_desc': '可通过下方留言或提交 PR 申请友链。',
+      'projects.title': '项目',
+      'projects.programs': '项目',
+      'projects.sponsorship': '赞助',
+      'about.hobbies': '爱好',
+      'about.tools': '工具',
+      'about.social_networks': '社交网络',
+      'about.gossips': '八卦',
+      'about.blog': '关于博客',
+      'common.search': '搜索',
+      'common.back': '返回',
+    },
+    en: {
+      'nav.blog': 'Blog',
+      'nav.blog.tech': 'Tech',
+      'nav.blog.daily': 'Daily',
+      'nav.blog.monthly': 'Monthly',
+      'nav.projects': 'Projects',
+      'nav.links': 'Links',
+      'nav.about': 'About',
+      'nav.update': 'Update',
+      'home.about': 'About',
+      'home.education': 'Education',
+      'home.posts': 'Posts',
+      'home.projects': 'Projects',
+      'home.skills': 'Skills',
+      'home.statistics': 'Statistics',
+      'btn.learn_more': 'Learn more',
+      'btn.read_more': 'Read more articles',
+      'btn.checkout': 'Checkout sponsorship',
+      'stats.days_online': 'Days Online',
+      'stats.last_updated': 'Last Updated',
+      'stats.total_words': 'Total Words',
+      'stats.total_posts': 'Total Posts',
+      'skill.languages': 'Programming Languages',
+      'skill.frontend': 'Frontend Technologies',
+      'skill.backend': 'Backend Tools',
+      'links.common': 'Common Links',
+      'links.apply': 'Apply Links',
+      'links.apply_desc': 'Apply via comment or submitting a PR.',
+      'projects.title': 'Projects',
+      'projects.programs': 'Programs',
+      'projects.sponsorship': 'Sponsorship',
+      'about.hobbies': 'Hobbies',
+      'about.tools': 'Tools',
+      'about.social_networks': 'Social Networks',
+      'about.gossips': 'Gossips',
+      'about.blog': 'About Blog',
+      'common.search': 'Search',
+      'common.back': 'Back',
+    }
+  }
+
+  // 文本映射：中文 -> 翻译键
+  const textToKey: Record<string, string> = {
+    '关于': 'home.about',
+    '教育': 'home.education',
+    '文章': 'home.posts',
+    '项目': 'home.projects',
+    '技能': 'home.skills',
+    '统计': 'home.statistics',
+    '了解更多': 'btn.learn_more',
+    '查看更多文章': 'btn.read_more',
+    '查看赞助': 'btn.checkout',
+    '在线天数': 'stats.days_online',
+    '最后更新': 'stats.last_updated',
+    '总字数': 'stats.total_words',
+    '文章总数': 'stats.total_posts',
+    '编程语言': 'skill.languages',
+    '前端技术': 'skill.frontend',
+    '后端工具': 'skill.backend',
+    '友情链接': 'links.common',
+    '申请友链': 'links.apply',
+    '赞助': 'projects.sponsorship',
+    '爱好': 'about.hobbies',
+    '工具': 'about.tools',
+    '社交网络': 'about.social_networks',
+    '八卦': 'about.gossips',
+    '关于博客': 'about.blog',
+    '搜索': 'common.search',
+    '返回': 'common.back',
+  }
+
+  type Lang = 'zh' | 'en'
+
+  function getLang(): Lang {
+    return (localStorage.getItem('lang') as Lang) || 'zh'
+  }
+
+  function setLang(lang: Lang) {
+    localStorage.setItem('lang', lang)
+  }
+
+  function applyTranslations(lang: Lang) {
+    const t = translations[lang]
+
+    // 1. 翻译带有 data-i18n 属性的元素
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n')
+      if (key && t[key]) {
+        el.textContent = t[key]
+      }
+    })
+
+    // 2. 翻译导航栏菜单项
+    document.querySelectorAll('nav a, nav button').forEach((el) => {
+      const text = el.textContent?.trim()
+      if (text) {
+        // 找到匹配的翻译键
+        for (const [zhText, key] of Object.entries(textToKey)) {
+          if (text === zhText && t[key]) {
+            el.textContent = t[key]
+            break
+          }
+        }
+        // 特殊处理：英文 -> 中文
+        if (lang === 'zh') {
+          for (const [key, enText] of Object.entries(translations.en)) {
+            if (text === enText && translations.zh[key]) {
+              el.textContent = translations.zh[key]
+              break
+            }
+          }
+        }
+      }
+    })
+
+    // 3. 翻译按钮文字
+    document.querySelectorAll('button p, a p').forEach((el) => {
+      const text = el.textContent?.trim()
+      if (text) {
+        for (const [zhText, key] of Object.entries(textToKey)) {
+          if (text === zhText && t[key]) {
+            el.textContent = t[key]
+            break
+          }
+        }
+        if (lang === 'zh') {
+          for (const [key, enText] of Object.entries(translations.en)) {
+            if (text === enText && translations.zh[key]) {
+              el.textContent = translations.zh[key]
+              break
+            }
+          }
+        }
+      }
+    })
+
+    // 更新按钮文字
+    const label = document.getElementById('lang-label')
+    if (label) {
+      label.textContent = lang === 'zh' ? 'EN' : '中'
+    }
+    // 更新 html lang 属性
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'
+  }
+
+  // 初始化
+  const currentLang = getLang()
+  applyTranslations(currentLang)
+
+  // 绑定点击事件
+  document.getElementById('lang-toggle')?.addEventListener('click', () => {
+    const newLang: Lang = getLang() === 'zh' ? 'en' : 'zh'
+    setLang(newLang)
+    applyTranslations(newLang)
+  })
+
+  // 监听 Astro 页面切换事件（SPA 导航时重新应用翻译）
+  document.addEventListener('astro:page-load', () => {
+    const lang = getLang()
+    applyTranslations(lang)
+  })
+</script>

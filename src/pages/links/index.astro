@@ -18,7 +18,7 @@ const linkEditPage = 'https://github.com/jiaxintang-xiang/JIABlog/blob/main/publ
 
 <PageLayout title='Links' {headings} comment>
   <p>They're sorted randomly.</p>
-  <h2 id='common-links'>Common Links</h2>
+  <h2 id='common-links' data-i18n='links.common'>Common Links</h2>
   <FriendList list={friends[0]} />
   <!-- <Collapse title='Links with Bad Status'>
     <FriendList list={friends[1]} />
@@ -27,7 +27,7 @@ const linkEditPage = 'https://github.com/jiaxintang-xiang/JIABlog/blob/main/publ
     <Timeline events={linksConf.logbook} />
   </Collapse> -->
 
-  <h2 id='apply-links'>Apply Links</h2>
+  <h2 id='apply-links' data-i18n='links.apply'>Apply Links</h2>
   <p>本站信息（点击复制）The site information (click to copy)：</p>
   <blockquote class='not-prose grid grid-cols-[auto_1fr] gap-x-2 break-words border-s-4 ps-4'>
     {
