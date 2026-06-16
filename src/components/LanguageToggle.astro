@@ -24,6 +24,11 @@
       'home.statistics': '统计',
       'home.student': '学生',
       'home.bio': '这里分享自己的学习和成长经历。Feel free to contact me~',
+      // 教育经历
+      'edu.lab': '广西无人机遥测实验室',
+      'edu.member': '成员',
+      'edu.school': '桂林航天工业学院',
+      'edu.major': '电子信息工程专业 - 本科',
       // 按钮
       'btn.learn_more': '了解更多',
       'btn.read_more': '查看更多文章',
@@ -43,6 +48,9 @@
       // 项目
       'projects.programs': '项目',
       'projects.sponsorship': '赞助',
+      'projects.desc': '如果你觉得我做的项目还不错，可以赞助我，让我有动力继续做下去。',
+      // 版权
+      'about.copyright': '本站所有原创内容及整体页面设计，若无特殊单独说明，均采用 CC BY-NC-SA 4.0 国际许可协议授权。您可在协议规则范围内，自由转载、分享、复制本站原创内容，亦可基于本站内容进行二次创作；但需严格遵守：标注原作者与原文链接、禁止用于任何商业用途、衍生作品需沿用相同授权协议。本站使用的配图、素材均尽可能注明来源。若您认为站内内容侵犯了您的合法权益，请及时与我联系，我将第一时间核实并做下架、删除处理。',
       // 关于页
       'about.student_dev': '学生 / 开发者',
       'about.intro': '我是「嘉心糖」，就读于桂林航天工业学院电子信息工程专业，是24级的，热爱生活。',
@@ -84,6 +92,11 @@
       'home.statistics': 'Statistics',
       'home.student': 'Student',
       'home.bio': 'Sharing my learning and growth experiences. Feel free to contact me~',
+      // Education
+      'edu.lab': 'Guangxi UAV Remote Sensing Laboratory',
+      'edu.member': 'Member',
+      'edu.school': 'Guilin University of Aerospace Technology',
+      'edu.major': 'Electronic Information Engineering - Bachelor',
       // Buttons
       'btn.learn_more': 'Learn more',
       'btn.read_more': 'Read more articles',
@@ -103,6 +116,9 @@
       // Projects
       'projects.programs': 'Programs',
       'projects.sponsorship': 'Sponsorship',
+      'projects.desc': 'If you think my projects are good, you can sponsor me to keep me motivated.',
+      // Copyright
+      'about.copyright': 'All original content and overall page design of this site are licensed under CC BY-NC-SA 4.0 International License unless otherwise stated. You may freely reproduce, share, and copy the original content of this site within the terms of the license, and may also create derivative works based on the content; however, you must strictly comply with: attributing the original author and source link, prohibiting any commercial use, and applying the same license to derivative works. The images and materials used on this site are sourced with attribution whenever possible. If you believe that any content on this site infringes upon your legitimate rights, please contact me promptly, and I will verify and take down or delete the content immediately.',
       // About
       'about.student_dev': 'Student / Developer',
       'about.intro': 'I\'m Jaxon, studying Electronic Information Engineering at Guilin University of Aerospace Technology. I love life.',
@@ -155,13 +171,33 @@
       }
     })
 
-    // 3. 翻译包含特定文本的元素（如 "China" / "中国"）
-    document.querySelectorAll('p').forEach((el) => {
+    // 3. 翻译包含特定文本的元素
+    const textMap: Record<string, string> = {
+      'China': 'common.china',
+      '中国': 'common.china',
+      '广西无人机遥测实验室': 'edu.lab',
+      '成员': 'edu.member',
+      '桂林航天工业学院': 'edu.school',
+      '电子信息工程专业 - 本科': 'edu.major',
+    }
+
+    document.querySelectorAll('h2, p').forEach((el) => {
       const text = el.textContent?.trim()
-      if (text === 'China' && lang === 'zh') {
-        el.textContent = '中国'
-      } else if (text === '中国' && lang === 'en') {
-        el.textContent = 'China'
+      if (text && textMap[text]) {
+        const key = textMap[text]
+        if (t[key]) {
+          el.textContent = t[key]
+        }
+      }
+    })
+
+    // 4. 翻译版权信息（特殊处理，因为文本较长）
+    document.querySelectorAll('p, li, div').forEach((el) => {
+      const text = el.textContent?.trim()
+      if (text && text.startsWith('本站所有原创内容')) {
+        if (t['about.copyright']) {
+          el.textContent = t['about.copyright']
+        }
       }
     })
 
@@ -188,8 +224,8 @@
     // 创建语言切换按钮
     const langBtn = document.createElement('button')
     langBtn.id = 'lang-toggle'
-    langBtn.className = 'group/dark box-content size-5 rounded-md border p-1.5 transition-colors hover:bg-border sm:group-[.not-top]:rounded-xl'
-    langBtn.innerHTML = `<span id="lang-label" class="text-xs font-medium">${getLang() === 'zh' ? 'EN' : '中'}</span>`
+    langBtn.className = 'group/dark box-content rounded-md border px-2 py-1 transition-colors hover:bg-border sm:group-[.not-top]:rounded-xl'
+    langBtn.innerHTML = `<span id="lang-label" class="text-sm font-medium">${getLang() === 'zh' ? 'EN' : '中'}</span>`
     langBtn.title = getLang() === 'zh' ? 'Switch to English' : '切换到中文'
 
     // 插入到主题切换按钮前面
