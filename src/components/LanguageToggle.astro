@@ -15,6 +15,7 @@
       'nav.about': '关于',
       'nav.update': '更新',
       // 首页
+      'home.author': '嘉心糖',
       'home.about': '关于',
       'home.education': '教育',
       'home.posts': '文章',
@@ -61,6 +62,7 @@
       // 通用
       'common.search': '搜索',
       'common.back': '返回',
+      'common.china': '中国',
     },
     en: {
       // Nav
@@ -73,6 +75,7 @@
       'nav.about': 'About',
       'nav.update': 'Update',
       // Home
+      'home.author': 'Jaxon',
       'home.about': 'About',
       'home.education': 'Education',
       'home.posts': 'Posts',
@@ -119,6 +122,7 @@
       // Common
       'common.search': 'Search',
       'common.back': 'Back',
+      'common.china': 'China',
     }
   }
 
@@ -148,6 +152,16 @@
       const key = el.getAttribute('data-i18n-nav')
       if (key && t[key]) {
         el.textContent = t[key]
+      }
+    })
+
+    // 3. 翻译包含特定文本的元素（如 "China" / "中国"）
+    document.querySelectorAll('p').forEach((el) => {
+      const text = el.textContent?.trim()
+      if (text === 'China' && lang === 'zh') {
+        el.textContent = '中国'
+      } else if (text === '中国' && lang === 'en') {
+        el.textContent = 'China'
       }
     })
 
