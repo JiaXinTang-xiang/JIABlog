@@ -17,6 +17,7 @@ heroImage: { src: './About_me_git1.jpg', color: '#24292e' }
 
 今天花了点时间优化了 GitHub 个人主页，操作也就几步不麻烦，分享记录下来方便以后查阅，也希望对你有帮助。[我的主页](https://github.com/jiaxintang-xiang)。
 
+
 ## 1. 创建同名仓库
 
 新建一个仓库，**仓库名必须和你的 GitHub 用户名完全一致**。比如我的用户名是 `JiaXinTang-Xiang`，仓库名就填 `JiaXinTang-Xiang`。
