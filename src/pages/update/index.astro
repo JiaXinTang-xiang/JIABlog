@@ -3,19 +3,99 @@ import { Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 
 const headings = [
+  { depth: 2, slug: 'article-update', text: '文章更新' },
   { depth: 2, slug: 'update-log', text: '更新日志' }
 ]
 ---
 
 <PageLayout title='更新日志' {headings}>
 
+  <h2 id='article-update'>文章更新</h2>
+
+  <Timeline
+    events={[
+      {
+        date: '2026-06-14',
+        content: '发布<a href="/tech/sogou_install">《Ubuntu 22.04 安装搜狗输入法》</a>：记录搜狗输入法的安装与配置过程。'
+      },
+      {
+        date: '2026-06-07',
+        content: '发布<a href="/monthly/26_05">《月记·26-05》</a>：遥测团建、电赛校赛测评、高校赛经历与展望。'
+      },
+      {
+        date: '2026-06-05',
+        content: '发布<a href="/tech/yaoce_baby">《适合遥测宝宝体质的视觉学习教程》</a>：面向实验室新生的视觉学习知识体系。'
+      },
+      {
+        date: '2026-06-02',
+        content: '发布<a href="/tech/yolo-uv-setup">《使用 uv 配置 YOLO 环境》</a>：用 uv 管理 Python 项目环境并配置 YOLO 训练。'
+      },
+      {
+        date: '2026-06-01',
+        content: '发布<a href="/tech/password">《Astro 文章密码保护》</a>：为文章添加密码访问功能。'
+      },
+      {
+        date: '2026-05-30',
+        content: '发布<a href="/tech/waline_jia">《Astro 搭建 Waline 评论区》</a>：部署 Waline 评论系统并接入 QQ 邮箱提醒。'
+      },
+      {
+        date: '2026-05-15',
+        content: '发布<a href="/tech/about_me_git">《GitHub 个人主页美化指南》</a>：分享 GitHub Profile 个性化配置方法。'
+      },
+      {
+        date: '2026-04-28',
+        content: '发布<a href="/tech/use-git">《Git 的常见使用》</a>：Git 日常操作指南。'
+      },
+      {
+        date: '2026-04-08',
+        content: '发布<a href="/tech/About-Ubuntu-command">《Ubuntu 常用命令大全》</a>：整理日常开发常用命令，持续更新。'
+      },
+      {
+        date: '2026-04-07',
+        content: '发布<a href="/tech/about-my-blog">《关于我的博客》</a>：记录搭建个人博客的过程与技术选型。'
+      },
+      {
+        date: '2026-04-02',
+        content: '发布<a href="/daily/first-daily-post">《我的第一篇日常记录》</a>：分享日常生活与随想。'
+      },
+      {
+        date: '2026-04-01',
+        content: '发布<a href="/monthly/26_04">《月记·26-04》</a>：首篇月记，记录电赛备战与生活琐事。'
+      },
+      {
+        date: '2026-04-01',
+        content: '发布<a href="/tech/first-tech-post">《我的第一篇技术文章》</a>：博客技术板块正式开启。'
+      },
+      {
+        date: '2025-03-31',
+        content: '发布<a href="/blog/first-post">《我的第一篇博客文章》</a>：博客正式上线，开启写作之旅。'
+      },
+    ]}
+  />
+
   <h2 id='update-log'>更新记录</h2>
 
   <Timeline
     events={[
       {
+        date: '2026-06-19',
+        content: '新增中英文 UI 切换功能：导航栏添加语言切换按钮，首页、关于页、项目页、友链页支持中英文切换。'
+      },
+      {
+        date: '2026-06-17',
+        content: '文章图片自动生成说明标签（figure/figcaption）；修复 rehype 插件构建报错问题。'
+      },
+      {
+        date: '2026-06-14',
+        content: '新增搜狗输入法安装配置教程；友链新增 Arthals\' ink 和 Axi\'s Blog。'
+      },
+      {
+        date: '2026-06-07',
+        content: '发布五月月记：记录遥测团建、电赛校赛测评、高校赛经历与展望。'
+      },
+      {
         date: '2026-06-01',
-        content: '新增文章密码保护功能，清理没有用信息，更新了联系方式。'
+        content: '新增文章密码保护功能，清理无用信息，更新联系方式。'
       },
       {
         date: '2026-05-30',
