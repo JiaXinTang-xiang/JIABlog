@@ -239,6 +239,15 @@ sudo ntpdate time.windows.com
 sudo hwclock --localtime --systohc
 ```
 
+## 下载ssh
+```
+sudo apt install openssh-server
+```
+```
+systemctl status ssh
+systemctl start ssh
+systemctl enable ssh
+```
 
 ## 下载文件树
 
