@@ -1,5 +1,5 @@
 ---
-title: 'Codex + CCX 安装配置指南'
+title: 'Codex 安装配置指南'
 description: ‘在 Linux 上安装配置 Codex ’
 publishDate: '2026-06-20'
 tags:
