@@ -79,7 +79,7 @@ sudo apt-get install fcitx-googlepinyin -y
 
 ## 三、SCP 文件传输
 
-SCP（Secure Copy）是基于 SSH 的安全文件传输命令，无需额外安装，系统自带，适合在 PC 与 Jetson 之间传文件。
+SCP（Secure Copy）是基于 SSH 的安全文件传输命令，无需额外安装，系统自带，适合在 PC 间传文件。
 
 ### 从 PC 上传文件到 Jetson
 

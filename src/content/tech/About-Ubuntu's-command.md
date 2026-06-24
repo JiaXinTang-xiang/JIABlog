@@ -339,7 +339,6 @@ ibus-setup
 
 Matlab 是一个常用的数据分析和绘图软件，在 Python 我们也可以使用 matplotlib 库绘制图形。在进行可视化时，我们使用的是 matplotlib.pyplot 子库
 ```
-
 pip install matplotlib
 ```
 
