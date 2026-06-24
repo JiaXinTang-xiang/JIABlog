@@ -264,6 +264,16 @@ sudo cutecom
 ```
 使用 cutecom 点击 open 打开 /dev/ttyTHS1 串口号：在Input输入串口要发送的数据，上面窗口显示 /dev/ttyTHS1 串口发送的数据，下面窗口显示 /dev/ttyTHS1 接收的数据。
 
+## 安装minicom
+```
+sudo apt-get install minicom
+```
+安装完成后启动minicom
+```
+minicom -D /dev/ttyAMA0 -b 9600
+```
+其中-D表示选择串口/dev/ttyAMA0，-b 设置波特率为9600，此参数可以不用设置，默认115200。
+
 
 ## cmake
 
