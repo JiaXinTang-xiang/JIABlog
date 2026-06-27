@@ -31,7 +31,7 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 **环境**：Ubuntu 22.04，ROS 2 Humble，Gazebo Classic 11.10.2。
 
 ---
-## 1：环境踩坑 + 第一个 URDF
+## 一、环境踩坑 + 第一个 URDF
 
 ### 1.1 环境踩坑
 
@@ -217,7 +217,7 @@ sam_bot_description/
 ```
 
 ---
-## 2：装上引擎、眼睛和平衡感
+## 二、装上引擎、眼睛和平衡感
 
 Day 1 的 URDF 只能看。要让它在 Gazebo 里"动"起来，需要三个东西：**物理属性**（质量/惯量/碰撞）、**驱动**（接收 /cmd_vel 让轮子转）、**传感器**（感知环境）。
 
@@ -489,7 +489,7 @@ IMU 传感器 --> /demo/imu --+---------> ekf_node --> /odometry/filtered
 ```
 
 ---
-## 3：接入 Nav2 导航栈
+## 三、接入 Nav2 导航栈
 
 Day 2 的机器人有了感官和动力，但它不知道：环境什么样子（建图）、自己在地图上的位置（定位）、从 A 去 B 怎么走（规划）、路上有障碍怎么避（控制）。Day 3 就是接上 Nav2 解决这四个问题。
 
