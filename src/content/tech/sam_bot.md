@@ -1,8 +1,8 @@
 ---
 title: '从零构建 Nav2 仿真机器人：一条命令的背后'
 description: '不跑现成的 TurtleBot3，写 URDF、传感器插件、EKF 融合、Nav2 导航栈，完整记录学习过程'
-publishDate: '2026-06-27'
-updatedDate: '2026-06-27'
+publishDate: '2026-06-29'
+updatedDate: '2026-06-29'
 tags:
   - ROS 2
   - Nav2
