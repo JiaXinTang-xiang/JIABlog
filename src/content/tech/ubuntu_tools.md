@@ -1,6 +1,6 @@
 ---
-title: '纪录Ubuntu 常用工具下载'
-description: '整理 Ubuntu 常用的工具安装与配置'
+title: 'Ubuntu 常用工具的下载和使用'
+description: '整理 Ubuntu 常用的工具'
 publishDate: '2026-06-22'
 tags:
   - Ubuntu

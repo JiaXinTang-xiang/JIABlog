@@ -1,6 +1,6 @@
 ---
 title: 'Codex 安装配置指南'
-description: ‘在 Linux 上安装配置 Codex ’
+description: ‘在 Ubuntu 上安装配置 Codex ’
 publishDate: '2026-06-20'
 tags:
   - Codex
