@@ -178,7 +178,6 @@ v = fy × Y/Z + cy
 `k1 = -0.45`（负值）说明相机有**明显的桶形畸变**——图像边缘的直线会向画面中心弯曲。这是广角镜头常见的特征。
 
 ## 8. 使用校准文件
-
 ### 方式一：自动加载
 
 将校准文件放到 ROS 默认路径，`usb_cam` 启动时自动读取：
@@ -186,7 +185,6 @@ v = fy × Y/Z + cy
 ```bash
 cp ost.yaml ~/.ros/camera_info/default_cam.yaml
 ```
-
 ### 方式二：显式指定
 
 通过参数传入校准文件路径：
@@ -197,15 +195,6 @@ ros2 run usb_cam usb_cam_node_exe --ros-args \
   -p camera_info_url:=file:///path/to/ost.yaml
 ```
 
-## 9. 故障排查
-
-| 问题 | 原因 | 解决 |
-|------|------|------|
-| 棋盘格未识别 | 光照或反光 | 避免光面纸，柔光环境 |
-| 进度条不动 | 位置变化不够多样 | 参考第 5 节四种动作 |
-| `cv_bridge` 报错 | NumPy 2.x 不兼容 | `pip install "numpy<2"` |
-| 摄像头驱动崩溃 | V4L2 格式不兼容 | 换设备节点 `/dev/video4` |
-| PYPI 下载失败 | pip 默认源被墙 | 加 `-i https://pypi.tuna.tsinghua.edu.cn/simple` |
 
 ## 底层实现：OpenCV 张正友标定法
 
