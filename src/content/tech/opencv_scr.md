@@ -1,7 +1,7 @@
 ---
 title: 'OpenCV 从零开始：图像基础、特征匹配与相机几何'
 description: '从 imread 到对极几何，三个阶段'
-publishDate: '2026-06-29'
+publishDate: '2026-06-30'
 tags:
   - OpenCV
   - 计算机视觉
