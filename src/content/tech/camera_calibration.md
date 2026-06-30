@@ -9,7 +9,7 @@ tags:
   - 计算机视觉
 language: 'Chinese'
 draft: false
-slug: 'camera-calibration-zhang'
+slug: 'camera-calibration'
 heroImage: { src: './camera_calibration.jpg', color: '#1a1a2e' }
 ---
 

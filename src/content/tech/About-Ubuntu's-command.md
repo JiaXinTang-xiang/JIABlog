@@ -9,7 +9,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'About-Ubuntu-command'
-heroImage: { src: './command.jpg', color: '#24292e' }
+heroImage: { src: './About-Ubuntu-command.jpg', color: '#24292e' }
 ---
 
 
