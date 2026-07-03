@@ -135,6 +135,7 @@ export const integ: IntegrationUserConfig = {
     //   { date: '2025-03-26', content: '每一个项目都是成长的见证，每一篇文章都是思考的结晶' }
     // ],
     // Yourself link info
+    
     applyTip: [
       { name: 'Name', val: `JiaXin's Blog` },
       { name: 'Desc', val: '心有山海，静而无边' },
