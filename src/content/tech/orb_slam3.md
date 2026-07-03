@@ -346,3 +346,5 @@ D435i 是标准答案，Gemini 335 是省钱方案。两者都带 IMU，能跑 V
 - ROS 2 Humble 移植：[mechazo11/ros2_orb_slam3](https://github.com/mechazo11/ros2_orb_slam3)
 - EVO 轨迹评估工具：[MichaelGrupp/evo](https://github.com/MichaelGrupp/evo)
 - Pangolin：[stevenlovegrove/Pangolin](https://github.com/stevenlovegrove/Pangolin)
+
+> 本文部分内容由 AI 辅助整理和润色。

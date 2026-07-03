@@ -1081,3 +1081,5 @@ imread → cvtColor → 滤波/形态学 → 边缘检测 → 直方图均衡
 ## 后续
 
 阶段四准备做多传感器外参标定：Camera-IMU（Kalibr + EuRoC 数据集）和 Camera-LiDAR（手写 PnP + 点云投影验证）。有硬件时用自己设备标，没硬件时用公开数据集理解完整 pipeline。
+
+> 本文部分内容由 AI 辅助整理和润色。

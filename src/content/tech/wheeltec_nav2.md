@@ -401,3 +401,5 @@ Rviz 操作：`2D Pose Estimate` 标初始位置 → `Nav2 Goal` 标目标点。
 4. **DWB 速度参数**：0.5 m/s 对实际场地是否太快/太慢
 5. **速度平滑器**：controller → smoother → cmd_vel 的 remap 链是否正确
 6. **首次全局定位**：Rviz 里用手动 `2D Pose Estimate` 还是加全局定位功能
+
+> 本文部分内容由 AI 辅助整理和润色。
