@@ -21,7 +21,7 @@ heroImage: { src: './About-Ubuntu-command.jpg', color: '#24292e' }
 ## 基础命令
 
 ```
-df -h        #查看系统内存使用情况
+df -h /       #查看系统内存使用情况
 ```
 
 ```
