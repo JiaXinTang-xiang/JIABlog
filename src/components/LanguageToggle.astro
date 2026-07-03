@@ -14,6 +14,7 @@
       'nav.links': '友链',
       'nav.about': '关于',
       'nav.update': '更新',
+      'nav.travellings': '开往',
       // 首页
       'home.author': '嘉心糖',
       'home.about': '关于',
@@ -83,6 +84,7 @@
       'nav.links': 'Links',
       'nav.about': 'About',
       'nav.update': 'Update',
+      'nav.travellings': 'Travelling',
       // Home
       'home.author': 'Jaxon',
       'home.about': 'About',
@@ -252,9 +254,36 @@
     })
   }
 
+  function injectTravellingsLink() {
+    // 在导航菜单 Update 后面加上开往外链
+    const nav = document.querySelector('header-component #headerExpandContent .flex.flex-col')
+    if (!nav || document.getElementById('travellings-link')) return
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'relative'
+    const link = document.createElement('a')
+    link.id = 'travellings-link'
+    link.href = 'https://www.travellings.cn/go.html'
+    link.target = '_blank'
+    link.rel = 'noopener'
+    link.title = '开往-友链接力'
+    link.className = 'w-full flex-none grow py-2 text-right font-medium transition-none hover:text-primary sm:w-fit sm:px-3'
+    link.setAttribute('data-i18n', 'nav.travellings')
+    link.textContent = getLang() === 'zh' ? '开往' : 'Travelling'
+    wrapper.appendChild(link)
+
+    // 找到 Update 链接后面插入
+    const items = nav.querySelectorAll('.relative')
+    const lastItem = items[items.length - 1]
+    if (lastItem) {
+      lastItem.after(wrapper)
+    }
+  }
+
   // 初始化
   function init() {
     injectLanguageToggle()
+    injectTravellingsLink()
     const currentLang = getLang()
     applyTranslations(currentLang)
   }
@@ -269,6 +298,7 @@
   // 监听 Astro 页面切换事件（SPA 导航时重新应用翻译）
   document.addEventListener('astro:page-load', () => {
     injectLanguageToggle()
+    injectTravellingsLink()
     const lang = getLang()
     applyTranslations(lang)
   })
