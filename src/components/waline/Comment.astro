@@ -100,6 +100,22 @@ const { class: className } = Astro.props
     --waline-box-shadow: none;
   }
 
+  /* Mobile: ensure visibility */
+  @media (max-width: 768px) {
+    #waline {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 100% !important;
+      overflow: visible !important;
+    }
+    #waline :global(.wl-panel),
+    #waline :global(.wl-comment),
+    #waline :global(.wl-card) {
+      display: block !important;
+    }
+  }
+
   /* Fix long text and links overflow */
   #waline :global(.wl-content, .wl-text, .wl-comment-text, .wl-item, .wl-card-item, a) {
     max-width: 100%;
