@@ -1,6 +1,6 @@
 ---
-title: '搭建个人知识库：基于 VitePress 的笔记站点'
-description: '记录我用 VitePress 搭建个人知识库的过程，包括框架选择、配置、部署到 Vercel 和绑定自定义子域名'
+title: '搭建 VitePress 站点'
+description: '记录我用 VitePress 搭建个人知识库的过程'
 publishDate: '2026-07-06'
 updatedDate: '2026-07-06'
 tags:
@@ -22,7 +22,6 @@ heroImage: { src: './about-my-notes.jpg', color: '#4A90E2' }
 对于个人博客，网上有很多模版，选一个自己喜欢的，在此基础上开发，前人栽树后人乘凉嘛，更多的人卡在配置和部署上面。本文搭建 VitePress 过程和这些blog站点类似，可作为教程参考。
 
 于是我决定搭一个**个人知识库 / 笔记站**，和博客分开：
-
 | | 博客 | 知识库 |
 |------|------|------|
 | **定位** | 长文分享、思考感悟 | 学习笔记、技术备忘 |
@@ -33,7 +32,6 @@ heroImage: { src: './about-my-notes.jpg', color: '#4A90E2' }
 ## 框架选择
 
 因为我的博客用的是 Astro，笔记站不想重复造轮子。这次目标很明确：**开箱即用、专注内容、最好连前端都不用碰**。
-
 | 框架 | 特点 | 适合 |
 |------|------|------|
 | **VitePress** | Vite + Vue，极简，启动快 | 文档站、知识库 |
@@ -113,8 +111,7 @@ vim react-hooks.md    # 写内容
 | 适合场景 | 一个账号一个站 | 多项目多站 |
 
 
-
-1.在部署之前，先把本地代码推到 GitHub 仓库：
+1. 在部署之前，先把本地代码推到 GitHub 仓库：
 
 ```bash
 # 在 my-notes 目录下
@@ -154,8 +151,7 @@ git push -u origin main
 
 ### 1. DNS 添加 CNAME 记录
 
-虽然域名商也提供 DNS 解析，但 Cloudflare 提供免费的全球 CDN 加速和更强大的安全防护，所以我用的是 Cloudflare。在域名 DNS 后台添加：
-
+虽然域名商也提供 DNS 解析，但 Cloudflare 提供免费的全球 CDN 加速和更强大的安全防护，所以我用的是 Cloudflare。在域名 DNS 后台添加
 | 类型 | 名称 | 目标 |
 |------|------|------|
 | CNAME | `notes` | Vercel 分配的地址（如 `xxx.vercel.app`） |
@@ -185,15 +181,12 @@ git push -u origin main
 ### 3. Cloudflare 加 CNAME 指向 Vercel
 
 在 Cloudflare 的 DNS → Records，添加 CNAME 记录：
-
 | 字段 | 值 |
 |------|------|
 | Type | `CNAME` |
 | Name | `notes`（代表子域名前缀） |
 | Target | Vercel 分配的地址（如 `xxx.vercel.app`） |
 | Proxy status | Proxied（橙色云朵亮起） |
-
-![alt text](image-6.png)
 
 稍等片刻，DNS 生效后就能通过 `https://notes.jiaxin404.top` 访问了。
 
