@@ -279,10 +279,19 @@
     }
   }
 
+  // 外部链接在新标签页打开
+  function fixExternalLinks() {
+    document.querySelectorAll('header-component a[href^="http"]').forEach((a) => {
+      a.setAttribute('target', '_blank')
+      a.setAttribute('rel', 'noopener')
+    })
+  }
+
   // 初始化
   function init() {
     injectLanguageToggle()
     injectTravellingsLink()
+    fixExternalLinks()
     const currentLang = getLang()
     applyTranslations(currentLang)
   }
@@ -298,6 +307,7 @@
   document.addEventListener('astro:page-load', () => {
     injectLanguageToggle()
     injectTravellingsLink()
+    fixExternalLinks()
     const lang = getLang()
     applyTranslations(lang)
   })
