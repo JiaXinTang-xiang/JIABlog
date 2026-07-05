@@ -62,7 +62,7 @@ export const theme: ThemeUserConfig = {
           { title: 'Tech', link: '/tech' },
           { title: 'Daily', link: '/daily' },
           { title: 'Monthly', link: '/monthly' },
-          { title: 'Note', link: 'https://notes.jiaxin404.top/' }
+          { title: 'Notes', link: 'https://notes.jiaxin404.top/' }
         ]
       },
       { title: 'Projects', link: '/projects' },
