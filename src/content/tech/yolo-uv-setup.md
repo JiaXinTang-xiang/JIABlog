@@ -11,7 +11,7 @@ tags:
 language: 'Chinese'
 draft: false                                                          # 是否为草稿
 slug: 'yolo-uv-setup'                                             # 文章的 URL 路径。
-heroImage: { src: './yolo-uv-setup.jpg', color: '#24292e' }
+heroImage: { src: './images/yolo-uv-setup/cover.jpg', color: '#24292e' }
 ---
 
 ## 前言

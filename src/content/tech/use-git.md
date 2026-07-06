@@ -4,7 +4,7 @@ description: '介绍一些常见的git命令'
 publishDate: '2026-04-28'
 tags: ['git', '学习']
 draft: false
-heroImage: { src: './use-git.jpg', color: '#1b2229' }
+heroImage: { src: './images/use-git/cover.jpg', color: '#1b2229' }
 ---
 
 

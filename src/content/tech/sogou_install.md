@@ -9,7 +9,7 @@ tags:
   - 输入法
 language: 'Chinese'
 draft: false
-heroImage: { src: './sogou_install.jpg', color: '#4A90E2' }
+heroImage: { src: './images/sogou_install/cover.jpg', color: '#4A90E2' }
 ---
 
 ## 前言

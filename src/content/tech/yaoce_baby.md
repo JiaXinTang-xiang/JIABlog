@@ -8,7 +8,7 @@ tags:
 language: 'Chinese'
 draft: false
 password: '301'
-heroImage: { src: './yaoce_baby.jpg', color: '#24292e' }
+heroImage: { src: './images/yaoce_baby/cover.jpg', color: '#24292e' }
 ---
 
 <blockquote style="border-left: 4px solid #4CAF50; background-color: #f0fff0; padding: 12px 16px; margin: 16px 0;">

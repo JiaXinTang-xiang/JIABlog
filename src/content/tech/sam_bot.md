@@ -12,7 +12,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'sam-bot-from-scratch'
-heroImage: { src: './sam_bot.png', color: '#0d1117' }
+heroImage: { src: './images/sam_bot/cover.png', color: '#0d1117' }
 ---
 
 ## 前言

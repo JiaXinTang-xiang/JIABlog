@@ -1,5 +1,5 @@
 ---
-title: '搭建 VitePress 站点'
+title: '搭建 VitePress 站点教程'
 description: '记录我用 VitePress 搭建个人知识库的过程'
 publishDate: '2026-07-06'
 updatedDate: '2026-07-06'
@@ -11,15 +11,15 @@ tags:
   - 域名
 language: 'Chinese'
 draft: false
-heroImage: { src: './about-my-notes.jpg', color: '#4A90E2' }
+heroImage: { src: '././images/about-my-notes/cover.jpg', color: '#4A90E2' }
 ---
 
 ## 前言
 
-继[个人博客](/tech/about-my-blog)之后，就想做一个搭建部署教程，同时记录一下以免自己忘记了，但总被各种事情耽搁。最近，看到有佬的个人笔记网站，萌生有搭一个人知识库的想法，趁现在期末周，腾出些时间弄了。
+继[个人博客](/tech/about-my-blog)之后，就想做一个搭建部署教程，同时记录一下以免自己忘记了，但总被各种事情耽搁。最近，看到有佬的个人笔记网站，萌生有搭一个人知识库的想法，趁现在期末周，腾出些时间弄了一下。
 可见https://notes.jiaxin404.top/。
 
-对于个人博客，网上有很多模版，选一个自己喜欢的，在此基础上开发，前人栽树后人乘凉嘛，更多的人卡在配置和部署上面。本文搭建 VitePress 过程和这些blog站点类似，可作为教程参考。
+对于个人博客，网上有很多模版，选一个自己喜欢的，在此基础上开发，前人栽树后人乘凉嘛，但更多的人卡在了配置和部署上面，本文搭建 VitePress 过程和这些blog站点类似，可作为教程参考。
 
 于是我决定搭一个**个人知识库 / 笔记站**，和博客分开：
 | | 博客 | 知识库 |
@@ -31,7 +31,7 @@ heroImage: { src: './about-my-notes.jpg', color: '#4A90E2' }
 
 ## 框架选择
 
-因为我的博客用的是 Astro，笔记站不想重复造轮子。这次目标很明确：**开箱即用、专注内容、最好连前端都不用碰**。
+因为我的博客用的是 Astro，笔记站不想重复造轮子。这次目标很明确：**开箱即用、专注内容**。
 | 框架 | 特点 | 适合 |
 |------|------|------|
 | **VitePress** | Vite + Vue，极简，启动快 | 文档站、知识库 |
@@ -40,7 +40,7 @@ heroImage: { src: './about-my-notes.jpg', color: '#4A90E2' }
 | **Hexo** | 老牌博客框架 | 博客 |
 
 最终选了 **VitePress**，原因很简单：
-1. **够轻量** — `npm init vitepress@latest` 就完事了
+1. **轻量** — `npm init vitepress@latest` 就完事了
 2. **自动侧边栏** — 写 Markdown 自动生成导航，不用手动配路由
 3. **内置搜索** — 开箱即用，不用额外接 Algolia
 4. **长得好看** — 默认主题干净
@@ -128,12 +128,12 @@ git push -u origin main
 2. GitHub 授权 Vercel，登录后，在主面板点击 Add New… → Project
 
 3. Import 仓库，找到你刚刚创建的网站仓库，点击旁边的 Import 按钮
-![alt text](image.png)
+![alt text](./images/about-my-notes/1.png)
 4. Deploy，在Vercel 会自动识别你的项目是什么框架（Astro, Next.js, etc.），并帮你填好所有构建设置。你什么都不用改，直接点击 Deploy 按钮
-![alt text](image-1.png)
+![alt text](./images/about-my-notes/2.png)
 
 5. 稍等片刻，Vercel网站就已经上线了！Vercel 会提供一个 .vercel.app 结尾的免费域名供你访问。
-![alt text](image-2.png)
+![alt text](./images/about-my-notes/3.png)
 
 全程不需要写一行配置，Vercel 会自动检测到 VitePress。后面只需要在本地修改代码，然后 git push 到 GitHub，Vercel 就会自动拉取最新代码，重新构建和部署你的网站。完全自动化！
 
@@ -143,7 +143,7 @@ git push -u origin main
 1.购买域名
 前往 NameSilo、GoDaddy 等域名注册商，购买一个你喜欢的域名。
 我是在 NameSilo 购买的，后面以它为例：
-![alt text](image-3.png)
+![alt text](./images/about-my-notes/4.png)
 
 我之前博客用的是 `jiaxin404.top`，所以这次笔记站用子域名 `notes.jiaxin404.top`。
 
@@ -156,7 +156,7 @@ git push -u origin main
 |------|------|------|
 | CNAME | `notes` | Vercel 分配的地址（如 `xxx.vercel.app`） |
 
-![alt text](image-4.png)
+![alt text](./images/about-my-notes/5.png)
 
 **注意**：如果开启了 Cloudflare 代理（橙色云），这里要先把代理关掉（灰色云），否则 Vercel 没法验证。验证通过后再开回去即可。
 
@@ -176,7 +176,7 @@ git push -u origin main
 
 进入 Vercel 项目 → Settings → Domains → 输入 `notes.jiaxin404.top` → Add。
 
-![alt text](image-5.png)
+![alt text](./images/about-my-notes/6.png)
 
 ### 3. Cloudflare 加 CNAME 指向 Vercel
 
@@ -216,6 +216,6 @@ notes.jiaxin404.top    → 知识库（VitePress + Vercel）
 
 ## 小结
 
-技术是骨架，内容才是灵魂。先让它跑起来，坚持记录才是最重要的。希望我能继续坚持更新写下去吧。
+技术是骨架，内容才是灵魂。先让它跑起来，坚持记录才是最重要的。希望我能继续坚持更新写下去。
 
 

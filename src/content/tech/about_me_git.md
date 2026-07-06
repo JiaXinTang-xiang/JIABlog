@@ -9,7 +9,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: ''
-heroImage: { src: './About_me_git.jpg', color: '#24292e' }
+heroImage: { src: './images/about_me_git/cover.jpg', color: '#24292e' }
 ---
 
 

@@ -13,7 +13,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'opencv_scr'
-heroImage: { src: './opencv_scr.png', color: '#1a1a2e' }
+heroImage: { src: './images/opencv_scr/cover.png', color: '#1a1a2e' }
 ---
 
 ## 前言

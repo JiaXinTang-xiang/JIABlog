@@ -9,7 +9,7 @@ tags:
 language: 'Chinese'
 draft: false
 password: '1234'
-heroImage: { src: './password.jpg', color: '#24292e' }
+heroImage: { src: './images/password/cover.jpg', color: '#24292e' }
 ---
 
 ## 前言

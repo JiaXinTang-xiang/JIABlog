@@ -10,7 +10,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: ''
-heroImage: { src: './waline_jia.jpg', color: '#24292e' }
+heroImage: { src: './images/waline_jia/cover.jpg', color: '#24292e' }
 ---
 
 ## 前言

@@ -10,7 +10,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'orb_slam3'
-heroImage: { src: './orb_slam3.jpg', color: '#1a1a2e' }
+heroImage: { src: './images/orb_slam3/cover.jpg', color: '#1a1a2e' }
 ---
 
 ## 前言

@@ -10,7 +10,7 @@ tags:
   - 个人成长
 language: 'Chinese'
 draft: false
-heroImage: { src: './about-my-blog.jpg', color: '#4A90E2' }
+heroImage: { src: './images/about-my-blog/cover.jpg', color: '#4A90E2' }
 ---
 
 

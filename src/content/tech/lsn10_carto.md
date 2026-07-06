@@ -12,7 +12,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'lsn10_carto'
-heroImage: { src: './lsn10_carto.jpg', color: '#1a1a2e' }
+heroImage: { src: './images/lsn10_carto/cover.jpg', color: '#1a1a2e' }
 ---
 
 ## 前言

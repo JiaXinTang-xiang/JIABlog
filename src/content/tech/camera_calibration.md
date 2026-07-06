@@ -1,5 +1,5 @@
 ---
-title: '相机标定'
+title: '相机标定教程'
 description: '基于棋盘格，使用 camera_calibration 包获取相机内参和畸变系数'
 publishDate: '2026-06-27'
 updatedDate: '2026-06-27'
@@ -10,7 +10,7 @@ tags:
 language: 'Chinese'
 draft: false
 slug: 'camera-calibration'
-heroImage: { src: './camera_calibration.jpg', color: '#1a1a2e' }
+heroImage: { src: './images/camera_calibration/cover.jpg', color: '#1a1a2e' }
 ---
 
 ## 前言
@@ -40,7 +40,7 @@ sudo apt install ros-humble-camera-calibration \
 
 # 安装 USB 摄像头驱动
 sudo apt install ros-humble-usb-cam
-/home/jiaxintang/桌面/my/picture/wallhaven-rqyv9w.jpg
+
 # 如果 NumPy 版本冲突（2.x 与 cv_bridge 不兼容）
 pip uninstall opencv-python -y
 pip install "numpy<2" -i https://pypi.tuna.tsinghua.edu.cn/simple
@@ -56,7 +56,7 @@ pip install "numpy<2" -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 > 内角点是黑白格子交叉的顶点，从外侧数：7 列 5 行的棋盘格，内角点为 6×4。
 
-![标定图形](./biaodingtu.png)
+![标定图形](./images/camera_calibration/1.png)
 
 ## 3. 启动摄像头
 

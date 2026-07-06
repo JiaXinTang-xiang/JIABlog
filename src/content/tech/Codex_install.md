@@ -8,7 +8,7 @@ tags:
   - CCSwitch
 language: 'Chinese'
 draft: false
-heroImage: { src: './Codex_install.jpg', color: '#24292e' }
+heroImage: { src: './images/Codex_install/cover.jpg', color: '#24292e' }
 ---
 
 ## 前言
