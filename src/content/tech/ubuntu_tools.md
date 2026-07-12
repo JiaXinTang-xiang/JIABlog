@@ -51,10 +51,46 @@ uv pip uninstall requests        # 卸载包
 uv pip freeze > requirements.txt # 导出依赖
 ```
 
+---
+
+## 二、Miniconda3 安装
+
+Miniconda 是 Anaconda 的精简版，只包含 Python 和 conda 包管理器，体积小、干净。用它来管理不同项目的 Python 版本和虚拟环境，比系统自带的 Python 方便得多。
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+运行后会进入交互式安装向导：
+阅读许可协议 → 接受许可条款 → 选择安装路径 → 解压和安装。
+
+接受 Anaconda 的服务条款，执行这两条命令：
+```bash
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+```
+接受后，再重新执行之前的创建环境命令：
+
+```
+conda create -n xxx python=3.10 -y
+```
+
+```
+wget 下载脚本 (188MB)
+    │
+    ▼
+bash 运行脚本
+    │
+    ├── 阅读许可协议 → 输入 yes 接受
+    ├── 确认安装路径 → 回车使用默认 (/home/jiaxintang/miniconda3)
+    ├── 自动解压 + 安装基础环境 + 下载 140+ 个包
+    └── 是否修改 shell 配置？ → 选 no（手动激活）
+```
 
 ---
 
-## 二、中文输入法
+## 三、中文输入法
 
 安装 Google 拼音，走 fcitx 框架。
 
@@ -77,7 +113,7 @@ sudo apt-get install fcitx-googlepinyin -y
 
 ---
 
-## 三、SCP 文件传输
+## 四、SCP 文件传输
 
 SCP（Secure Copy）是基于 SSH 的安全文件传输命令，无需额外安装，系统自带，适合在 PC 间传文件。
 
@@ -128,7 +164,7 @@ ssh-copy-id seeed@192.168.137.94
 ---
 
 
-## 四、Firefox 浏览器
+## 五、Firefox 浏览器
 
 ```bash
 sudo apt update
@@ -147,7 +183,7 @@ sudo snap refresh --hold snapd
 
 ---
 
-## 五、文本编辑器
+## 六、文本编辑器
 
 ### Gedit
 
@@ -229,7 +265,7 @@ vim filename
 
 ---
 
-## 六、Docker
+## 七、Docker
 
 Docker 是轻量级容器化平台，用于将应用及其依赖打包成可移植的容器。
 
