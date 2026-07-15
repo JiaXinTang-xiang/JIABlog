@@ -1,6 +1,6 @@
 ---
-title: 'YOLO11 自定义模型转换：从 PyTorch 到 MaixCAM2 完整踩坑记录'
-description: '将 32 类 YOLO11 模型从 .pt 转换为 MaixCAM2 可运行的 .axmodel，涵盖 ONNX 导出、pulsar2 量化编译、mud 配置和 MaixPy 部署的全流程'
+title: '记录MaixCAM2将YOLO11模型转换'
+description: '本文参考官方教程,导出模型'
 publishDate: '2026-07-15'
 updatedDate: '2026-07-15'
 tags:
@@ -16,157 +16,105 @@ heroImage: { src: './images/maix_yolo/cover.jpg', color: '#4A90E2' }
 
 ## 前言
 
-很多 MaixCAM2 的 AI 教程都是这样开始的：
+前几天买了一个maixcan，作为今年电赛的使用，本文记录使用maixcam2跑yolo的过程，仅供参考，以[官方教程](https://wiki.sipeed.com/maixpy/doc/zh/ai_model_converter/maixcam2.html)为主。
+
+---
+
+## 一、烧录镜像
+
+这个下面是官方的要求，可见yolo模型和镜像的版本相关，具体烧录可以看这里[MaixCAM MaixPy 升级和烧录系统](https://wiki.sipeed.com/maixpy/doc/zh/basic/upgrade.html),我这次烧录的是4.12.5。
+```
+MaixPy 默认提供了 YOLOv5 , YOLOv8 , YOLO11 , YOLO26 模型，可以直接使用：
+YOLOv8 需要 MaixPy >= 4.3.0。
+YOLO11 需要 MaixPy >= 4.7.0。
+YOLO26 需要 MaixPy >= 4.12.5。
+```
+
+---
+
+## 步骤1：ONNX 导出
+
+电脑上训练的模型后的模型是best.pt不能直接给 MaixCAM2 使用，硬件性能有限，需要将模型进行INT8量化以减少计算量，并且转换为 MaixCAM2 支持的模型格式MUD。
+
+MUD是 MaixPy 支持的一种模型描述文件，用来统一不同平台的模型文件，方便 MaixPy 代码跨平台，本身是一个 ini格式的文本文件，可以使用文本编辑器编辑。
+
+### 方法一：完整 ONNX 导出
+
+这个代码是简单的转换，读者可以自行修改参数。笔者开始用的是这个方法，后来发现需要裁剪节点，读者可以看下面的方法二。
 
 ```python
-from maix import nn
-detector = nn.YOLO11(model="/root/best.mud", dual_buff=True)
+from ultralytics import YOLO
+
+model = YOLO('runs/detect/train9/weights/best.pt')
+
+model.export(
+    format='onnx',
+    imgsz=640,        # 和训练时一致
+    opset=12,         # OpenCV 兼容性最好的 opset 版本
+    simplify=True     # 简化模型，推理更快
+)
 ```
 
-两行代码跑通，然后呢？`.pt` 怎么变成 `.axmodel` 的？pulsar2 量化到底做了什么？6 个 Conv 输出为什么被重构成了 3 个 Concat？`best.mud` 里 `mean` 和 `scale` 的值从哪来的？
+### 方法二：ONNX 裁剪节点
 
-这条命令背后压缩了一整套模型转换、量化编译、边缘部署的知识。这篇把 YOLO11 从 PyTorch 训练好的 `.pt`，经过 ONNX 导出、pulsar2 量化编译，到 MaixCAM2 上实时运行——不靠现成模型、不走一键脚本，每一步搞清楚为什么。
+这里是从官方贴过来的，[自行跳转](https://wiki.sipeed.com/maixpy/doc/zh/ai_model_converter/onnx_export.html)，核心就是用 `extract_onnx.py` 提取节点：
 
-**起点**：32 类自定义数据集训练好的 `best.pt`，输入 640×480。
+```python
+import onnx
+import sys
+
+input_path = sys.argv[1]
+output_path = sys.argv[2]
+input_names_str = sys.argv[3]
+output_names_str = sys.argv[4]
+input_names = []
+for s in input_names_str.split(","):
+    input_names.append(s.strip())
+output_names = []
+for s in output_names_str.split(","):
+    output_names.append(s.strip())
+onnx.utils.extract_model(input_path, output_path, input_names, output_names)
+```
+
+用法：`python extract_onnx.py $model_path $onnx_extracted $input_names $output_names`
+
+或者直接一行命令：
+
+```bash
+python -c "import onnx,sys; onnx.utils.extract_model(sys.argv[1], sys.argv[2], [s.strip() for s in sys.argv[3].split(',')], [s.strip() for s in sys.argv[4].split(',')])" yolo11n.onnx export.onnx "images" "/model.23/Concat_output_0,/model.23/Concat_1_output_0,/model.23/Concat_2_output_0"
+```
+
+其中 `yolo11n.onnx`、`export.onnx`、`"images"`、`"/model.23/Concat_output_0,..."` 依次替换成你自己的 `$model_path`、`$onnx_extracted`、`$input_names`、`$output_names`。
+
+此时得到的 `export.onnx` 就是裁剪后的新 ONNX 文件，可以继续下一步了。
 
 ---
 
-## 一、整体流程
+## 步骤2：把用到的文件cp到 ubuntu20
 
-目标很明确——训练好的 YOLO11 权重，跑到 MaixCAM2 的 NPU 上：
+校准图片还需要 ≥200 张训练样本（.jpg/.png），记得cp过去，我传是测试集val。
 
-```
-[训练机 Windows]  .pt → ONNX 导出
-        │ scp / U盘
-        ▼
-[开发机 Linux]    检查 ONNX 通道 → 校准图片准备
-        │
-        ▼
-[Docker 容器]     重构节点 → 提取 → 简化 → 量化校准 → NPU 编译 → .axmodel
-        │ scp
-        ▼
-[MaixCAM2]        放入 mud + axmodel → MaixPy 加载运行
-```
+另外就是转好的best.onnx镜像也cp过去
 
-不用 Python 驱动层、不搞多传感器。Sipeed 官方提供 pulsar2 Docker 镜像做交叉编译，MaixPy 内置 YOLO11 解码器。
+## 步骤3：安装模型转换环境
 
----
+这里我选用的是ubuntu20上根据官方教程使用pulsar2 Docker 镜像，用的是虚拟机，读者自行判断选择。
 
-## 二、资源准备
+### 下载 pulsar2 Docker 镜像
 
-### 2.1 工具链选型：Lite 还是 Full？
+[下载地址modelscope](https://www.modelscope.cn/models/AXERA-TECH/Pulsar2/files)
 
-Sipeed 提供两个版本的 pulsar2 Docker 镜像：
+滑到下面选择最新的版本，我选这个的是6.0.我虚拟机没啥内存选择安装`ax_pulsar2_6.0_lite.tar.gz`有1G多,后面补了几个包才能转，读者有内存推荐安装`ax_pulsar2_6.0.tar.gz`更好。
 
-| 文件 | 大小 | 说明 |
-|------|------|------|
-| `ax_pulsar2_6.0_lite.tar.gz` | ~1 GB | **Lite（精简版）**，推荐 |
-| `ax_pulsar2_6.0.tar.gz` | ~5 GB | Full（完整版） |
-
-我选了 Lite。为什么？因为 Lite 核心编译器完整，缺的包一条命令补上：
+我缺的包一条命令补上：
 
 ```bash
 pip install onnx onnxsim -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
 ```
 
-| 对比项 | Lite (~1GB) | Full (~5GB) |
-|--------|-------------|-------------|
-| `pulsar2 build` 编译器 | ✅ 有 | ✅ 有 |
-| `onnxsim` | ❌ 没有 | ✅ 预装 |
-| 压缩包大小 | 1 GB | 5 GB |
-| 解压后体积 | ~3 GB | ~15 GB |
-
-5GB 的镜像里大部分是我用不到的东西。Lite 解压快、占空间小，缺的 `onnxsim` 只多花一条 `pip install`，完全没必要为这一个包多下载 4GB。
-
-补充安装的实际包量：
-
-| 包名 | 大小 | 用途 |
-|------|------|------|
-| `onnx` | 19 MB | ONNX 模型读写 |
-| `onnxsim` | 3 MB | ONNX 图简化 |
-| `numpy` | 17 MB | onnx 依赖 |
-| `protobuf` | 0.3 MB | onnx 依赖 |
-| `ml_dtypes` | 5 MB | onnx 依赖 |
-| `rich` + 其他 | < 2 MB | onnxsim 依赖 |
-
-**下载地址：** [Sipeed 下载站 → MaixCAM2 → tools](https://dl.sipeed.com/shareURL/MaixCAM/MaixCAM2/tools)
-
-### 2.2 参考文档
-
-- MaixPy YOLO11 教程：https://wiki.sipeed.com/maixpy/doc/cn/course/basic/ai/yolo11.html
-- Pulsar2 使用指南：https://pulsar2-docs.readthedocs.io/
-- 模型转换教程：https://wiki.sipeed.com/maixpy/doc/cn/course/ai/deploy/maixcam2.html
-
 ---
 
-## 三、ONNX 导出
-
-在训练机上用 ultralytics 导出：
-
-```python
-from ultralytics import YOLO
-
-model = YOLO("best_last.pt")
-
-path = model.export(
-    format="onnx",
-    imgsz=[640, 480],
-    dynamic=False,
-    simplify=True,
-    opset=17
-)
-print(f"导出到: {path}")
-```
-
-导出后用 [Netron](https://netron.app/) 打开 ONNX，确认 6 个 Conv 输出节点：
-
-```
-/model.23/cv2.0/cv2.0.2/Conv_output_0   [1, 64, 80, 60]  ← bbox
-/model.23/cv2.1/cv2.1.2/Conv_output_0   [1, 64, 40, 30]  ← bbox
-/model.23/cv2.2/cv2.2.2/Conv_output_0   [1, 64, 20, 15]  ← bbox
-/model.23/cv3.0/cv3.0.2/Conv_output_0   [1, 32, 80, 60]  ← cls
-/model.23/cv3.1/cv3.1.2/Conv_output_0   [1, 32, 40, 30]  ← cls
-/model.23/cv3.2/cv3.2.2/Conv_output_0   [1, 32, 20, 15]  ← cls
-```
-
-**检查要点：**
-- 6 个输出，3 个 cv2（bbox 回归，64 通道 = 4×reg_max=16）+ 3 个 cv3（分类，32 通道 = 类别数）
-- 通道数正确即可，具体空间尺寸取决于 imgsz
-
----
-
-## 四、ONNX 通道错误：第一个坑
-
-把转换后的 `.axmodel` 部署到 MaixCAM2，以为大功告成，结果：
-
-```
-need 3 bbox and 3 cls outputs
-```
-
-**原因：** ONNX 导出的 cv3 通道数 ≠ 训练类别数——被截断了。
-
-**解决：** 重新导出，不加 `output_names` 参数，保留完整输出。ultralytics 的 `model.export()` 默认会把所有检测头都输出，但如果手动指定了 `output_names` 筛选，就可能漏掉部分通道。
-
-教训：导出后一定用 Netron 肉眼确认 6 个输出的通道数。
-
----
-
-## 五、上传到 Linux 开发机
-
-```bash
-scp best.onnx uu20@192.168.x.x:/home/uu20/桌面/yolo/yolo11/
-```
-
-校准图片需要 ≥200 张训练样本（.jpg/.png），放到 `yolo11/val/` 下：
-
-```bash
-cd /home/uu20/桌面/yolo/yolo11
-ls val/ | wc -l          # 确认 ≥ 200
-```
-
----
-
-## 六、Docker 环境搭建
+### Docker 环境搭建
 
 ```bash
 # 首次加载镜像
@@ -178,8 +126,8 @@ cd /home/uu20/桌面/yolo/yolo11
 sudo docker run -it --net host --name yolo_build -v ./:/data pulsar2:6.0-lite
 ```
 
-### 6.1 容器每次都是新的：第二个坑
-
+注意：
+我用完有不小心就把容器删除了。
 第一次没加 `--name`，也没去掉 `--rm`。退出容器后环境全丢——装的 `onnxsim` 没了，中间产物也没了。
 
 **解决：** 去掉 `--rm`，加 `--name yolo_build` 命名。下次用 `docker start -ai yolo_build` 回来，环境完好：
@@ -189,19 +137,9 @@ sudo docker start -ai yolo_build
 cd /data && bash build_yolo11.sh best
 ```
 
-### 6.2 onnxsim 找不到：第三个坑
-
-进入容器后直接跑转换脚本，报 `onnxsim: command not found`。
-
-Lite 镜像不自带 `onnxsim`，但国内直连 PyPI 也慢。用阿里源：
-
-```bash
-pip install onnx onnxsim -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
-```
-
 ---
 
-## 七、ONNX → axmodel 转换
+## 步骤4：ONNX → axmodel 转换
 
 进入容器后：
 
@@ -238,38 +176,247 @@ bash build_yolo11.sh best
 
 6 个输出余弦相似度均 > 0.999 表示 INT8 量化精度接近无损。
 
-### 7.1 YOLO26 与 YOLO11 的节点名差异：第四个坑
 
-之前用 YOLO26 跑通了整个流程，换到 YOLO11 后节点名全变了：
+脚本代码 `build_yolo11.sh`：
 
-| | YOLO26 | YOLO11 |
-|---|---|---|
-| bbox 节点 | `one2one_cv2.X/.../Conv` | `cv2.X/cv2.X.2/Conv` |
-| cls 节点 | `one2one_cv3.X/.../Conv` | `cv3.X/cv3.X.2/Conv` |
-| bbox 通道 | 4 | 64 (reg_max=16) |
+```bash
+# !/bin/bash
 
-`restructure_onnx.py` 里用节点名定位输出，YOLO26 的名字直接拿到 YOLO11 上全匹配不上。
+set -e
 
-**解决：** 用 Netron 找出 YOLO11 的实际节点名，更新 `restructure_onnx.py` 中的匹配规则。YOLO26 方案已归档到 `yolo26_archive/`。
+############# 改成你的参数 ####################
+model_name=$1                    # 运行: ./build_yolo11.sh best
+model_path=./${model_name}.onnx  # best.onnx
+images_dir=./val                 # 校准图片目录
+images_num=200                   # 用200张校准
+input_names=images               # ONNX 输入节点名
 
-### 7.2 Concat 输出维度问题：第五个坑（关键！）
+config_path=yolo11_build_config.json
 
+output_nodes=(
+    "/model.23/per_scale_concat_0_output_0"   # scale0 80x80 (96ch, 4D)
+    "/model.23/per_scale_concat_1_output_0"   # scale1 40x40 (96ch, 4D)
+    "/model.23/per_scale_concat_2_output_0"   # scale2 20x20 (96ch, 4D)
+)
+#############################################
+
+# 拼接输出节点字符串
+
+onnx_output_names=""
+json_outputs=""
+
+for node in "${output_nodes[@]}"; do
+    if [ -n "$onnx_output_names" ]; then
+        onnx_output_names="${onnx_output_names},"
+    fi
+    onnx_output_names="${onnx_output_names}${node}"
+
+    json_outputs="${json_outputs}
+    {
+      \"tensor_name\": \"${node}\",
+      \"dst_perm\": [0, 2, 3, 1]
+    },"
+done
+
+json_outputs="${json_outputs%,}"
+
+# 生成 pulsar2 config.json
+
+cat > $config_path << EOF
+{
+  "model_type": "ONNX",
+  "npu_mode": "NPU1",
+  "quant": {
+    "input_configs": [
+      {
+        "tensor_name": "${input_names}",
+        "calibration_dataset": "tmp_images/images.tar",
+        "calibration_size": ${images_num},
+        "calibration_mean": [0, 0, 0],
+        "calibration_std": [255, 255, 255]
+      }
+    ],
+    "calibration_method": "MinMax",
+    "precision_analysis": true
+  },
+  "input_processors": [
+    {
+      "tensor_name": "${input_names}",
+      "tensor_format": "RGB",
+      "tensor_layout": "NCHW",
+      "src_format": "RGB",
+      "src_dtype": "U8",
+      "src_layout": "NHWC",
+      "csc_mode": "NoCSC"
+    }
+  ],
+  "output_processors": [${json_outputs}
+  ],
+  "compiler": {
+    "check": 3,
+    "check_mode": "CheckOutput",
+    "check_cosine_simularity": 0.9
+  }
+}
+EOF
+
+echo -e "\e[32m已生成配置文件: ${config_path}\e[0m"
+
+# 创建校准图片打包脚本
+
+cat > gen_cali_images_tar.py << 'PYTHON_SCRIPT'
+import sys, os, random, shutil
+
+images_dir = sys.argv[1]
+images_num = int(sys.argv[2])
+
+files = os.listdir(images_dir)
+valid = []
+for name in files:
+    path = os.path.join(images_dir, name)
+    ext = os.path.splitext(name)[1]
+    if ext.lower() not in [".jpg", ".jpeg", ".png"]:
+        continue
+    valid.append(path)
+
+print(f"images dir {images_dir} have {len(valid)} images")
+if len(valid) < images_num:
+    print(f"not enough images in {images_dir}, have: {len(valid)}, need {images_num}")
+    sys.exit(1)
+
+idxes = random.sample(range(len(valid)), images_num)
+shutil.rmtree("tmp_images", ignore_errors=True)
+os.makedirs("tmp_images/images")
+for i in idxes:
+    target = os.path.join("tmp_images", "images", os.path.basename(valid[i]))
+    shutil.copyfile(valid[i], target)
+os.chdir("tmp_images/images")
+os.system("tar -cf ../images.tar *")
+print("calibration tar created: tmp_images/images.tar")
+PYTHON_SCRIPT
+
+# 创建 onnx 提取脚本
+
+cat > extract_onnx.py << 'PYTHON_SCRIPT'
+import onnx, sys
+
+input_path = sys.argv[1]
+output_path = sys.argv[2]
+input_names_str = sys.argv[3]
+output_names_str = sys.argv[4]
+input_names = [s.strip() for s in input_names_str.split(",")]
+output_names = [s.strip() for s in output_names_str.split(",")]
+
+onnx.utils.extract_model(input_path, output_path, input_names, output_names)
+print(f"extracted onnx saved to: {output_path}")
+PYTHON_SCRIPT
+
+# 创建 ONNX 重构脚本（6 Conv → 3 per-scale Concat）
+
+cat > restructure_onnx.py << 'PYTHON_SCRIPT'
+import onnx
+from onnx import helper, TensorProto
+import sys
+
+input_path = sys.argv[1]
+output_path = sys.argv[2]
+
+m = onnx.load(input_path)
+graph = m.graph
+
+all_outputs = {o for n in graph.node for o in n.output}
+
+for i in range(3):
+    cv2_name = f"/model.23/cv2.{i}/cv2.{i}.2/Conv_output_0"
+    cv3_name = f"/model.23/cv3.{i}/cv3.{i}.2/Conv_output_0"
+    if cv2_name not in all_outputs or cv3_name not in all_outputs:
+        print(f"ERROR: scale {i} nodes not found")
+        sys.exit(1)
+
+    concat_out = f"/model.23/per_scale_concat_{i}_output_0"
+    graph.node.append(helper.make_node(
+        "Concat", inputs=[cv2_name, cv3_name], outputs=[concat_out],
+        name=f"/model.23/per_scale_concat_{i}", axis=1
+    ))
+    graph.output.append(helper.make_tensor_value_info(
+        concat_out, TensorProto.FLOAT, [1, 96, None, None]
+    ))
+    print(f"Scale {i}: {cv2_name} + {cv3_name} -> {concat_out}")
+
+del graph.output[:3]  # 去掉旧输出，保留新 3 个
+onnx.save(m, output_path)
+print(f"Saved restructured ONNX to: {output_path}")
+PYTHON_SCRIPT
+
+# ========== 开始转换 ==========
+
+mkdir -p tmp1
+onnx_extracted=tmp1/${model_name}_extracted.onnx
+onnxsim_path=tmp1/${model_name}.onnx
+
+# Step 0: 重构 ONNX（将 6 个 Conv 按尺度合并为 3 个 4D Concat）
+
+echo -e "\e[32mStep 0: 重构 ONNX 输出节点（per-scale Concat）\e[0m"
+restructured_onnx=tmp1/${model_name}_restructured.onnx
+python restructure_onnx.py $model_path $restructured_onnx
+
+# Step 1: 提取输出节点
+
+echo -e "\e[32mStep 1: 提取 ONNX 输出节点\e[0m"
+python extract_onnx.py $restructured_onnx $onnx_extracted $input_names "$onnx_output_names"
+
+# Step 2: onnxsim 简化
+
+echo -e "\e[32mStep 2: ONNX 简化\e[0m"
+onnxsim $onnx_extracted $onnxsim_path
+
+# Step 3: 打包校准图片
+
+echo -e "\e[32mStep 3: 打包校准图片\e[0m"
+python gen_cali_images_tar.py $images_dir $images_num
+
+mkdir -p out
+tmp_config_path=tmp/$config_path
+
+# Step 4: vnpu (NPU1, 一半算力)
+
+echo -e "\e[32mStep 4: Building ${model_name}_vnpu.axmodel\e[0m"
+rm -rf tmp
+mkdir tmp
+cp $config_path $tmp_config_path
+sed -i '/npu_mode/c\"npu_mode": "NPU1",' $tmp_config_path
+pulsar2 build --target_hardware AX620E --input $onnxsim_path --output_dir tmp --config $tmp_config_path
+cp tmp/compiled.axmodel out/${model_name}_vnpu.axmodel
+
+# Step 5: npu (NPU2, 全部算力)
+
+echo -e "\e[32mStep 5: Building ${model_name}_npu.axmodel\e[0m"
+rm -rf tmp
+mkdir tmp
+cp $config_path $tmp_config_path
+sed -i '/npu_mode/c\"npu_mode": "NPU2",' $tmp_config_path
+pulsar2 build --target_hardware AX620E --input $onnxsim_path --output_dir tmp --config $tmp_config_path
+cp tmp/compiled.axmodel out/${model_name}_npu.axmodel
+
+rm -rf tmp tmp1 tmp_images
+
+echo -e "\e[32m========================================\e[0m"
+echo -e "\e[32m转换完成! 输出文件在 out/ 目录:\e[0m"
+echo -e "\e[32m  out/${model_name}_npu.axmodel\e[0m"
+echo -e "\e[32m  out/${model_name}_vnpu.axmodel\e[0m"
+echo -e "\e[32m========================================\e[0m"
+```
+
+注意：
 MaixPy YOLO11 解码器需要 **3 个 4D Concat 输出**（每个尺度合并 bbox+cls），但 ultralytics 导出的 Concat 是跨尺度全局合并的 3D 输出。
 
 **解决：** `restructure_onnx.py` 在编译前将 6 个 Conv 输出按尺度合并为 3 个 4D Concat（`per_scale_concat_0/1/2`，axis=1，输出 `[N, 96, H, W]`），再送入 pulsar2。
 
-### 7.3 磁盘空间不足：第六个坑
-
-Docker 镜像 1GB + ONNX 模型几百 MB + 校准图片 + pulsar2 中间产物，开发机磁盘很快就红了：
-
-```bash
-rm /home/uu20/下载/ax_pulsar2_6.0_lite.tar.gz  # 镜像已加载，tar.gz 可删
-sudo apt clean
-```
 
 ---
 
-## 八、mud 配置文件
+## 步骤5：mud 配置文件
+一共三个文件yolo11n.mud， yolo11n_npu.axmodel和yolo11n_vnpu.axmodel
 
 ```ini
 [basic]
@@ -292,6 +439,8 @@ mean = 0, 0, 0
 scale = 0.00392156862745098, 0.00392156862745098, 0.00392156862745098
 ```
 
+可以看到， 指定了模型类别为axmodel, 模型路径为相对mud文件的路径下的*.axmodel文件；
+
 **字段说明：**
 
 | 字段 | 说明 |
@@ -305,20 +454,20 @@ scale = 0.00392156862745098, 0.00392156862745098, 0.00392156862745098
 
 ---
 
-## 九、部署到 MaixCAM2
+## 步骤6：部署到 MaixCAM2
 
 ```bash
 scp out/best_npu.axmodel root@maixcam2:/root/
 scp out/best_vnpu.axmodel root@maixcam2:/root/
 scp best.mud root@maixcam2:/root/
 ```
-
 或用 ADB / U 盘。
 
 ---
 
-## 十、MaixPy 运行
+## 步骤7：MaixPy 运行
 
+main.py
 ```python
 from maix import camera, display, image, nn, app, comm
 import struct, os, time
@@ -392,33 +541,11 @@ while not app.need_exit():
         print(f"loop error: {e}")
         continue
 ```
+就可以成功运行了
 
 ---
 
-## 十一、换成其他类别数要改什么？
-
-YOLO11 架构固定，**只有 `best.mud` 的 `labels =` 需要改**。
-
-其余文件（`build_yolo11.sh`、`restructure_onnx.py`、导出代码）都不需要改——类别数由 ONNX 权重自动携带，编译器自动识别。
-
-确认类别数：
-
-```bash
-python -c "
-import onnx
-m = onnx.load('best.onnx')
-for n in m.graph.node:
-    if 'cv3.0/cv3.0.2/Conv' in n.name:
-        for inp in n.input:
-            for init in m.graph.initializer:
-                if init.name == inp and len(init.dims) >= 1:
-                    print(f'类别数 = {init.dims[0]}')
-"
-```
-
----
-
-## 十二、快速命令速查
+## 快速命令速查
 
 ```bash
 # === 从零开始 ===
@@ -465,5 +592,3 @@ scp out/best_npu.axmodel out/best_vnpu.axmodel best.mud root@maixcam2:/root/
 - Sipeed 下载站：https://dl.sipeed.com/shareURL/MaixCAM/MaixCAM2/tools
 - ONNX 模型可视化：https://netron.app/
 - YOLO11 ultralytics 文档：https://docs.ultralytics.com/
-
-> 本文部分内容由 AI 辅助整理和润色。
