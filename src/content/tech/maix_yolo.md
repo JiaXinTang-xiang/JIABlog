@@ -16,7 +16,7 @@ heroImage: { src: './images/maix_yolo/cover.jpg', color: '#4A90E2' }
 
 ## 前言
 
-前几天买了一个maixcan，作为今年电赛的使用，本文记录使用maixcam2跑yolo的过程，仅供参考，以[官方教程](https://wiki.sipeed.com/maixpy/doc/zh/ai_model_converter/maixcam2.html)为主。
+前几天买了一个maixcan2，作为今年电赛的使用，本文记录使用maixcam2跑yolo的过程，仅供参考，以[官方教程](https://wiki.sipeed.com/maixpy/doc/zh/ai_model_converter/maixcam2.html)为主。
 
 ---
 
@@ -40,7 +40,7 @@ MUD是 MaixPy 支持的一种模型描述文件，用来统一不同平台的模
 
 ### 方法一：完整 ONNX 导出
 
-这个代码是简单的转换，读者可以自行修改参数。笔者开始用的是这个方法，后来发现需要裁剪节点，读者可以看下面的方法二。
+这个代码是简单的转换，读者可以自行修改参数。笔者开始用的是这个方法，后来发现需要裁剪节点，读者可以看下面的方法二。我用的是方法1，后面在转换脚本那里裁剪。
 
 ```python
 from ultralytics import YOLO
@@ -94,7 +94,7 @@ python -c "import onnx,sys; onnx.utils.extract_model(sys.argv[1], sys.argv[2], [
 
 校准图片还需要 ≥200 张训练样本（.jpg/.png），记得cp过去，我传是测试集val。
 
-另外就是转好的best.onnx镜像也cp过去
+另外就是转好的best.onnx镜像也cp过去，一共两个
 
 ## 步骤3：安装模型转换环境
 
@@ -126,16 +126,15 @@ cd /home/uu20/桌面/yolo/yolo11
 sudo docker run -it --net host --name yolo_build -v ./:/data pulsar2:6.0-lite
 ```
 
-注意：
-我用完有不小心就把容器删除了。
-第一次没加 `--name`，也没去掉 `--rm`。退出容器后环境全丢——装的 `onnxsim` 没了，中间产物也没了。
-
-**解决：** 去掉 `--rm`，加 `--name yolo_build` 命名。下次用 `docker start -ai yolo_build` 回来，环境完好：
-
-```bash
-sudo docker start -ai yolo_build
-cd /data && bash build_yolo11.sh best
-```
+> ⚠️ **注意：**
+> 我用完不小心就把容器删除了。第一次没加 `--name`，也没去掉 `--rm`。退出容器后环境全丢——装的 `onnxsim` 没了，中间产物也没了。
+>
+> **解决：** 去掉 `--rm`，加 `--name yolo_build` 命名。下次用 `docker start -ai yolo_build` 回来，环境完好：
+>
+> ```bash
+> sudo docker start -ai yolo_build
+> cd /data && bash build_yolo11.sh best
+> ```
 
 ---
 
@@ -407,16 +406,17 @@ echo -e "\e[32m  out/${model_name}_vnpu.axmodel\e[0m"
 echo -e "\e[32m========================================\e[0m"
 ```
 
-注意：
-MaixPy YOLO11 解码器需要 **3 个 4D Concat 输出**（每个尺度合并 bbox+cls），但 ultralytics 导出的 Concat 是跨尺度全局合并的 3D 输出。
-
-**解决：** `restructure_onnx.py` 在编译前将 6 个 Conv 输出按尺度合并为 3 个 4D Concat（`per_scale_concat_0/1/2`，axis=1，输出 `[N, 96, H, W]`），再送入 pulsar2。
+> ⚠️ **注意：**
+> MaixPy YOLO11 解码器需要 **3 个 4D Concat 输出**（每个尺度合并 bbox+cls），但 ultralytics 导出的 Concat 是跨尺度全局合并的 3D 输出。
+>
+> **解决：** `restructure_onnx.py` 在编译前将 6 个 Conv 输出按尺度合并为 3 个 4D Concat（`per_scale_concat_0/1/2`，axis=1，输出 `[N, 96, H, W]`），再送入 pulsar2。
 
 
 ---
 
 ## 步骤5：mud 配置文件
-一共三个文件yolo11n.mud， yolo11n_npu.axmodel和yolo11n_vnpu.axmodel
+
+一共需要三个文件yolo11n.mud， yolo11n_npu.axmodel和yolo11n_vnpu.axmodel
 
 ```ini
 [basic]
@@ -570,19 +570,17 @@ scp out/best_npu.axmodel out/best_vnpu.axmodel best.mud root@maixcam2:/root/
 
 ## 写在最后
 
-从训练好的 `.pt` 到 MaixCAM2 屏幕上实时出检测框，踩了六个坑，改了两处源码（节点名匹配 + Concat 维度重构），确认了一个关键事实（YOLO11 bbox 通道 = 64 不是 4，因为 reg_max=16）。
+虽然跑通了一个教程，但是要明白**跑通过程中每一步都知道为什么**。
 
-这事的意义不在于跑通了一个流程——教程里的 `nn.YOLO11(model="best.mud")` 本来就能跑通——而在于**跑通过程中每一步都知道为什么**。为什么 Lite 不是 Full？因为缺的只是一个 `pip install`，不值得多下 4GB。为什么 6 个 Conv 变成 3 个 Concat？因为 MaixPy 解码器按尺度组织输出，不是按 bbox/cls 分开取。为什么节点名全变了？因为 YOLO11 和 YOLO26 是两套完全不同的检测头命名。
-
-每个坑背后都有一个具体的知识点。亲手踩过之后，再换其他 YOLO 版本、换其他 NPU 平台，看到类似报错就知道往哪方向排查。
-
-这不是终点——32 类模型跑通是第一步。接下来的事情是：
+接下来的可以做：
 
 - **替换 MaixCAM2 内置模型**——用自己的 32 类模型跑实时检测，对比内置模型的精度和速度
 - **量化感知训练（QAT）**——pulsar2 的 INT8 量化余弦相似度 > 0.999 已经很好，但如果某些类别精度掉得厉害，QAT 是下一道防线
 - **模型剪枝 + 知识蒸馏**——YOLO11 在 640×480 上跑 NPU 够用，但如果要上更高分辨率或更低延迟，需要更小的 backbone
 
+完成
 ---
+
 
 ## 参考
 
