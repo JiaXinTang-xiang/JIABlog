@@ -18,6 +18,8 @@ heroImage: { src: './images/maix_yolo/cover.jpg', color: '#4A90E2' }
 
 前几天买了一个maixcan2，作为今年电赛的使用，本文记录使用maixcam2跑yolo的过程，仅供参考，以[官方教程](https://wiki.sipeed.com/maixpy/doc/zh/ai_model_converter/maixcam2.html)为主。
 
+有开源在maixhub上：[具体可以看](https://maixhub.com/share/125)
+
 ---
 
 ## 一、烧录镜像
