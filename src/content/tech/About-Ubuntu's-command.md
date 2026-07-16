@@ -335,6 +335,16 @@ ibus-setup
 进入到此界面，在ibus首选项中，点击“输入法”，添加“中文”-“智能拼音”，然后关闭。
 
 
+### 磁盘管理工具
+```
+sudo apt install gparted
+```
+装完运行：
+
+```
+sudo gparted
+```
+
 ## matplotlib
 
 Matlab 是一个常用的数据分析和绘图软件，在 Python 我们也可以使用 matplotlib 库绘制图形。在进行可视化时，我们使用的是 matplotlib.pyplot 子库
