@@ -13,20 +13,17 @@ const { id, collection, collections, class: className } = Astro.props
 const path = `/${collection}`
 
 const index = collections.findIndex((x) => x.id === id)
-const prev = index > 0 ? collections[index - 1] : null
-const next = index < collections.length - 1 ? collections[index + 1] : null
 const total = collections.length
 const current = index + 1
 
-// 生成页码数组，最多显示 7 个
 function getPages(current: number, total: number): (number | string)[] {
-  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+  if (total <= 9) return Array.from({ length: total }, (_, i) => i + 1)
   const pages: (number | string)[] = [1]
-  if (current > 3) pages.push('...')
-  const start = Math.max(2, current - 1)
-  const end = Math.min(total - 1, current + 1)
+  if (current > 4) pages.push('...')
+  const start = Math.max(2, current - 2)
+  const end = Math.min(total - 1, current + 2)
   for (let i = start; i <= end; i++) pages.push(i)
-  if (current < total - 2) pages.push('...')
+  if (current < total - 3) pages.push('...')
   pages.push(total)
   return pages
 }
@@ -34,68 +31,21 @@ function getPages(current: number, total: number): (number | string)[] {
 const pages = getPages(current, total)
 ---
 
-<div class={cn('flex flex-col gap-2', className)}>
-  <div class='flex max-sm:flex-col sm:justify-between gap-2'>
-    <span class='min-w-0'>
-      {
-        prev && (
-          <a
-            href={`${path}/${prev.data.slug || prev.id}`}
-            class='group inline-flex items-center gap-x-2 rounded-xl px-4 py-2 no-underline transition-colors duration-300 hover:bg-muted max-sm:max-w-[80%] sm:flex'
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'
-              fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'
-              class='shrink-0 rotate-180 stroke-muted-foreground transition-colors group-hover:stroke-primary'
-            >
-              <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 group-hover:scale-x-100'/>
-              <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1'/>
-            </svg>
-            <p class='truncate font-medium transition-colors'>{prev.data.title}</p>
-          </a>
-        )
-      }
-    </span>
-
-    <span class='min-w-0'>
-      {
-        next && (
-          <a
-            href={`${path}/${next.data.slug || next.id}`}
-            class='group inline-flex items-center gap-x-2 rounded-xl px-4 py-2 text-right no-underline transition-colors duration-300 hover:bg-muted max-sm:float-end max-sm:max-w-[80%] sm:flex'
-          >
-            <p class='truncate font-medium transition-colors'>{next.data.title}</p>
-            <svg
-              xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'
-              fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'
-              class='shrink-0 stroke-muted-foreground transition-colors group-hover:stroke-primary'
-            >
-              <line x1='5' y1='12' x2='19' y2='12' class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 group-hover:scale-x-100'/>
-              <polyline points='12 5 19 12 12 19' class='translate-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1'/>
-            </svg>
-          </a>
-        )
-      }
-    </span>
-  </div>
-
-  {/* 页码导航 */}
-  <div class='flex justify-center gap-x-1'>
-    {pages.map((p) => (
-      p === '...' ? (
-        <span class='px-2 py-1 text-sm text-muted-foreground'>...</span>
-      ) : (
-        <a
-          href={`${path}/${collections[Number(p) - 1].data.slug || collections[Number(p) - 1].id}`}
-          class={`px-3 py-1 text-sm rounded-md no-underline transition-colors ${
-            Number(p) === current
-              ? 'bg-primary text-primary-foreground font-medium'
-              : 'text-muted-foreground hover:bg-muted'
-          }`}
-        >
-          {p}
-        </a>
-      )
-    ))}
-  </div>
+<div class={cn('flex justify-center items-center gap-x-1 flex-wrap', className)}>
+  {pages.map((p) => (
+    p === '...' ? (
+      <span class='px-2 py-1 text-sm text-muted-foreground'>...</span>
+    ) : (
+      <a
+        href={`${path}/${collections[Number(p) - 1].data.slug || collections[Number(p) - 1].id}`}
+        class={`px-3 py-1 text-sm rounded-md no-underline transition-colors ${
+          Number(p) === current
+            ? 'bg-primary text-primary-foreground font-medium'
+            : 'text-muted-foreground hover:bg-muted'
+        }`}
+      >
+        {p}
+      </a>
+    )
+  ))}
 </div>
