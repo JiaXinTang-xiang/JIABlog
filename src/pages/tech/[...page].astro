@@ -82,7 +82,7 @@ const pageNumbers = getPageNumbers(page.currentPage, totalPages)
                   <span class='px-3 py-1.5 text-sm text-muted-foreground'>...</span>
                 ) : (
                   <a
-                    href={n === 1 ? '/tech/' : `/tech/page/${n}/`}
+                    href={n === 1 ? '/tech/' : `/tech/${n}/`}
                     class={`px-3 py-1.5 text-sm rounded-md no-underline transition-colors ${
                       n === page.currentPage
                         ? 'bg-primary text-primary-foreground font-medium'
