@@ -1,7 +1,7 @@
 ---
 title: 'DeepSeek Harness 安装'
 description: '，记录安装过程和鲸鱼娘主题插件，体验DeepSeek Harness。'
-publishDate: '2026-08-21'
+publishDate: '2026-08-19'
 tags:
   - Harness
   - AI 编程
